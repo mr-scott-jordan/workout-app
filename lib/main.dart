@@ -13,13 +13,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Workout App',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        accentColor: Colors.redAccent,
-        canvasColor: Color.fromRGBO(255, 254, 219, 1),
+        brightness: Brightness.dark,
+        // primarySwatch: Colors.indigo,
+        accentColor: Colors.black45,
+        canvasColor: Color.fromRGBO(42, 79, 122, 1),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(),
-      routes: {},
+      routes: {
+        // add new routes here
+      },
     );
   }
 }
