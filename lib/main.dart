@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/pages/bulletin_board_page.dart';
+import 'package:workout_app/pages/equipment_page.dart';
+import 'package:workout_app/pages/workout_page.dart';
+import 'package:workout_app/pages/workout_setup_page.dart';
 
-import 'pages/home.dart';
+import 'pages/home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +25,10 @@ class MyApp extends StatelessWidget {
       ),
       home: HomePage(),
       routes: {
-        // add new routes here
+        BulletinBoardPage.routeName: (context) => BulletinBoardPage(),
+        EquipmentPage.routeName: (context) => EquipmentPage(),
+        WorkoutSetupPage.routeName: (context) => WorkoutSetupPage(),
+        WorkoutPage.routeName: (context) => WorkoutPage(),
       },
     );
   }
