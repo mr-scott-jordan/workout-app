@@ -4,14 +4,14 @@ import '../enums/equipment.dart';
 
 class Exercise {
   final String id;
-  final String label;
+  final String title;
   final List<String> tags;
   final Equipment equipment;
 
-  Exercise({
+  const Exercise({
     @required this.id,
-    @required this.label,
+    @required this.title,
     @required this.tags,
     @required this.equipment,
-  }) : assert(id != null && label != null && tags != null && equipment != null);
+  }) : assert(id != null && title != null && tags != null && equipment != null);
 }
