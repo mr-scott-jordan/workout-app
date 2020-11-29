@@ -1,0 +1,4 @@
+enum Equipment {
+  PullUpBar,
+  YogaMat,
+}
