@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
             height: 100,
           ),
           Container(
-            child: Icon(Icons.ac_unit, size: 150),
+            child: Icon(Icons.fitness_center, size: 150),
           ),
           SizedBox(
             height: 100,
