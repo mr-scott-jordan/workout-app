@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/pages/workout_page.dart';
+
+import '../enums/tags.dart';
 
 class WorkoutSetupPage extends StatefulWidget {
   static const routeName = 'workout-setup-page';
@@ -7,10 +10,18 @@ class WorkoutSetupPage extends StatefulWidget {
 }
 
 class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
-  String _workDuration;
+  String _exerciseDuration;
   String _restDuration;
   String _numberOfExercises;
   String _numberOfRounds;
+
+  bool _fullbody;
+  bool _push;
+  bool _pull;
+  bool _legs;
+  bool _core;
+
+  List<Tags> _tags;
 
   Widget _buildDropDown(String title, String stateValue,
       List<String> possibleValues, Function onChanged) {
@@ -18,7 +29,8 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
       children: [
         Text(title),
         Container(
-          width: 100,
+          width: 150,
+          // height: 100,
           child: DropdownButton(
             value: stateValue,
             elevation: 4,
@@ -40,10 +52,16 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
 
   @override
   void initState() {
-    _workDuration = '00:45';
+    _exerciseDuration = '00:45';
     _restDuration = '00:10';
     _numberOfExercises = '6';
     _numberOfRounds = '4';
+    _tags = [];
+    _pull = false;
+    _push = false;
+    _core = false;
+    _legs = false;
+    _fullbody = false;
     super.initState();
   }
 
@@ -53,7 +71,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).accentColor,
         centerTitle: true,
-        title: Text('Workout App'),
+        title: Text('Workout Setup'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -62,8 +80,8 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _buildDropDown(
-                'Workout Duration',
-                _workDuration,
+                'Exercise Duration',
+                _exerciseDuration,
                 [
                   '00:30',
                   '00:45',
@@ -73,8 +91,8 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                 ],
                 (newValue) {
                   setState(() {
-                    _workDuration = newValue;
-                    print(_workDuration);
+                    _exerciseDuration = newValue;
+                    print(_exerciseDuration);
                   });
                 },
               ),
@@ -111,6 +129,54 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   });
                 },
               ),
+              SwitchListTile(
+                  title: Text('Push'),
+                  value: _push,
+                  onChanged: (value) {
+                    setState(() {
+                      _push = value;
+                    });
+                  }),
+              SwitchListTile(
+                  title: Text('Pull'),
+                  value: _pull,
+                  onChanged: (value) {
+                    setState(() {
+                      _pull = value;
+                    });
+                  }),
+              SwitchListTile(
+                  title: Text('Legs'),
+                  value: _legs,
+                  onChanged: (value) {
+                    setState(() {
+                      _legs = value;
+                    });
+                  }),
+              SwitchListTile(
+                  title: Text('Core'),
+                  value: _core,
+                  onChanged: (value) {
+                    setState(() {
+                      _core = value;
+                    });
+                  }),
+              SwitchListTile(
+                  title: Text('FullBody'),
+                  value: _fullbody,
+                  onChanged: (value) {
+                    setState(() {
+                      _fullbody = value;
+                    });
+                  }),
+              RaisedButton(
+                  child: Text('Load Workout'),
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      WorkoutPage.routeName,
+                    );
+                  })
             ],
           ),
         ),
