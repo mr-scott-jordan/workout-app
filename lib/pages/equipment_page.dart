@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/enums/equipment.dart';
+import 'package:workout_app/model/workout.dart';
 
 import '../pages/workout_setup_page.dart';
 
+// ignore: must_be_immutable
 class EquipmentPage extends StatefulWidget {
   static const routeName = 'equipment-page';
+  Workout workout;
+
+  EquipmentPage(this.workout);
 
   @override
   _EquipmentPageState createState() => _EquipmentPageState();
@@ -42,7 +48,11 @@ class _EquipmentPageState extends State<EquipmentPage> {
                   onChanged: (value) {
                     setState(() {
                       _pullupBar = value;
-                      print(_pullupBar);
+                      _pullupBar
+                          ? widget.workout.equipment.add(Equipment.PullUpBar)
+                          : widget.workout.equipment
+                              .remove(Equipment.PullUpBar);
+                      // print(widget.workout.equipment[0].toString());
                     });
                   }),
             ],
@@ -56,7 +66,9 @@ class _EquipmentPageState extends State<EquipmentPage> {
                   onChanged: (value) {
                     setState(() {
                       _yogaMat = value;
-                      print(_yogaMat);
+                      _yogaMat
+                          ? widget.workout.equipment.add(Equipment.YogaMat)
+                          : widget.workout.equipment.remove(Equipment.YogaMat);
                     });
                   }),
             ],

@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/model/workout.dart';
 import 'package:workout_app/pages/workout_page.dart';
 
 import '../enums/tags.dart';
 
+// ignore: must_be_immutable
 class WorkoutSetupPage extends StatefulWidget {
   static const routeName = 'workout-setup-page';
+  Workout workout;
+
+  WorkoutSetupPage(
+    this.workout,
+  );
   @override
   _WorkoutSetupPageState createState() => _WorkoutSetupPageState();
 }
@@ -20,8 +27,6 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
   bool _pull;
   bool _legs;
   bool _core;
-
-  List<Tags> _tags;
 
   Widget _buildDropDown(String title, String stateValue,
       List<String> possibleValues, Function onChanged) {
@@ -56,7 +61,6 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
     _restDuration = '00:10';
     _numberOfExercises = '6';
     _numberOfRounds = '4';
-    _tags = [];
     _pull = false;
     _push = false;
     _core = false;
@@ -67,6 +71,8 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
 
   @override
   Widget build(BuildContext context) {
+    var minutes;
+    var seconds;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).accentColor,
@@ -83,7 +89,6 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                 'Exercise Duration',
                 _exerciseDuration,
                 [
-                  '00:30',
                   '00:45',
                   '01:00',
                   '01:15',
@@ -92,40 +97,62 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                 (newValue) {
                   setState(() {
                     _exerciseDuration = newValue;
-                    print(_exerciseDuration);
+                    minutes = int.parse(_exerciseDuration.split(':')[0]);
+                    seconds = int.parse(_exerciseDuration.split(':')[1]);
+                    widget.workout.exerciseDuration =
+                        Duration(minutes: minutes, seconds: seconds);
                   });
                 },
               ),
               _buildDropDown(
                 'Rest Duration',
                 _restDuration,
-                ['00:05', '00:10', '00:15', '00:20'],
+                [
+                  '00:05',
+                  '00:10',
+                  '00:15',
+                  '00:20',
+                ],
                 (newValue) {
                   setState(() {
                     _restDuration = newValue;
-                    print(_restDuration);
+                    minutes = int.parse(_restDuration.split(':')[0]);
+                    seconds = int.parse(_restDuration.split(':')[1]);
+                    widget.workout.restDuration =
+                        Duration(minutes: minutes, seconds: seconds);
                   });
                 },
               ),
               _buildDropDown(
                 'Number of Exercises',
                 _numberOfExercises,
-                ['3', '4', '5', '6'],
+                [
+                  '3',
+                  '4',
+                  '5',
+                  '6',
+                ],
                 (newValue) {
                   setState(() {
                     _numberOfExercises = newValue;
-                    print(_numberOfExercises);
+                    widget.workout.numOfExercises =
+                        int.parse(_numberOfExercises);
                   });
                 },
               ),
               _buildDropDown(
                 'Number of Rounds',
                 _numberOfRounds,
-                ['3', '4', '5', '6'],
+                [
+                  '3',
+                  '4',
+                  '5',
+                  '6',
+                ],
                 (newValue) {
                   setState(() {
                     _numberOfRounds = newValue;
-                    print(_numberOfRounds);
+                    widget.workout.numOfRounds = int.parse(_numberOfRounds);
                   });
                 },
               ),
@@ -135,6 +162,9 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _push = value;
+                      value
+                          ? widget.workout.tags.add(Tags.Push)
+                          : widget.workout.tags.remove(Tags.Push);
                     });
                   }),
               SwitchListTile(
@@ -143,6 +173,9 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _pull = value;
+                      value
+                          ? widget.workout.tags.add(Tags.Pull)
+                          : widget.workout.tags.remove(Tags.Pull);
                     });
                   }),
               SwitchListTile(
@@ -151,6 +184,9 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _legs = value;
+                      value
+                          ? widget.workout.tags.add(Tags.Legs)
+                          : widget.workout.tags.remove(Tags.Legs);
                     });
                   }),
               SwitchListTile(
@@ -159,6 +195,9 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _core = value;
+                      value
+                          ? widget.workout.tags.add(Tags.Core)
+                          : widget.workout.tags.remove(Tags.Core);
                     });
                   }),
               SwitchListTile(
@@ -167,16 +206,20 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _fullbody = value;
+                      value
+                          ? widget.workout.tags.add(Tags.FullBody)
+                          : widget.workout.tags.remove(Tags.FullBody);
                     });
                   }),
               RaisedButton(
-                  child: Text('Load Workout'),
-                  onPressed: () {
-                    Navigator.pushNamed(
-                      context,
-                      WorkoutPage.routeName,
-                    );
-                  })
+                child: Text('Load Workout'),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    WorkoutPage.routeName,
+                  );
+                },
+              ),
             ],
           ),
         ),
