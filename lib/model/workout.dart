@@ -9,6 +9,7 @@ class Workout {
   List<Equipment> equipment;
   Duration exerciseDuration;
   Duration restDuration;
+  Duration totalDuration;
   int numOfRounds;
   int numOfExercises;
 
@@ -24,19 +25,17 @@ class Workout {
     this.exercises = [];
   }
 
-  List<Exercise> _generatePotentialWorkoutList() {
-    var exercisesWtihEquipment = EXERCISES_DATA;
-    //     .where((exercise) => this.equipment.contains(exercise.equipment))
-    //     .toList();
-    // var validExercises = exercisesWtihEquipment
-    //     .where((exercise) => this.tags.contains(exercise.tags[0]))
-    //     .toList();
-
-    return exercisesWtihEquipment;
+  void generateWorkout() {
+    var listOfAllExercises =
+        List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
+    listOfAllExercises.shuffle();
+    this.exercises = List.generate(
+        numOfExercises, (index) => listOfAllExercises.elementAt(index));
   }
 
-  void generateWorkoutList() {
-    var validExercises = _generatePotentialWorkoutList();
-    this.exercises = validExercises;
+  void setWorkoutDuration() {
+    var intervalDuration = this.exerciseDuration + this.restDuration;
+    var setDuration = intervalDuration * this.numOfExercises;
+    this.totalDuration = setDuration * this.numOfRounds;
   }
 }
