@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/exercise_data.dart';
 import 'package:workout_app/model/workout.dart';
-import 'package:workout_app/pages/primary-drawer.dart';
+import 'package:workout_app/pages/primary_drawer.dart';
 import 'package:workout_app/pages/workout_page.dart';
 
 // ignore: must_be_immutable
@@ -32,7 +32,7 @@ class _BulletinBoardPageState extends State<BulletinBoardPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).accentColor,
         centerTitle: true,
-        title: Text('Workout App'),
+        title: Text('Bulletin Board Page'),
       ),
       drawer: PrimaryDrawer(),
       body: Column(
