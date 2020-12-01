@@ -1,7 +1,7 @@
 import 'enums/equipment.dart';
 import 'model/exercise.dart';
 
-const DUMMY_EXERCISES = const [
+const EXERCISES_DATA = const [
   Exercise(
     id: 'e1',
     title: 'Pushups',
