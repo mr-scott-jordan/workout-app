@@ -12,7 +12,6 @@ class WorkoutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     workout.setWorkoutDuration();
     var minutes = workout.totalDuration.inMinutes;
-    print(workout);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).accentColor,
@@ -35,9 +34,16 @@ class WorkoutPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                alignment: Alignment.centerLeft,
-                child: Text(workout.exercises.elementAt(0).toString()),
-              ),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    workout.exercises.elementAt(0).title,
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      decorationColor: Colors.amberAccent,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
               Container(
                 alignment: Alignment.centerRight,
                 child: Countdown(
@@ -49,7 +55,9 @@ class WorkoutPage extends StatelessWidget {
                   },
                   builder: (BuildContext ctx, Duration remaining) {
                     return Text(
-                      '${remaining.toString().substring(3, 7)}',
+                      minutes > 9
+                          ? '${remaining.toString().substring(2, 7)}'
+                          : '${remaining.toString().substring(2, 7)}',
                       style: TextStyle(
                         color: Colors.amberAccent,
                         fontSize: 20,
@@ -60,6 +68,15 @@ class WorkoutPage extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          SizedBox(
+            height: 100,
+          ),
+          RaisedButton(
+            child: Text('Finish Workout'),
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
           ),
         ],
       ),

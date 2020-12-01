@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/pages/equipment_page.dart';
+import 'package:workout_app/pages/primary_drawer.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -10,6 +11,7 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         title: Text('Workout App'),
       ),
+      drawer: PrimaryDrawer(),
       body: Column(
         children: [
           SizedBox(

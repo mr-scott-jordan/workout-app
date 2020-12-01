@@ -15,7 +15,7 @@ class PrimaryDrawer extends StatelessWidget {
         RaisedButton(
           child: Text('Main Menu'),
           onPressed: () {
-            Navigator.pushNamed(context, '/');
+            Navigator.pushReplacementNamed(context, '/');
           },
         ),
         SizedBox(
@@ -24,7 +24,7 @@ class PrimaryDrawer extends StatelessWidget {
         RaisedButton(
           child: Text('New Workout'),
           onPressed: () {
-            Navigator.pushNamed(context, EquipmentPage.routeName);
+            Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
           },
         )
       ],
