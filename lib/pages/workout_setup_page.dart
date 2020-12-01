@@ -135,6 +135,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _push = value;
+                      print(_push);
                     });
                   }),
               SwitchListTile(
@@ -143,6 +144,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _pull = value;
+                      print(_pull);
                     });
                   }),
               SwitchListTile(
@@ -151,6 +153,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _legs = value;
+                      print(_legs);
                     });
                   }),
               SwitchListTile(
@@ -159,6 +162,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _core = value;
+                      print(_core);
                     });
                   }),
               SwitchListTile(
@@ -167,6 +171,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                   onChanged: (value) {
                     setState(() {
                       _fullbody = value;
+                      print(_fullbody);
                     });
                   }),
               RaisedButton(
