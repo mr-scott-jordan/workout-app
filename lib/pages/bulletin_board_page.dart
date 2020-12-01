@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/model/workout.dart';
+import 'package:workout_app/pages/primary_drawer.dart';
 
 class BulletinBoardPage extends StatelessWidget {
   static const routeName = 'bulletin-board-page';
@@ -14,6 +15,7 @@ class BulletinBoardPage extends StatelessWidget {
         centerTitle: true,
         title: Text('Workout App'),
       ),
+      drawer: PrimaryDrawer(),
       body: Center(
         child: Text('Bulletin Board Page'),
       ),
