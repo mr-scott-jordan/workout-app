@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/enums/equipment.dart';
 import 'package:workout_app/model/workout.dart';
+import 'package:workout_app/pages/primary_drawer.dart';
 
 import '../pages/workout_setup_page.dart';
 
@@ -34,6 +35,7 @@ class _EquipmentPageState extends State<EquipmentPage> {
         centerTitle: true,
         title: Text('Equipment Page'),
       ),
+      drawer: PrimaryDrawer(),
       body: Column(
         children: [
           SizedBox(
