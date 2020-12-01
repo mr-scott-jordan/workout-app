@@ -165,6 +165,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                       value
                           ? widget.workout.tags.add(Tags.Push)
                           : widget.workout.tags.remove(Tags.Push);
+                      print(_push);
                     });
                   }),
               SwitchListTile(
@@ -176,6 +177,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                       value
                           ? widget.workout.tags.add(Tags.Pull)
                           : widget.workout.tags.remove(Tags.Pull);
+                      print(_pull);
                     });
                   }),
               SwitchListTile(
@@ -187,6 +189,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                       value
                           ? widget.workout.tags.add(Tags.Legs)
                           : widget.workout.tags.remove(Tags.Legs);
+                      print(_legs);
                     });
                   }),
               SwitchListTile(
@@ -198,6 +201,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                       value
                           ? widget.workout.tags.add(Tags.Core)
                           : widget.workout.tags.remove(Tags.Core);
+                      print(_core);
                     });
                   }),
               SwitchListTile(
@@ -209,6 +213,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
                       value
                           ? widget.workout.tags.add(Tags.FullBody)
                           : widget.workout.tags.remove(Tags.FullBody);
+                      print(_fullbody);
                     });
                   }),
               RaisedButton(
