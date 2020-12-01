@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/model/workout.dart';
 import 'package:workout_app/pages/bulletin_board_page.dart';
+import 'package:workout_app/pages/primary_drawer.dart';
 
 import '../enums/tags.dart';
 
@@ -79,6 +80,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
         centerTitle: true,
         title: Text('Workout Setup'),
       ),
+      drawer: PrimaryDrawer(),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,

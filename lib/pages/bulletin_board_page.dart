@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/exercise_data.dart';
 import 'package:workout_app/model/workout.dart';
+import 'package:workout_app/pages/primary-drawer.dart';
 import 'package:workout_app/pages/workout_page.dart';
 
 // ignore: must_be_immutable
@@ -33,6 +34,7 @@ class _BulletinBoardPageState extends State<BulletinBoardPage> {
         centerTitle: true,
         title: Text('Workout App'),
       ),
+      drawer: PrimaryDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
