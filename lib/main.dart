@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         // primarySwatch: Colors.indigo,
+        fontFamily: 'Quicksand',
         accentColor: Colors.black45,
         canvasColor: Color.fromRGBO(42, 79, 122, 1),
         visualDensity: VisualDensity.adaptivePlatformDensity,
