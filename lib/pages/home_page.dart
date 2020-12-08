@@ -56,7 +56,7 @@ class HomePage extends State<HomeForm> with SingleTickerProviderStateMixin {
               alignment: Alignment.center,
               child: Scaffold(
                 appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(60),
+                  preferredSize: Size.fromHeight(35),
                   child: Container(
                     color: const Color(0xffee5253),
                     child: Padding(
