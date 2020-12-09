@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         canvasColor: Color.fromRGBO(42, 79, 122, 1),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: HomeForm(),
       routes: {
         EquipmentPage.routeName: (context) => EquipmentPage(_workout),
         WorkoutSetupPage.routeName: (context) => WorkoutSetupPage(_workout),
