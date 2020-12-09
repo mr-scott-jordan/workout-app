@@ -29,8 +29,12 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage> {
   bool _legs;
   bool _core;
 
-  Widget _buildDropDown(String title, String stateValue,
-      List<String> possibleValues, Function onChanged) {
+  Widget _buildDropDown(
+    String title,
+    String stateValue,
+    List<String> possibleValues,
+    Function onChanged,
+  ) {
     return Column(
       children: [
         Text(title),
