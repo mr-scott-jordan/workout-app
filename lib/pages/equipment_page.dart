@@ -64,7 +64,7 @@ class _EquipmentPageState extends State<EquipmentPage>
           children: [
             //Works as the drawer (first widget)
             Scaffold(
-              backgroundColor: const Color(0xff22a6b3),
+              backgroundColor: const Color(0xff424242),
               body: PrimaryDrawer(),
             ),
 
@@ -78,7 +78,12 @@ class _EquipmentPageState extends State<EquipmentPage>
                 appBar: PreferredSize(
                   preferredSize: Size.fromHeight(35),
                   child: Container(
-                    color: const Color(0xffee5253),
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [Colors.blue[400], Colors.purple])),
+                    // color: const Color(0xffee5253),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                       child: Column(
@@ -97,63 +102,72 @@ class _EquipmentPageState extends State<EquipmentPage>
                     ),
                   ),
                 ),
-                body: Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Pullup Bar'),
-                        Switch(
-                            value: _pullupBar,
-                            onChanged: (value) {
-                              setState(() {
-                                _pullupBar = value;
-                                _pullupBar
-                                    ? widget.workout.equipment
-                                        .add(Equipment.PullUpBar)
-                                    : widget.workout.equipment
-                                        .remove(Equipment.PullUpBar);
-                                // print(widget.workout.equipment[0].toString());
-                              });
-                            }),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Yoga Mat'),
-                        Switch(
-                            value: _yogaMat,
-                            onChanged: (value) {
-                              setState(() {
-                                _yogaMat = value;
-                                _yogaMat
-                                    ? widget.workout.equipment
-                                        .add(Equipment.YogaMat)
-                                    : widget.workout.equipment
-                                        .remove(Equipment.YogaMat);
-                              });
-                            }),
-                      ],
-                    ),
-                    Container(
-                      height: 200,
-                      width: 200,
-                      alignment: Alignment.bottomCenter,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            WorkoutSetupPage.routeName,
-                          );
-                        },
-                        child: Text('Next'),
+                body: Container(
+                  color: Color(0xff424242),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 100,
                       ),
-                    ),
-                  ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Pullup Bar'),
+                          Switch(
+                              activeColor: Color(0xfffbc02d),
+                              value: _pullupBar,
+                              onChanged: (value) {
+                                setState(() {
+                                  _pullupBar = value;
+                                  _pullupBar
+                                      ? widget.workout.equipment
+                                          .add(Equipment.PullUpBar)
+                                      : widget.workout.equipment
+                                          .remove(Equipment.PullUpBar);
+                                  // print(widget.workout.equipment[0].toString());
+                                });
+                              }),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Yoga Mat'),
+                          Switch(
+                              activeColor: Color(0xfffbc02d),
+                              value: _yogaMat,
+                              onChanged: (value) {
+                                setState(() {
+                                  _yogaMat = value;
+                                  _yogaMat
+                                      ? widget.workout.equipment
+                                          .add(Equipment.YogaMat)
+                                      : widget.workout.equipment
+                                          .remove(Equipment.YogaMat);
+                                });
+                              }),
+                        ],
+                      ),
+                      Container(
+                        height: 200,
+                        width: 200,
+                        alignment: Alignment.bottomCenter,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.purple),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              WorkoutSetupPage.routeName,
+                            );
+                          },
+                          child: Text('Next'),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )
