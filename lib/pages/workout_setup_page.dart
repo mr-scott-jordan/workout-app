@@ -45,6 +45,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage>
           width: 150,
           // height: 100,
           child: DropdownButton(
+            dropdownColor: Color(0xff424242),
             value: stateValue,
             elevation: 4,
             underline: Container(
