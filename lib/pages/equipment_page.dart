@@ -102,63 +102,66 @@ class _EquipmentPageState extends State<EquipmentPage>
                     ),
                   ),
                 ),
-                body: Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Pullup Bar'),
-                        Switch(
-                            value: _pullupBar,
-                            onChanged: (value) {
-                              setState(() {
-                                _pullupBar = value;
-                                _pullupBar
-                                    ? widget.workout.equipment
-                                        .add(Equipment.PullUpBar)
-                                    : widget.workout.equipment
-                                        .remove(Equipment.PullUpBar);
-                                // print(widget.workout.equipment[0].toString());
-                              });
-                            }),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Yoga Mat'),
-                        Switch(
-                            value: _yogaMat,
-                            onChanged: (value) {
-                              setState(() {
-                                _yogaMat = value;
-                                _yogaMat
-                                    ? widget.workout.equipment
-                                        .add(Equipment.YogaMat)
-                                    : widget.workout.equipment
-                                        .remove(Equipment.YogaMat);
-                              });
-                            }),
-                      ],
-                    ),
-                    Container(
-                      height: 200,
-                      width: 200,
-                      alignment: Alignment.bottomCenter,
-                      child: FormattedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            WorkoutSetupPage.routeName,
-                          );
-                        },
-                        buttonText: "Next",
+                body: Container(
+                  color: Color(0xff424242),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 100,
                       ),
-                    ),
-                  ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Pullup Bar'),
+                          Switch(
+                              value: _pullupBar,
+                              onChanged: (value) {
+                                setState(() {
+                                  _pullupBar = value;
+                                  _pullupBar
+                                      ? widget.workout.equipment
+                                          .add(Equipment.PullUpBar)
+                                      : widget.workout.equipment
+                                          .remove(Equipment.PullUpBar);
+                                  // print(widget.workout.equipment[0].toString());
+                                });
+                              }),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Yoga Mat'),
+                          Switch(
+                              value: _yogaMat,
+                              onChanged: (value) {
+                                setState(() {
+                                  _yogaMat = value;
+                                  _yogaMat
+                                      ? widget.workout.equipment
+                                          .add(Equipment.YogaMat)
+                                      : widget.workout.equipment
+                                          .remove(Equipment.YogaMat);
+                                });
+                              }),
+                        ],
+                      ),
+                      Container(
+                        height: 200,
+                        width: 200,
+                        alignment: Alignment.bottomCenter,
+                        child: FormattedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              WorkoutSetupPage.routeName,
+                            );
+                          },
+                          buttonText: "Next",
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
