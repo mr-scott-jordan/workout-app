@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/pages/equipment_page.dart';
+import 'package:workout_app/widgets/formatted_button.dart';
 
 class PrimaryDrawer extends StatelessWidget {
   // final Text text;
@@ -12,21 +13,21 @@ class PrimaryDrawer extends StatelessWidget {
         SizedBox(
           height: 250,
         ),
-        RaisedButton(
-          child: Text('Main Menu'),
+        FormattedButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/');
           },
+          buttonText: "Main Menu",
         ),
         SizedBox(
           height: 50,
         ),
-        RaisedButton(
-          child: Text('New Workout'),
+        FormattedButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
           },
-        )
+          buttonText: "New Workout",
+        ),
       ],
     ));
   }
