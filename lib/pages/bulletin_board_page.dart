@@ -128,7 +128,7 @@ class _BulletinBoardPageState extends State<BulletinBoardPage>
                                     fontSize: 17, fontWeight: FontWeight.bold),
                               ),
                               trailing: Container(
-                                width: MediaQuery.of(context).size.width / 4,
+                                width: MediaQuery.of(context).size.width / 2,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [

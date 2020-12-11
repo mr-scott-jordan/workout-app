@@ -96,6 +96,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage>
   @override
   Widget build(BuildContext context) {
     final rightSlide = MediaQuery.of(context).size.width * 0.6;
+    widget.workout.setWorkoutDuration();
     var minutes;
     var seconds;
     return AnimatedBuilder(
@@ -145,166 +146,227 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage>
                 ),
                 body: Container(
                   color: Color(0xff424242),
-                  child: SingleChildScrollView(
-                    child: Container(
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          _buildDropDown(
-                            'Exercise Duration',
-                            _exerciseDuration,
-                            [
-                              '00:45',
-                              '01:00',
-                              '01:15',
-                              '01:30',
-                            ],
-                            (newValue) {
-                              setState(() {
-                                _exerciseDuration = newValue;
-                                minutes =
-                                    int.parse(_exerciseDuration.split(':')[0]);
-                                seconds =
-                                    int.parse(_exerciseDuration.split(':')[1]);
-                                widget.workout.exerciseDuration = Duration(
-                                    minutes: minutes, seconds: seconds);
-                              });
-                            },
-                          ),
-                          _buildDropDown(
-                            'Rest Duration',
-                            _restDuration,
-                            [
-                              '00:05',
-                              '00:10',
-                              '00:15',
-                              '00:20',
-                            ],
-                            (newValue) {
-                              setState(() {
-                                _restDuration = newValue;
-                                minutes =
-                                    int.parse(_restDuration.split(':')[0]);
-                                seconds =
-                                    int.parse(_restDuration.split(':')[1]);
-                                widget.workout.restDuration = Duration(
-                                    minutes: minutes, seconds: seconds);
-                              });
-                            },
-                          ),
-                          _buildDropDown(
-                            'Number of Exercises',
-                            _numberOfExercises,
-                            [
-                              '3',
-                              '4',
-                              '5',
-                              '6',
-                            ],
-                            (newValue) {
-                              setState(() {
-                                _numberOfExercises = newValue;
-                                widget.workout.numOfExercises =
-                                    int.parse(_numberOfExercises);
-                              });
-                            },
-                          ),
-                          _buildDropDown(
-                            'Number of Rounds',
-                            _numberOfRounds,
-                            [
-                              '3',
-                              '4',
-                              '5',
-                              '6',
-                            ],
-                            (newValue) {
-                              setState(() {
-                                _numberOfRounds = newValue;
-                                widget.workout.numOfRounds =
-                                    int.parse(_numberOfRounds);
-                              });
-                            },
-                          ),
-                          SwitchListTile(
-                              activeColor: Color(0xfffbc02d),
-                              title: Text('Push'),
-                              value: _push,
-                              onChanged: (value) {
-                                setState(() {
-                                  _push = value;
-                                  value
-                                      ? widget.workout.tags.add(Tags.Push)
-                                      : widget.workout.tags.remove(Tags.Push);
-                                  print(_push);
-                                });
-                              }),
-                          SwitchListTile(
-                              activeColor: Color(0xfffbc02d),
-                              title: Text('Pull'),
-                              value: _pull,
-                              onChanged: (value) {
-                                setState(() {
-                                  _pull = value;
-                                  value
-                                      ? widget.workout.tags.add(Tags.Pull)
-                                      : widget.workout.tags.remove(Tags.Pull);
-                                  print(_pull);
-                                });
-                              }),
-                          SwitchListTile(
-                              activeColor: Color(0xfffbc02d),
-                              title: Text('Legs'),
-                              value: _legs,
-                              onChanged: (value) {
-                                setState(() {
-                                  _legs = value;
-                                  value
-                                      ? widget.workout.tags.add(Tags.Legs)
-                                      : widget.workout.tags.remove(Tags.Legs);
-                                  print(_legs);
-                                });
-                              }),
-                          SwitchListTile(
-                              activeColor: Color(0xfffbc02d),
-                              title: Text('Core'),
-                              value: _core,
-                              onChanged: (value) {
-                                setState(() {
-                                  _core = value;
-                                  value
-                                      ? widget.workout.tags.add(Tags.Core)
-                                      : widget.workout.tags.remove(Tags.Core);
-                                  print(_core);
-                                });
-                              }),
-                          SwitchListTile(
-                              activeColor: Color(0xfffbc02d),
-                              title: Text('FullBody'),
-                              value: _fullbody,
-                              onChanged: (value) {
-                                setState(() {
-                                  _fullbody = value;
-                                  value
-                                      ? widget.workout.tags.add(Tags.FullBody)
-                                      : widget.workout.tags
-                                          .remove(Tags.FullBody);
-                                  print(_fullbody);
-                                });
-                              }),
-                          FormattedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                context,
-                                BulletinBoardPage.routeName,
-                              );
-                            },
-                            buttonText: "Load Workout",
-                          ),
-                        ],
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'Total Workout Duration:',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Color(0xfffbc02d),
+                                  ),
+                                ),
+                                Text(
+                                  (widget.workout.totalDuration
+                                      .toString()
+                                      .split('.')[0]),
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              height: 2.0,
+                              width: double.infinity,
+                              color: Colors.purple,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                      Expanded(
+                        flex: 8,
+                        child: SingleChildScrollView(
+                          child: Container(
+                            width: double.infinity,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                _buildDropDown(
+                                  'Exercise Duration',
+                                  _exerciseDuration,
+                                  [
+                                    '00:45',
+                                    '01:00',
+                                    '01:15',
+                                    '01:30',
+                                  ],
+                                  (newValue) {
+                                    setState(() {
+                                      _exerciseDuration = newValue;
+                                      minutes = int.parse(
+                                          _exerciseDuration.split(':')[0]);
+                                      seconds = int.parse(
+                                          _exerciseDuration.split(':')[1]);
+                                      widget.workout.exerciseDuration =
+                                          Duration(
+                                              minutes: minutes,
+                                              seconds: seconds);
+                                    });
+                                  },
+                                ),
+                                _buildDropDown(
+                                  'Rest Duration',
+                                  _restDuration,
+                                  [
+                                    '00:05',
+                                    '00:10',
+                                    '00:15',
+                                    '00:20',
+                                  ],
+                                  (newValue) {
+                                    setState(() {
+                                      _restDuration = newValue;
+                                      minutes = int.parse(
+                                          _restDuration.split(':')[0]);
+                                      seconds = int.parse(
+                                          _restDuration.split(':')[1]);
+                                      widget.workout.restDuration = Duration(
+                                          minutes: minutes, seconds: seconds);
+                                    });
+                                  },
+                                ),
+                                _buildDropDown(
+                                  'Number of Exercises',
+                                  _numberOfExercises,
+                                  [
+                                    '3',
+                                    '4',
+                                    '5',
+                                    '6',
+                                  ],
+                                  (newValue) {
+                                    setState(() {
+                                      _numberOfExercises = newValue;
+                                      widget.workout.numOfExercises =
+                                          int.parse(_numberOfExercises);
+                                    });
+                                  },
+                                ),
+                                _buildDropDown(
+                                  'Number of Rounds',
+                                  _numberOfRounds,
+                                  [
+                                    '3',
+                                    '4',
+                                    '5',
+                                    '6',
+                                  ],
+                                  (newValue) {
+                                    setState(() {
+                                      _numberOfRounds = newValue;
+                                      widget.workout.numOfRounds =
+                                          int.parse(_numberOfRounds);
+                                    });
+                                  },
+                                ),
+                                SwitchListTile(
+                                    activeColor: Color(0xfffbc02d),
+                                    title: Text('Push'),
+                                    value: _push,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _push = value;
+                                        value
+                                            ? widget.workout.tags.add(Tags.Push)
+                                            : widget.workout.tags
+                                                .remove(Tags.Push);
+                                        print(_push);
+                                      });
+                                    }),
+                                SwitchListTile(
+                                    activeColor: Color(0xfffbc02d),
+                                    title: Text('Pull'),
+                                    value: _pull,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _pull = value;
+                                        value
+                                            ? widget.workout.tags.add(Tags.Pull)
+                                            : widget.workout.tags
+                                                .remove(Tags.Pull);
+                                        print(_pull);
+                                      });
+                                    }),
+                                SwitchListTile(
+                                    activeColor: Color(0xfffbc02d),
+                                    title: Text('Legs'),
+                                    value: _legs,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _legs = value;
+                                        value
+                                            ? widget.workout.tags.add(Tags.Legs)
+                                            : widget.workout.tags
+                                                .remove(Tags.Legs);
+                                        print(_legs);
+                                      });
+                                    }),
+                                SwitchListTile(
+                                    activeColor: Color(0xfffbc02d),
+                                    title: Text('Core'),
+                                    value: _core,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _core = value;
+                                        value
+                                            ? widget.workout.tags.add(Tags.Core)
+                                            : widget.workout.tags
+                                                .remove(Tags.Core);
+                                        print(_core);
+                                      });
+                                    }),
+                                SwitchListTile(
+                                    activeColor: Color(0xfffbc02d),
+                                    title: Text('FullBody'),
+                                    value: _fullbody,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _fullbody = value;
+                                        value
+                                            ? widget.workout.tags
+                                                .add(Tags.FullBody)
+                                            : widget.workout.tags
+                                                .remove(Tags.FullBody);
+                                        print(_fullbody);
+                                      });
+                                    }),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: 2.0,
+                              width: double.infinity,
+                              color: Colors.purple,
+                            ),
+                            FormattedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  BulletinBoardPage.routeName,
+                                );
+                              },
+                              buttonText: "Load Workout",
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
