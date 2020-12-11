@@ -11,7 +11,8 @@ class FormattedButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-        shadowColor: MaterialStateProperty.all<Color>(Colors.white),
+        shadowColor: MaterialStateProperty.all<Color>(Color(0xff42a5f5)),
+        elevation: MaterialStateProperty.all(7),
       ),
       onPressed: onPressed,
       child: Text(buttonText),
