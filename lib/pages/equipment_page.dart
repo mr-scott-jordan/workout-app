@@ -114,6 +114,7 @@ class _EquipmentPageState extends State<EquipmentPage>
                         children: [
                           Text('Pullup Bar'),
                           Switch(
+                              activeColor: Color(0xfffbc02d),
                               value: _pullupBar,
                               onChanged: (value) {
                                 setState(() {
@@ -133,6 +134,7 @@ class _EquipmentPageState extends State<EquipmentPage>
                         children: [
                           Text('Yoga Mat'),
                           Switch(
+                              activeColor: Color(0xfffbc02d),
                               value: _yogaMat,
                               onChanged: (value) {
                                 setState(() {
