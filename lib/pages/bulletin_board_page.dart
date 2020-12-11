@@ -55,7 +55,7 @@ class _BulletinBoardPageState extends State<BulletinBoardPage>
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: const Color(0xff22a6b3),
+              backgroundColor: const Color(0xff424242),
               body: PrimaryDrawer(),
             ),
             Transform(
@@ -67,7 +67,12 @@ class _BulletinBoardPageState extends State<BulletinBoardPage>
                 appBar: PreferredSize(
                   preferredSize: Size.fromHeight(35),
                   child: Container(
-                    color: const Color(0xffee5253),
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [Colors.blue[400], Colors.purple])),
+                    // color: const Color(0xffee5253),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                       child: Column(
@@ -86,92 +91,98 @@ class _BulletinBoardPageState extends State<BulletinBoardPage>
                     ),
                   ),
                 ),
-                body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: Text(
-                        (widget.workout.totalDuration.toString().split('.')[0]),
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                body: Container(
+                  color: Color(0xff424242),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Text(
+                          (widget.workout.totalDuration
+                              .toString()
+                              .split('.')[0]),
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      width: double.infinity,
-                      height: 300,
-                      child: ListView.builder(
-                        itemCount: widget.workout.exercises.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            // leading: Text(
-                            //   workout.exercises[index].title,
-                            //   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                            // ),
-                            title: Text(
-                              widget.workout.exercises[index].title,
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
-                            ),
-                            trailing: Container(
-                              width: MediaQuery.of(context).size.width / 4,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                      icon: Icon(Icons.swap_calls_rounded),
-                                      onPressed: () {
-                                        setState(() {
-                                          widget.workout.exercises[index] =
-                                              potentialExercises.firstWhere(
-                                                  (element) =>
-                                                      element !=
-                                                      widget.workout
-                                                          .exercises[index]);
-                                        });
-                                      }),
-                                  IconButton(
-                                      icon: Icon(Icons.delete),
-                                      onPressed: () {
-                                        setState(() {
-                                          var didRemove = widget
-                                              .workout.exercises
-                                              .removeAt(index);
-                                          widget.workout.numOfExercises =
-                                              widget.workout.numOfExercises - 1;
-                                          print(didRemove);
-                                        });
-                                      }),
-                                ],
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        height: 300,
+                        child: ListView.builder(
+                          itemCount: widget.workout.exercises.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              // leading: Text(
+                              //   workout.exercises[index].title,
+                              //   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                              // ),
+                              title: Text(
+                                widget.workout.exercises[index].title,
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.bold),
                               ),
-                            ),
+                              trailing: Container(
+                                width: MediaQuery.of(context).size.width / 4,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    IconButton(
+                                        icon: Icon(Icons.swap_calls_rounded),
+                                        onPressed: () {
+                                          setState(() {
+                                            widget.workout.exercises[index] =
+                                                potentialExercises.firstWhere(
+                                                    (element) =>
+                                                        element !=
+                                                        widget.workout
+                                                            .exercises[index]);
+                                          });
+                                        }),
+                                    IconButton(
+                                        icon: Icon(Icons.delete),
+                                        onPressed: () {
+                                          setState(() {
+                                            var didRemove = widget
+                                                .workout.exercises
+                                                .removeAt(index);
+                                            widget.workout.numOfExercises =
+                                                widget.workout.numOfExercises -
+                                                    1;
+                                            print(didRemove);
+                                          });
+                                        }),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      FormattedButton(
+                        onPressed: () {
+                          setState(() {
+                            widget.workout.generateWorkout();
+                          });
+                        },
+                        buttonText: "Regenerate Workout",
+                      ),
+                      FormattedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            WorkoutPage.routeName,
                           );
                         },
+                        buttonText: "Begin Workout",
                       ),
-                    ),
-                    FormattedButton(
-                      onPressed: () {
-                        setState(() {
-                          widget.workout.generateWorkout();
-                        });
-                      },
-                      buttonText: "Regenerate Workout",
-                    ),
-                    FormattedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          WorkoutPage.routeName,
-                        );
-                      },
-                      buttonText: "Begin Workout",
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -51,7 +51,7 @@ class _WorkoutPageState extends State<WorkoutPage>
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: const Color(0xff22a6b3),
+              backgroundColor: const Color(0xff424242),
               body: PrimaryDrawer(),
             ),
             Transform(
@@ -60,10 +60,16 @@ class _WorkoutPageState extends State<WorkoutPage>
                 ..scale(scale),
               alignment: Alignment.center,
               child: Scaffold(
+                backgroundColor: Color(0xff424242),
                 appBar: PreferredSize(
                   preferredSize: Size.fromHeight(35),
                   child: Container(
-                    color: const Color(0xffee5253),
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [Colors.blue[400], Colors.purple])),
+                    // color: const Color(0xffee5253),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                       child: Column(
@@ -82,67 +88,69 @@ class _WorkoutPageState extends State<WorkoutPage>
                     ),
                   ),
                 ),
-                body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * .8,
-                      child: Placeholder(
-                        fallbackHeight: 250,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 60,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              widget.workout.exercises.elementAt(0).title,
-                              style: TextStyle(
-                                fontSize: 24,
-                                color: Colors.white,
-                                decorationColor: Colors.amberAccent,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )),
-                        Container(
-                          alignment: Alignment.centerRight,
-                          child: Countdown(
-                            duration: Duration(
-                              minutes: minutes,
-                            ),
-                            onFinish: () {
-                              print('finished!');
-                            },
-                            builder: (BuildContext ctx, Duration remaining) {
-                              return Text(
-                                minutes > 9
-                                    ? '${remaining.toString().substring(2, 7)}'
-                                    : '${remaining.toString().substring(2, 7)}',
-                                style: TextStyle(
-                                  color: Colors.amberAccent,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              );
-                            },
-                          ),
+                body: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * .8,
+                        child: Placeholder(
+                          fallbackHeight: 250,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 100,
-                    ),
-                    FormattedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/');
-                      },
-                      buttonText: "Finish Workout",
-                    ),
-                  ],
+                      ),
+                      SizedBox(
+                        height: 60,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                widget.workout.exercises.elementAt(0).title,
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                  decorationColor: Colors.amberAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            child: Countdown(
+                              duration: Duration(
+                                minutes: minutes,
+                              ),
+                              onFinish: () {
+                                print('finished!');
+                              },
+                              builder: (BuildContext ctx, Duration remaining) {
+                                return Text(
+                                  minutes > 9
+                                      ? '${remaining.toString().substring(2, 7)}'
+                                      : '${remaining.toString().substring(2, 7)}',
+                                  style: TextStyle(
+                                    color: Colors.amberAccent,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 100,
+                      ),
+                      FormattedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/');
+                        },
+                        buttonText: "Finish Workout",
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

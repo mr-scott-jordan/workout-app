@@ -47,7 +47,7 @@ class HomePage extends State<HomeForm> with SingleTickerProviderStateMixin {
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: const Color(0xff22a6b3),
+              backgroundColor: const Color(0xff424242),
               body: PrimaryDrawer(),
             ),
             Transform(
@@ -59,7 +59,12 @@ class HomePage extends State<HomeForm> with SingleTickerProviderStateMixin {
                 appBar: PreferredSize(
                   preferredSize: Size.fromHeight(35),
                   child: Container(
-                    color: const Color(0xffee5253),
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [Colors.blue[400], Colors.purple])),
+                    // color: const Color(0xff212121),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                       child: Column(
@@ -78,26 +83,30 @@ class HomePage extends State<HomeForm> with SingleTickerProviderStateMixin {
                     ),
                   ),
                 ),
-                body: Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Container(
-                      child: Icon(Icons.fitness_center, size: 150),
-                    ),
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Center(
-                      child: FormattedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, EquipmentPage.routeName);
-                        },
-                        buttonText: "Load Workout",
+                body: Container(
+                  color: Color(0xff424242),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 100,
                       ),
-                    ),
-                  ],
+                      Container(
+                        child: Icon(Icons.fitness_center, size: 150),
+                      ),
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Center(
+                        child: FormattedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, EquipmentPage.routeName);
+                          },
+                          buttonText: "Load Workout",
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -46,10 +46,11 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage>
           width: 150,
           // height: 100,
           child: DropdownButton(
+            dropdownColor: Color(0xff424242),
             value: stateValue,
             elevation: 4,
             underline: Container(
-              color: Colors.white,
+              color: Colors.purple,
               height: 2,
             ),
             onChanged: onChanged,
@@ -105,7 +106,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage>
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: const Color(0xff22a6b3),
+              backgroundColor: const Color(0xff424242),
               body: PrimaryDrawer(),
             ),
             Transform(
@@ -114,10 +115,16 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage>
                 ..scale(scale),
               alignment: Alignment.center,
               child: Scaffold(
+                backgroundColor: Color(0xff424242),
                 appBar: PreferredSize(
                   preferredSize: Size.fromHeight(35),
                   child: Container(
-                    color: const Color(0xffee5253),
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [Colors.blue[400], Colors.purple])),
+                    // color: const Color(0xffee5253),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                       child: Column(
@@ -136,156 +143,167 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage>
                     ),
                   ),
                 ),
-                body: SingleChildScrollView(
-                  child: Container(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        _buildDropDown(
-                          'Exercise Duration',
-                          _exerciseDuration,
-                          [
-                            '00:45',
-                            '01:00',
-                            '01:15',
-                            '01:30',
-                          ],
-                          (newValue) {
-                            setState(() {
-                              _exerciseDuration = newValue;
-                              minutes =
-                                  int.parse(_exerciseDuration.split(':')[0]);
-                              seconds =
-                                  int.parse(_exerciseDuration.split(':')[1]);
-                              widget.workout.exerciseDuration =
-                                  Duration(minutes: minutes, seconds: seconds);
-                            });
-                          },
-                        ),
-                        _buildDropDown(
-                          'Rest Duration',
-                          _restDuration,
-                          [
-                            '00:05',
-                            '00:10',
-                            '00:15',
-                            '00:20',
-                          ],
-                          (newValue) {
-                            setState(() {
-                              _restDuration = newValue;
-                              minutes = int.parse(_restDuration.split(':')[0]);
-                              seconds = int.parse(_restDuration.split(':')[1]);
-                              widget.workout.restDuration =
-                                  Duration(minutes: minutes, seconds: seconds);
-                            });
-                          },
-                        ),
-                        _buildDropDown(
-                          'Number of Exercises',
-                          _numberOfExercises,
-                          [
-                            '3',
-                            '4',
-                            '5',
-                            '6',
-                          ],
-                          (newValue) {
-                            setState(() {
-                              _numberOfExercises = newValue;
-                              widget.workout.numOfExercises =
-                                  int.parse(_numberOfExercises);
-                            });
-                          },
-                        ),
-                        _buildDropDown(
-                          'Number of Rounds',
-                          _numberOfRounds,
-                          [
-                            '3',
-                            '4',
-                            '5',
-                            '6',
-                          ],
-                          (newValue) {
-                            setState(() {
-                              _numberOfRounds = newValue;
-                              widget.workout.numOfRounds =
-                                  int.parse(_numberOfRounds);
-                            });
-                          },
-                        ),
-                        SwitchListTile(
-                            title: Text('Push'),
-                            value: _push,
-                            onChanged: (value) {
+                body: Container(
+                  color: Color(0xff424242),
+                  child: SingleChildScrollView(
+                    child: Container(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          _buildDropDown(
+                            'Exercise Duration',
+                            _exerciseDuration,
+                            [
+                              '00:45',
+                              '01:00',
+                              '01:15',
+                              '01:30',
+                            ],
+                            (newValue) {
                               setState(() {
-                                _push = value;
-                                value
-                                    ? widget.workout.tags.add(Tags.Push)
-                                    : widget.workout.tags.remove(Tags.Push);
-                                print(_push);
+                                _exerciseDuration = newValue;
+                                minutes =
+                                    int.parse(_exerciseDuration.split(':')[0]);
+                                seconds =
+                                    int.parse(_exerciseDuration.split(':')[1]);
+                                widget.workout.exerciseDuration = Duration(
+                                    minutes: minutes, seconds: seconds);
                               });
-                            }),
-                        SwitchListTile(
-                            title: Text('Pull'),
-                            value: _pull,
-                            onChanged: (value) {
+                            },
+                          ),
+                          _buildDropDown(
+                            'Rest Duration',
+                            _restDuration,
+                            [
+                              '00:05',
+                              '00:10',
+                              '00:15',
+                              '00:20',
+                            ],
+                            (newValue) {
                               setState(() {
-                                _pull = value;
-                                value
-                                    ? widget.workout.tags.add(Tags.Pull)
-                                    : widget.workout.tags.remove(Tags.Pull);
-                                print(_pull);
+                                _restDuration = newValue;
+                                minutes =
+                                    int.parse(_restDuration.split(':')[0]);
+                                seconds =
+                                    int.parse(_restDuration.split(':')[1]);
+                                widget.workout.restDuration = Duration(
+                                    minutes: minutes, seconds: seconds);
                               });
-                            }),
-                        SwitchListTile(
-                            title: Text('Legs'),
-                            value: _legs,
-                            onChanged: (value) {
+                            },
+                          ),
+                          _buildDropDown(
+                            'Number of Exercises',
+                            _numberOfExercises,
+                            [
+                              '3',
+                              '4',
+                              '5',
+                              '6',
+                            ],
+                            (newValue) {
                               setState(() {
-                                _legs = value;
-                                value
-                                    ? widget.workout.tags.add(Tags.Legs)
-                                    : widget.workout.tags.remove(Tags.Legs);
-                                print(_legs);
+                                _numberOfExercises = newValue;
+                                widget.workout.numOfExercises =
+                                    int.parse(_numberOfExercises);
                               });
-                            }),
-                        SwitchListTile(
-                            title: Text('Core'),
-                            value: _core,
-                            onChanged: (value) {
+                            },
+                          ),
+                          _buildDropDown(
+                            'Number of Rounds',
+                            _numberOfRounds,
+                            [
+                              '3',
+                              '4',
+                              '5',
+                              '6',
+                            ],
+                            (newValue) {
                               setState(() {
-                                _core = value;
-                                value
-                                    ? widget.workout.tags.add(Tags.Core)
-                                    : widget.workout.tags.remove(Tags.Core);
-                                print(_core);
+                                _numberOfRounds = newValue;
+                                widget.workout.numOfRounds =
+                                    int.parse(_numberOfRounds);
                               });
-                            }),
-                        SwitchListTile(
-                            title: Text('FullBody'),
-                            value: _fullbody,
-                            onChanged: (value) {
-                              setState(() {
-                                _fullbody = value;
-                                value
-                                    ? widget.workout.tags.add(Tags.FullBody)
-                                    : widget.workout.tags.remove(Tags.FullBody);
-                                print(_fullbody);
-                              });
-                            }),
-                        FormattedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              BulletinBoardPage.routeName,
-                            );
-                          },
-                          buttonText: "Load Workout",
-                        ),
-                      ],
+                            },
+                          ),
+                          SwitchListTile(
+                              activeColor: Color(0xfffbc02d),
+                              title: Text('Push'),
+                              value: _push,
+                              onChanged: (value) {
+                                setState(() {
+                                  _push = value;
+                                  value
+                                      ? widget.workout.tags.add(Tags.Push)
+                                      : widget.workout.tags.remove(Tags.Push);
+                                  print(_push);
+                                });
+                              }),
+                          SwitchListTile(
+                              activeColor: Color(0xfffbc02d),
+                              title: Text('Pull'),
+                              value: _pull,
+                              onChanged: (value) {
+                                setState(() {
+                                  _pull = value;
+                                  value
+                                      ? widget.workout.tags.add(Tags.Pull)
+                                      : widget.workout.tags.remove(Tags.Pull);
+                                  print(_pull);
+                                });
+                              }),
+                          SwitchListTile(
+                              activeColor: Color(0xfffbc02d),
+                              title: Text('Legs'),
+                              value: _legs,
+                              onChanged: (value) {
+                                setState(() {
+                                  _legs = value;
+                                  value
+                                      ? widget.workout.tags.add(Tags.Legs)
+                                      : widget.workout.tags.remove(Tags.Legs);
+                                  print(_legs);
+                                });
+                              }),
+                          SwitchListTile(
+                              activeColor: Color(0xfffbc02d),
+                              title: Text('Core'),
+                              value: _core,
+                              onChanged: (value) {
+                                setState(() {
+                                  _core = value;
+                                  value
+                                      ? widget.workout.tags.add(Tags.Core)
+                                      : widget.workout.tags.remove(Tags.Core);
+                                  print(_core);
+                                });
+                              }),
+                          SwitchListTile(
+                              activeColor: Color(0xfffbc02d),
+                              title: Text('FullBody'),
+                              value: _fullbody,
+                              onChanged: (value) {
+                                setState(() {
+                                  _fullbody = value;
+                                  value
+                                      ? widget.workout.tags.add(Tags.FullBody)
+                                      : widget.workout.tags
+                                          .remove(Tags.FullBody);
+                                  print(_fullbody);
+                                });
+                              }),
+                          FormattedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                BulletinBoardPage.routeName,
+                              );
+                            },
+                            buttonText: "Load Workout",
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

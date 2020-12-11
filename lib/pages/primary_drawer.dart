@@ -8,27 +8,31 @@ class PrimaryDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: Column(
-      children: [
-        SizedBox(
-          height: 250,
-        ),
-        FormattedButton(
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/');
-          },
-          buttonText: "Main Menu",
-        ),
-        SizedBox(
-          height: 50,
-        ),
-        FormattedButton(
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
-          },
-          buttonText: "New Workout",
-        ),
-      ],
+        child: Container(
+      // color: Color(0xFF37474F),
+      color: Color(0xff212121),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 250,
+          ),
+          FormattedButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/');
+            },
+            buttonText: "Main Menu",
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          FormattedButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
+            },
+            buttonText: "New Workout",
+          ),
+        ],
+      ),
     ));
   }
 }
