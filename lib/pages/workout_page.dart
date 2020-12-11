@@ -2,6 +2,7 @@ import 'package:countdown_flutter/countdown_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_app/model/workout.dart';
 import 'package:workout_app/pages/primary_drawer.dart';
+import 'package:workout_app/widgets/formatted_button.dart';
 
 class WorkoutPage extends StatefulWidget {
   static const routeName = 'workout-page';
@@ -142,15 +143,11 @@ class _WorkoutPageState extends State<WorkoutPage>
                       SizedBox(
                         height: 100,
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.purple),
-                        ),
-                        child: Text('Finish Workout'),
+                      FormattedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/');
                         },
+                        buttonText: "Finish Workout",
                       ),
                     ],
                   ),
