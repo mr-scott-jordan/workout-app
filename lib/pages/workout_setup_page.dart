@@ -49,7 +49,7 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage>
             value: stateValue,
             elevation: 4,
             underline: Container(
-              color: Colors.white,
+              color: Colors.purple,
               height: 2,
             ),
             onChanged: onChanged,
