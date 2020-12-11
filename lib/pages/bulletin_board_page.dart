@@ -96,24 +96,29 @@ class _BulletinBoardPageState extends State<BulletinBoardPage>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        child: Text(
-                          (widget.workout.totalDuration
-                              .toString()
-                              .split('.')[0]),
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        height: 300,
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                (widget.workout.totalDuration
+                                    .toString()
+                                    .split('.')[0]),
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Container(
+                                height: 2.0,
+                                width: double.infinity,
+                                color: Colors.purple,
+                              ),
+                            ],
+                          )),
+                      Expanded(
+                        flex: 7,
                         child: ListView.builder(
                           itemCount: widget.workout.exercises.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -164,22 +169,35 @@ class _BulletinBoardPageState extends State<BulletinBoardPage>
                           },
                         ),
                       ),
-                      FormattedButton(
-                        onPressed: () {
-                          setState(() {
-                            widget.workout.generateWorkout();
-                          });
-                        },
-                        buttonText: "Regenerate Workout",
-                      ),
-                      FormattedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            WorkoutPage.routeName,
-                          );
-                        },
-                        buttonText: "Begin Workout",
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: 2.0,
+                              width: double.infinity,
+                              color: Colors.purple,
+                            ),
+                            FormattedButton(
+                              onPressed: () {
+                                setState(() {
+                                  widget.workout.generateWorkout();
+                                });
+                              },
+                              buttonText: "Regenerate Workout",
+                            ),
+                            FormattedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  WorkoutPage.routeName,
+                                );
+                              },
+                              buttonText: "Begin Workout",
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
