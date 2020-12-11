@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/pages/equipment_page.dart';
 import 'package:workout_app/pages/primary_drawer.dart';
+import 'package:workout_app/widgets/formatted_button.dart';
 
 class HomeForm extends StatefulWidget {
   // const HomeForm({Key key}) : super(key: key);
@@ -89,11 +90,11 @@ class HomePage extends State<HomeForm> with SingleTickerProviderStateMixin {
                       height: 100,
                     ),
                     Center(
-                      child: RaisedButton(
-                        child: Text('Load Workout'),
+                      child: FormattedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, EquipmentPage.routeName);
                         },
+                        buttonText: "Load Workout",
                       ),
                     ),
                   ],

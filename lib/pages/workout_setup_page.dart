@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_app/model/workout.dart';
 import 'package:workout_app/pages/bulletin_board_page.dart';
 import 'package:workout_app/pages/primary_drawer.dart';
+import 'package:workout_app/widgets/formatted_button.dart';
 
 import '../enums/tags.dart';
 
@@ -275,14 +276,14 @@ class _WorkoutSetupPageState extends State<WorkoutSetupPage>
                                 print(_fullbody);
                               });
                             }),
-                        RaisedButton(
-                          child: Text('Load Workout'),
+                        FormattedButton(
                           onPressed: () {
                             Navigator.pushNamed(
                               context,
                               BulletinBoardPage.routeName,
                             );
                           },
+                          buttonText: "Load Workout",
                         ),
                       ],
                     ),

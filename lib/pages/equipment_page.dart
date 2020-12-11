@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_app/enums/equipment.dart';
 import 'package:workout_app/model/workout.dart';
 import 'package:workout_app/pages/primary_drawer.dart';
+import 'package:workout_app/widgets/formatted_button.dart';
 
 import '../pages/workout_setup_page.dart';
 
@@ -143,14 +144,14 @@ class _EquipmentPageState extends State<EquipmentPage>
                       height: 200,
                       width: 200,
                       alignment: Alignment.bottomCenter,
-                      child: RaisedButton(
+                      child: FormattedButton(
                         onPressed: () {
                           Navigator.pushNamed(
                             context,
                             WorkoutSetupPage.routeName,
                           );
                         },
-                        child: Text('Next'),
+                        buttonText: "Next",
                       ),
                     ),
                   ],
