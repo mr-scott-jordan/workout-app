@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "17121611063",
+    "project_id": "workout-app-capstone",
+    "storage_bucket": "workout-app-capstone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17121611063:android:f3c553db2c5e682ac49eb2",
+        "android_client_info": {
+          "package_name": "com.example.workout_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17121611063-rvu292odopdn7nrrnb832nvu7u2882fu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.workout_app",
+            "certificate_hash": "d987ed9631b16707721ba690534f475e85ee4dcb"
+          }
+        },
+        {
+          "client_id": "17121611063-nh2up733r5mbkch1b5310tsm4l3gnb3g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgOmKWJFeTdd7y2YniXsZIYrRPm_UrMv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17121611063-nh2up733r5mbkch1b5310tsm4l3gnb3g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
