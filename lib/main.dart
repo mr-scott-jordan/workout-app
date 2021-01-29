@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/pages/bulletin_board_page.dart';
-import 'package:workout_app/pages/equipment_page.dart';
-import 'package:workout_app/pages/workout_page.dart';
-import 'package:workout_app/pages/workout_setup_page.dart';
 
-import 'model/workout.dart';
-import 'pages/home_page.dart';
+import 'features/high_intensity_interval/domain/entities/workout.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,8 +1,9 @@
-import 'package:countdown_flutter/countdown_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_app/model/workout.dart';
-import 'package:workout_app/pages/primary_drawer.dart';
-import 'package:workout_app/widgets/formatted_button.dart';
+
+import '../../../../model/workout.dart';
+
+import '../widgets/formatted_button.dart';
+import 'primary_drawer.dart';
 
 class WorkoutPage extends StatefulWidget {
   static const routeName = 'workout-page';
@@ -117,26 +118,26 @@ class _WorkoutPageState extends State<WorkoutPage>
                               )),
                           Container(
                             alignment: Alignment.centerRight,
-                            child: Countdown(
-                              duration: Duration(
-                                minutes: minutes,
-                              ),
-                              onFinish: () {
-                                print('finished!');
-                              },
-                              builder: (BuildContext ctx, Duration remaining) {
-                                return Text(
-                                  minutes > 9
-                                      ? '${remaining.toString().substring(2, 7)}'
-                                      : '${remaining.toString().substring(2, 7)}',
-                                  style: TextStyle(
-                                    color: Colors.amberAccent,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                );
-                              },
-                            ),
+                            // child: Countdown(
+                            //   duration: Duration(
+                            //     minutes: minutes,
+                            //   ),
+                            //   onFinish: () {
+                            //     print('finished!');
+                            //   },
+                            //   builder: (BuildContext ctx, Duration remaining) {
+                            //     return Text(
+                            //       minutes > 9
+                            //           ? '${remaining.toString().substring(2, 7)}'
+                            //           : '${remaining.toString().substring(2, 7)}',
+                            //       style: TextStyle(
+                            //         color: Colors.amberAccent,
+                            //         fontSize: 20,
+                            //         fontWeight: FontWeight.w900,
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
                           ),
                         ],
                       ),

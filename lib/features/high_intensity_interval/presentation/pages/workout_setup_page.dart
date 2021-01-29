@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/model/workout.dart';
-import 'package:workout_app/pages/bulletin_board_page.dart';
-import 'package:workout_app/pages/primary_drawer.dart';
-import 'package:workout_app/widgets/formatted_button.dart';
 
-import '../enums/tags.dart';
+import '../../../../enums/tags.dart';
+import '../../../../model/workout.dart';
+import '../widgets/formatted_button.dart';
+import 'bulletin_board_page.dart';
+import 'primary_drawer.dart';
 
 // ignore: must_be_immutable
 class WorkoutSetupPage extends StatefulWidget {

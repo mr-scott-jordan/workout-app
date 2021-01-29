@@ -1,7 +1,7 @@
 import 'enums/equipment.dart';
-import 'model/exercise.dart';
+import 'features/high_intensity_interval/domain/entities/exercise.dart';
 
-const EXERCISES_DATA = const [
+final EXERCISES_DATA = [
   Exercise(
     id: 'e1',
     title: 'Pushups',

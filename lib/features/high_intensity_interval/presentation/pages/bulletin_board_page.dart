@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/exercise_data.dart';
-import 'package:workout_app/model/workout.dart';
-import 'package:workout_app/pages/primary_drawer.dart';
-import 'package:workout_app/pages/workout_page.dart';
-import 'package:workout_app/widgets/formatted_button.dart';
+import 'package:workout_app/features/high-intensity-interval/domain/entities/workout.dart';
 
 // ignore: must_be_immutable
 class BulletinBoardPage extends StatefulWidget {

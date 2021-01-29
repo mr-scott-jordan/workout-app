@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/pages/equipment_page.dart';
-import 'package:workout_app/pages/primary_drawer.dart';
-import 'package:workout_app/widgets/formatted_button.dart';
+import 'package:workout_app/features/high-intensity-interval/presentation/pages/primary_drawer.dart';
 
-class HomeForm extends StatefulWidget {
-  // const HomeForm({Key key}) : super(key: key);
+class PageAnimationWidget extends StatefulWidget {
+  final Widget child;
+  PageAnimationWidget({@required this.child});
 
   @override
-  State<StatefulWidget> createState() {
-    return HomePage();
-  }
-  // HomePage createState() => HomePage();
+  _PageAnimationWidgetState createState() => _PageAnimationWidgetState();
 }
 
-class HomePage extends State<HomeForm> with SingleTickerProviderStateMixin {
+class _PageAnimationWidgetState extends State<PageAnimationWidget>
+    with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
   @override
@@ -39,6 +36,8 @@ class HomePage extends State<HomeForm> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final rightSlide = MediaQuery.of(context).size.width * 0.6;
+    // SystemChrome.setEnabledSystemUIOverlays([]);
+
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) {
@@ -57,7 +56,7 @@ class HomePage extends State<HomeForm> with SingleTickerProviderStateMixin {
               alignment: Alignment.center,
               child: Scaffold(
                 appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(35),
+                  preferredSize: Size.fromHeight(25),
                   child: Container(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -83,31 +82,7 @@ class HomePage extends State<HomeForm> with SingleTickerProviderStateMixin {
                     ),
                   ),
                 ),
-                body: Container(
-                  color: Color(0xff424242),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 100,
-                      ),
-                      Container(
-                        child: Icon(Icons.fitness_center, size: 150),
-                      ),
-                      SizedBox(
-                        height: 100,
-                      ),
-                      Center(
-                        child: FormattedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, EquipmentPage.routeName);
-                          },
-                          buttonText: "Load Workout",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                body: widget.child,
               ),
             ),
           ],

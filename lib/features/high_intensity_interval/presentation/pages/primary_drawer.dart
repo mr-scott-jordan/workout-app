@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/pages/equipment_page.dart';
-import 'package:workout_app/widgets/formatted_button.dart';
+
+import '../widgets/formatted_button.dart';
+import 'equipment_page.dart';
 
 class PrimaryDrawer extends StatelessWidget {
   // final Text text;
