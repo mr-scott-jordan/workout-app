@@ -3,25 +3,40 @@ import 'package:flutter/material.dart';
 import 'package:workout_app/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:workout_app/core/usecase/usecase.dart';
+import 'package:workout_app/enums/equipment.dart';
+import 'package:workout_app/enums/tags.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/entities/exercise.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/repositories/workout_repository.dart';
 
-class GetRandomWorkout implements UseCase<List<Exercise>, WorkoutParams> {
+class GenerateExercises implements UseCase<List<Exercise>, WorkoutParams> {
   final WorkoutRepository repository;
 
-  GetRandomWorkout(this.repository);
+  GenerateExercises(this.repository);
 
   @override
   Future<Either<Failure, List<Exercise>>> call(WorkoutParams params) async {
-    return await repository.getRandomExercises(params.workout);
+    return await repository.generateExercises(
+      numberOfExercises: params.numberOfExercises,
+      tags: params.tags,
+      equipment: params.equipment,
+    );
   }
 }
 
 class WorkoutParams extends Equatable {
-  final Workout workout;
+  final int numberOfExercises;
+  final List<Tags> tags;
+  final List<Equipment> equipment;
 
-  WorkoutParams({@required this.workout});
+  WorkoutParams({
+    @required this.numberOfExercises,
+    @required this.tags,
+    @required this.equipment,
+  });
 
-  List<Object> get props => [workout];
+  List<Object> get props => [
+        numberOfExercises,
+        tags,
+        equipment,
+      ];
 }
