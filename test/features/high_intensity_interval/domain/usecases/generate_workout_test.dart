@@ -5,6 +5,7 @@ import 'package:workout_app/enums/equipment.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/repositories/workout_repository.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/usecases/generate_workout.dart';
+import 'package:workout_app/features/high_intensity_interval/domain/usecases/get_workout.dart';
 
 class MockWorkoutRepository extends Mock implements WorkoutRepository {}
 
