@@ -1,10 +1,10 @@
-part of 'workout_bloc.dart';
+// part of 'workout_bloc.dart';
 
-abstract class WorkoutState extends Equatable {
-  const WorkoutState();
-}
+// abstract class WorkoutState extends Equatable {
+//   const WorkoutState();
+// }
 
-class WorkoutInitial extends WorkoutState {
-  @override
-  List<Object> get props => [];
-}
+// class WorkoutInitial extends WorkoutState {
+//   @override
+//   List<Object> get props => [];
+// }

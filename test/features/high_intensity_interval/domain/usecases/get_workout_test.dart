@@ -2,24 +2,31 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:workout_app/enums/equipment.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/exercise.dart';
+import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/repositories/workout_repository.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/usecases/get_random_workout.dart';
+import 'package:workout_app/features/high_intensity_interval/domain/usecases/generate_workout.dart';
 
 class MockWorkoutRepository extends Mock implements WorkoutRepository {}
 
 void main() {
-  GenerateExercises generateExercises;
+  GetWorkout generateWorkout;
   MockWorkoutRepository mockWorkoutRepository;
 
   setUp(() {
     mockWorkoutRepository = MockWorkoutRepository();
-    generateExercises = GenerateExercises(mockWorkoutRepository);
+    generateWorkout = GetWorkout(mockWorkoutRepository);
   });
 
-  final tExercises = [
-    Exercise(id: "tId", title: "tTitle", tags: [], equipment: Equipment.None),
-  ];
+  final tWorkout = Workout(
+    equipment: [],
+    restDuration: null,
+    exerciseDuration: null,
+    exercises: [],
+    numOfExercises: null,
+    numOfRounds: null,
+    tags: [],
+    totalDuration: null,
+  );
   final tWorkoutParams = WorkoutParams(
     numberOfExercises: 1,
     tags: [],
@@ -30,19 +37,19 @@ void main() {
 
   test('should get a list of exercises', () async {
     // arrange
-    when(mockWorkoutRepository.generateExercises(
+    when(mockWorkoutRepository.generateWorkout(
       tags: [],
       equipment: [
         Equipment.None,
       ],
       numberOfExercises: 1,
-    )).thenAnswer((_) async => Right(tExercises));
+    )).thenAnswer((_) async => Right(tWorkout));
 
-    final result = await generateExercises(tWorkoutParams);
+    final result = await generateWorkout(tWorkoutParams);
 
-    expect(result, Right(tExercises));
+    expect(result, Right(tWorkout));
     verify(
-      mockWorkoutRepository.generateExercises(
+      mockWorkoutRepository.generateWorkout(
         tags: tWorkoutParams.tags,
         equipment: tWorkoutParams.equipment,
         numberOfExercises: tWorkoutParams.numberOfExercises,
