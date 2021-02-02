@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_app/enums/equipment.dart';
-import 'package:workout_app/enums/tags.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/exercise.dart';
+
+import '../enums/equipment.dart';
+import '../enums/tag.dart';
+import 'exercise.dart';
 
 class Workout extends Equatable {
-  final List<Tags> tags;
+  final List<Tag> tags;
   final List<Equipment> equipment;
   final Duration exerciseDuration;
   final Duration restDuration;

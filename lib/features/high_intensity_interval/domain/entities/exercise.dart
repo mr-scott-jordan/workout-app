@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_app/enums/equipment.dart';
+
+import '../enums/equipment.dart';
 
 class Exercise extends Equatable {
   final String id;

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-
-import '../../../../enums/equipment.dart';
-import '../../../../enums/tags.dart';
+import '../../domain/enums/equipment.dart';
+import '../../domain/enums/tag.dart';
+import '../models/tag_model.dart' as tags;
+import '../models/equipment_model.dart' as equipment;
+import '../models/exercise_model.dart' as exercises;
 import '../../domain/entities/exercise.dart';
 import '../../domain/entities/workout.dart';
 
 class WorkoutModel extends Workout {
   WorkoutModel({
-    @required List<Tags> tags,
+    @required List<Tag> tags,
     @required List<Equipment> equipment,
     @required Duration exerciseDuration,
     @required Duration restDuration,
@@ -25,4 +27,26 @@ class WorkoutModel extends Workout {
           exercises: exercises,
           totalDuration: totalDuration,
         );
+
+  factory WorkoutModel.fromJson(Map<String, dynamic> json) {
+    return WorkoutModel(
+      tags: tags.fromList(json['tags']),
+      equipment: equipment.fromList(json['equipment']),
+      exerciseDuration: Duration(
+        minutes: json['exerciseDuration']['minutes'],
+        seconds: json['exerciseDuration']['seconds'],
+      ),
+      restDuration: Duration(
+        minutes: json['restDuration']['minutes'],
+        seconds: json['restDuration']['seconds'],
+      ),
+      numOfRounds: json['numOfRounds'],
+      numOfExercises: json['numOfExercises'],
+      exercises: json['exercises'].map((e) => exercises.fromJson(e)),
+      totalDuration: Duration(
+        minutes: json['totalDuration']['minutes'],
+        seconds: json['totalDuration']['seconds'],
+      ),
+    );
+  }
 }

@@ -1,5 +1,5 @@
-import 'enums/equipment.dart';
 import 'features/high_intensity_interval/domain/entities/exercise.dart';
+import 'features/high_intensity_interval/domain/enums/equipment.dart';
 
 final EXERCISES_DATA = [
   Exercise(

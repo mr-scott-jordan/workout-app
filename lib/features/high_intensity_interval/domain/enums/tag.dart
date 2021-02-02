@@ -1,4 +1,4 @@
-enum Tags {
+enum Tag {
   FullBody,
   Push,
   Pull,
