@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:workout_app/features/high_intensity_interval/data/models/exercise_model.dart';
 
 import 'package:workout_app/features/high_intensity_interval/data/models/workout_model.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/exercise.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/enums/equipment.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/enums/tag.dart';
