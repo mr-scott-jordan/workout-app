@@ -4,8 +4,8 @@ import '../../domain/entities/exercise.dart';
 import '../../domain/entities/workout.dart';
 import '../../domain/enums/equipment.dart';
 import '../../domain/enums/tag.dart';
-import '../models/equipment_model.dart' as equipment;
-import '../models/tag_model.dart' as tags;
+import '../models/equipment_model.dart' as equipmentModel;
+import '../models/tag_model.dart' as tagsModel;
 import 'exercises_model.dart';
 
 class WorkoutModel extends Workout {
@@ -31,8 +31,8 @@ class WorkoutModel extends Workout {
 
   factory WorkoutModel.fromJson(Map<String, dynamic> json) {
     return WorkoutModel(
-      tags: tags.fromList(json['tags']),
-      equipment: equipment.fromList(json['equipment']),
+      tags: tagsModel.fromList(json['tags']),
+      equipment: equipmentModel.fromList(json['equipment']),
       exerciseDuration: Duration(
         minutes: json['exerciseDuration']['minutes'],
         seconds: json['exerciseDuration']['seconds'],
@@ -49,5 +49,27 @@ class WorkoutModel extends Workout {
         seconds: json['totalDuration']['seconds'],
       ),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'tags': tagsModel.toList(tags),
+      'equipment': equipmentModel.toList(equipment),
+      'exerciseDuration': {
+        'minutes': exerciseDuration.inMinutes,
+        "seconds": exerciseDuration.inSeconds % 60
+      },
+      "restDuration": {
+        "minutes": restDuration.inMinutes,
+        "seconds": restDuration.inSeconds % 60
+      },
+      "totalDuration": {
+        "minutes": totalDuration.inMinutes % 60,
+        "seconds": totalDuration.inSeconds % 60
+      },
+      "numOfRounds": numOfRounds,
+      "numOfExercises": numOfExercises,
+      "exercises": ExercisesModel.toList(exercises)
+    };
   }
 }

@@ -46,4 +46,16 @@ void main() {
       expect(result, equals(tWorkoutModel));
     });
   });
+
+  group('toJson', () {
+    test('should return a JSON map containing the proper data', () async {
+      // act
+      final result = tWorkoutModel.toJson();
+      // arrange
+      final expected = json.decode(fixture('workout.json'));
+
+      // assert
+      expect(result, equals(expected));
+    });
+  });
 }

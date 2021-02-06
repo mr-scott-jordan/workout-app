@@ -19,6 +19,13 @@ List<String> toList(List<Equipment> equipment) {
       .toList();
 }
 
+String toString(Equipment equipment) {
+  return _kMap.keys.firstWhere(
+    (k) => _kMap[k] == equipment,
+    orElse: () => '',
+  );
+}
+
 Equipment fromString(String string) {
   return _kMap[string];
 }
