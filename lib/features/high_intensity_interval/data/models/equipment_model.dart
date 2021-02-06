@@ -1,13 +1,13 @@
 import 'package:workout_app/features/high_intensity_interval/domain/enums/equipment.dart';
 
 const _kMap = {
-  'none': Equipment.PullUpBar,
+  'none': Equipment.None,
   'pullupbar': Equipment.PullUpBar,
   'yogamat': Equipment.YogaMat,
 };
 
-List<Equipment> fromList(List<String> strings) {
-  return strings.map((str) => _kMap[str]).toList();
+List<Equipment> fromList(List<dynamic> strings) {
+  return strings.map((str) => fromString(str)).toList();
 }
 
 List<String> toList(List<Equipment> equipment) {

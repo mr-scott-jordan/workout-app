@@ -15,13 +15,13 @@ class ExerciseModel extends Exercise {
           title: title,
           tags: tags,
         );
-}
 
-ExerciseModel fromJson(Map<String, dynamic> json) {
-  return ExerciseModel(
-    id: json['id'],
-    title: json['title'],
-    tags: tags.fromList(json['tags']),
-    equipment: equipment.fromString(json['equipment']),
-  );
+  factory ExerciseModel.fromJson(dynamic json) {
+    return ExerciseModel(
+      id: json['id'],
+      title: json['title'],
+      tags: tags.fromList(json['tags']),
+      equipment: equipment.fromString(json['equipment']),
+    );
+  }
 }

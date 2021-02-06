@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../domain/enums/equipment.dart';
-import '../../domain/enums/tag.dart';
-import '../models/tag_model.dart' as tags;
-import '../models/equipment_model.dart' as equipment;
-import '../models/exercise_model.dart' as exercises;
+
 import '../../domain/entities/exercise.dart';
 import '../../domain/entities/workout.dart';
+import '../../domain/enums/equipment.dart';
+import '../../domain/enums/tag.dart';
+import '../models/equipment_model.dart' as equipment;
+import '../models/tag_model.dart' as tags;
+import 'exercises_model.dart';
 
 class WorkoutModel extends Workout {
   WorkoutModel({
@@ -42,7 +43,7 @@ class WorkoutModel extends Workout {
       ),
       numOfRounds: json['numOfRounds'],
       numOfExercises: json['numOfExercises'],
-      exercises: json['exercises'].map((e) => exercises.fromJson(e)),
+      exercises: ExercisesModel.fromList(json['exercises']),
       totalDuration: Duration(
         minutes: json['totalDuration']['minutes'],
         seconds: json['totalDuration']['seconds'],

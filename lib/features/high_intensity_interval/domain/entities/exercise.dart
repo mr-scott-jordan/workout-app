@@ -2,11 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../enums/equipment.dart';
+import '../enums/tag.dart';
 
 class Exercise extends Equatable {
   final String id;
   final String title;
-  final List<String> tags;
+  final List<Tag> tags;
   final Equipment equipment;
 
   Exercise({

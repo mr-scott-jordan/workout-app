@@ -8,8 +8,8 @@ const _kMap = {
   'legs': Tag.Legs,
 };
 
-List<Tag> fromList(List<String> strings) {
-  return strings.map((str) => _kMap[str]).toList();
+List<Tag> fromList(List<dynamic> strings) {
+  return strings.map((str) => _kMap[str.toString()]).toList();
 }
 
 List<String> toList(List<Tag> tags) {
