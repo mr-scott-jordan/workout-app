@@ -6,10 +6,10 @@ import '../../../../core/use_cases/use_case.dart';
 import '../entities/workout.dart';
 import '../enums/equipment.dart';
 import '../enums/tag.dart';
-import '../repositories/workout_repository.dart';
+import '../repositories/workout_repository_type.dart';
 
 class GenerateWorkout implements UseCase<Workout, GenerateWorkoutParams> {
-  final WorkoutRepository repository;
+  final WorkoutRepositoryType repository;
 
   GenerateWorkout(this.repository);
 

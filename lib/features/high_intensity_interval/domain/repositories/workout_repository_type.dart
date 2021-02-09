@@ -6,7 +6,7 @@ import 'package:workout_app/features/high_intensity_interval/domain/enums/tag.da
 import '../../../../core/error/failures.dart';
 import '../entities/workout.dart';
 
-abstract class WorkoutRepository {
+abstract class WorkoutRepositoryType {
   Future<Either<Failure, Workout>> generateWorkout({
     @required List<Tag> tags,
     @required List<Equipment> equipment,

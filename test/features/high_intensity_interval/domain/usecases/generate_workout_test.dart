@@ -4,10 +4,10 @@ import 'package:mockito/mockito.dart';
 
 import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/enums/equipment.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/repositories/workout_repository.dart';
+import 'package:workout_app/features/high_intensity_interval/domain/repositories/workout_repository_type.dart';
 import 'package:workout_app/features/high_intensity_interval/domain/usecases/generate_workout.dart';
 
-class MockWorkoutRepository extends Mock implements WorkoutRepository {}
+class MockWorkoutRepository extends Mock implements WorkoutRepositoryType {}
 
 void main() {
   GenerateWorkout generateWorkout;
