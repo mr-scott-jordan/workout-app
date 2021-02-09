@@ -1,12 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:workout_app/features/high_intensity_interval/data/models/exercise_model.dart';
-import 'package:workout_app/features/high_intensity_interval/data/models/workout_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:workout_app/features/high_intensity_interval/domain/enums/equipment.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/enums/tag.dart';
-import '';
+
+import '../../domain/enums/equipment.dart';
+import '../../domain/enums/tag.dart';
+import '../models/exercise_model.dart';
+import '../models/workout_model.dart';
 
 abstract class WorkoutRemoteDataSourceType {
   /// Calls endpoint for data
@@ -22,7 +20,7 @@ class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
 
   @override
   Future<WorkoutModel> getWorkout() {
-    _getDummyWorkout();
+    return _getDummyWorkout();
     // TODO: Nathan - hook in firebase
     //_getWorkoutFromFirebase();
   }

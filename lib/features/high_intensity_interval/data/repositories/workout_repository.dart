@@ -27,14 +27,10 @@ class WorkoutRepository implements WorkoutRepositoryType {
 
   @override
   Future<Either<Failure, Workout>> getWorkout() async {
-    if (await networkInfo.isConnected) {
-      try {
-        return Right(await remoteDataSource.getWorkout());
-      } on ServerException {
-        return Left(ServerFailure());
-      }
-    } else {
-      return Left(NetworkFailure());
+    try {
+      return Right(await remoteDataSource.getWorkout());
+    } on ServerException {
+      return Left(ServerFailure());
     }
   }
 }
