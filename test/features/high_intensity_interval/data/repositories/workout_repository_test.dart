@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:workout_app/core/error/exception.dart';
 import 'package:workout_app/core/error/failures.dart';
 import 'package:workout_app/core/network/network_info_type.dart';
+import 'package:workout_app/features/high_intensity_interval/data/datasources/workout_local_data_source.dart';
 import 'package:workout_app/features/high_intensity_interval/data/datasources/workout_remote_data_source.dart';
 import 'package:workout_app/features/high_intensity_interval/data/models/exercise_model.dart';
 import 'package:workout_app/features/high_intensity_interval/data/models/workout_model.dart';
@@ -14,20 +15,25 @@ import 'package:workout_app/features/high_intensity_interval/domain/enums/tag.da
 class MockRemoteDataSource extends Mock implements WorkoutRemoteDataSourceType {
 }
 
+class MockLocalDataSource extends Mock implements WorkoutLocalDataSourceType {}
+
 class MockNetworkInfo extends Mock implements NetworkInfoType {}
 
 void main() {
   WorkoutRepository repository;
   MockRemoteDataSource mockRemoteDataSource;
+  MockLocalDataSource mockLocalDataSource;
   MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
     mockNetworkInfo = MockNetworkInfo();
+    mockLocalDataSource = MockLocalDataSource();
 
     repository = WorkoutRepository(
       remoteDataSource: mockRemoteDataSource,
       networkInfo: mockNetworkInfo,
+      localDataSourceType: mockLocalDataSource,
     );
   });
   void runTestsOnline(Function body) {
@@ -72,13 +78,13 @@ void main() {
     );
     final tWorkout = tWorkoutModel;
 
-    test('should check if the device is online', () {
+    test('should check if the device is online', () async {
       // arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       // act
       repository.getWorkout();
       // assert
-      verify(mockNetworkInfo.isConnected);
+      verifyNever(mockNetworkInfo.isConnected);
     });
 
     runTestsOnline(() {

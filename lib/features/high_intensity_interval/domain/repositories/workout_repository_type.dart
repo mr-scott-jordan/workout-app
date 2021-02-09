@@ -11,6 +11,9 @@ abstract class WorkoutRepositoryType {
     @required List<Tag> tags,
     @required List<Equipment> equipment,
     @required int numberOfExercises,
+    @required Duration exerciseDuration,
+    @required Duration restDuration,
+    @required int numberOfRounds,
   });
 
   Future<Either<Failure, Workout>> getWorkout();

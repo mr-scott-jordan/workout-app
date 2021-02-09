@@ -34,6 +34,9 @@ void main() {
     equipment: [
       Equipment.None,
     ],
+    exerciseDuration: Duration(seconds: 30),
+    numberOfRounds: 3,
+    restDuration: Duration(seconds: 30),
   );
 
   test('should get a list of exercises', () async {
@@ -44,6 +47,9 @@ void main() {
         Equipment.None,
       ],
       numberOfExercises: 1,
+      exerciseDuration: Duration(seconds: 30),
+      numberOfRounds: 3,
+      restDuration: Duration(seconds: 30),
     )).thenAnswer((_) async => Right(tWorkout));
 
     final result = await generateWorkout(tWorkoutParams);
@@ -54,6 +60,9 @@ void main() {
         tags: tWorkoutParams.tags,
         equipment: tWorkoutParams.equipment,
         numberOfExercises: tWorkoutParams.numberOfExercises,
+        exerciseDuration: tWorkoutParams.exerciseDuration,
+        numberOfRounds: tWorkoutParams.numberOfRounds,
+        restDuration: tWorkoutParams.restDuration,
       ),
     );
     verifyNoMoreInteractions(mockWorkoutRepository);
