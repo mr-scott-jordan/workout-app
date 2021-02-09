@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:workout_app/core/error/exception.dart';
 import 'package:workout_app/core/error/failures.dart';
-import 'package:workout_app/core/platform/network_info.dart';
+import 'package:workout_app/core/network/network_info_type.dart';
 import 'package:workout_app/features/high_intensity_interval/data/datasources/workout_remote_data_source.dart';
 import 'package:workout_app/features/high_intensity_interval/data/models/exercise_model.dart';
 import 'package:workout_app/features/high_intensity_interval/data/models/workout_model.dart';
@@ -14,7 +14,7 @@ import 'package:workout_app/features/high_intensity_interval/domain/enums/tag.da
 class MockRemoteDataSource extends Mock implements WorkoutRemoteDataSourceType {
 }
 
-class MockNetworkInfo extends Mock implements NetworkInfo {}
+class MockNetworkInfo extends Mock implements NetworkInfoType {}
 
 void main() {
   WorkoutRepository repository;

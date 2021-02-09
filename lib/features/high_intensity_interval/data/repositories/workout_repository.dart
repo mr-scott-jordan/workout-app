@@ -1,16 +1,17 @@
-import 'package:flutter/cupertino.dart';
-import 'package:workout_app/core/error/exception.dart';
-import 'package:workout_app/core/platform/network_info.dart';
-import 'package:workout_app/features/high_intensity_interval/data/datasources/workout_remote_data_source.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/enums/tag.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/enums/equipment.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
-import 'package:workout_app/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/repositories/workout_repository_type.dart';
+import 'package:flutter/cupertino.dart';
+
+import '../../../../core/error/exception.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/network/network_info_type.dart';
+import '../../domain/entities/workout.dart';
+import '../../domain/enums/equipment.dart';
+import '../../domain/enums/tag.dart';
+import '../../domain/repositories/workout_repository_type.dart';
+import '../datasources/workout_remote_data_source.dart';
 
 class WorkoutRepository implements WorkoutRepositoryType {
-  final NetworkInfo networkInfo;
+  final NetworkInfoType networkInfo;
   final WorkoutRemoteDataSourceType remoteDataSource;
 
   WorkoutRepository({
@@ -21,7 +22,6 @@ class WorkoutRepository implements WorkoutRepositoryType {
   @override
   Future<Either<Failure, Workout>> generateWorkout(
       {List<Tag> tags, List<Equipment> equipment, int numberOfExercises}) {
-    // TODO: implement generateWorkout
     throw UnimplementedError();
   }
 
