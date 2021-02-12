@@ -26,6 +26,7 @@ class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
     //_getWorkoutFromFirebase();
   }
 
+  // returns a hardcoded Workout Model
   Future<WorkoutModel> _getDummyWorkout() async {
     return WorkoutModel(
       equipment: [Equipment.None],
