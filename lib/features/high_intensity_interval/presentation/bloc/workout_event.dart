@@ -5,9 +5,6 @@ abstract class WorkoutEvent extends Equatable {
   List<Object> get props => [];
 }
 
-// this might not be needed anymore
-class InitialWorkoutEvent extends WorkoutEvent {}
-
 class EditWorkoutEvent extends WorkoutEvent {
   final Workout workout;
 
@@ -16,7 +13,7 @@ class EditWorkoutEvent extends WorkoutEvent {
   List<Object> get props => [workout];
 }
 
-class StartWorkoutEvent extends WorkoutEvent {}
+// class StartWorkoutEvent extends WorkoutEvent {}
 
 class GenerateWorkoutEvent extends WorkoutEvent {
   final Workout workout;
