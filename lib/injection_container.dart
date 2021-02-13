@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:http/http.dart' as http;
+import 'package:workout_app/core/network/network_info_type.dart';
 import 'package:workout_app/features/high_intensity_interval/data/datasources/workout_local_data_source.dart';
 import 'package:workout_app/features/high_intensity_interval/data/datasources/workout_remote_data_source.dart';
 import 'package:workout_app/features/high_intensity_interval/data/repositories/workout_repository.dart';
@@ -41,6 +42,8 @@ Future<void> init() async {
     ..registerLazySingleton<WorkoutLocalDataSourceType>(
         () => WorkoutLocalDataSource()); //! Core
 
+  //! Core
+  sl..registerLazySingleton<NetworkInfoType>(() => NetworkInfo(sl()));
   //! External
   sl
     ..registerLazySingleton(() => http.Client())
