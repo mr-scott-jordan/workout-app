@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:workout_app/features/high_intensity_interval/domain/enums/tag.dart';
 
 import '../../../../exercise_data.dart';
 import '../../domain/entities/exercise.dart';

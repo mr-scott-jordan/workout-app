@@ -20,8 +20,27 @@ class WorkoutLoadedState extends WorkoutState {
   WorkoutLoadedState(this.workout);
 
   // finish this as needed
-  WorkoutLoadedState copyWith(Workout workout) {
-    return WorkoutLoadedState(workout ?? this.workout);
+  WorkoutLoadedState copyWith({
+    List<Equipment> equipment,
+    List<Tag> tags,
+    Duration exerciseDuration,
+    Duration restDuration,
+    int numOfRounds,
+    int numOfExercises,
+    List<Exercise> exercises,
+  }) {
+    return WorkoutLoadedState(
+      Workout(
+        equipment: equipment ?? this.workout.equipment,
+        tags: tags ?? this.workout.tags,
+        exerciseDuration: exerciseDuration ?? this.workout.exerciseDuration,
+        restDuration: restDuration ?? this.workout.restDuration,
+        totalDuration: this.workout.totalDuration,
+        numOfExercises: numOfExercises ?? this.workout.numOfExercises,
+        numOfRounds: numOfRounds ?? this.workout.numOfRounds,
+        exercises: exercises ?? this.workout.exercises,
+      ),
+    );
   }
 
   static WorkoutLoadedState initialState() {
