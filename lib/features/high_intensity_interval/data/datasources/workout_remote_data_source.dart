@@ -20,10 +20,10 @@ class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
 
   @override
   Future<WorkoutModel> getWorkout() {
-    return _getDummyWorkout();
-    // TODO: Nathan - hook in firebase
+    // TODO: Nathan - hook in firebase create in new class dawg
     // https://github.com/ResoCoder/flutter-tdd-clean-architecture-course/blob/master/lib/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart
     //_getWorkoutFromFirebase();
+    return _getDummyWorkout();
   }
 
   // returns a hardcoded Workout Model
