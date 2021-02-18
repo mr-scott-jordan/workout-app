@@ -1,65 +1,66 @@
-import 'enums/equipment.dart';
-import 'model/exercise.dart';
+import 'features/high_intensity_interval/domain/entities/exercise.dart';
+import 'features/high_intensity_interval/domain/enums/equipment.dart';
+import 'features/high_intensity_interval/domain/enums/tag.dart';
 
-const EXERCISES_DATA = const [
+final EXERCISES_DATA = [
   Exercise(
     id: 'e1',
-    title: 'Pushups',
-    tags: ['push'],
+    title: 'Pushup',
+    tags: [Tag.Push],
     equipment: Equipment.None,
   ),
   Exercise(
     id: 'e2',
-    title: 'Squats',
-    tags: ['legs'],
+    title: 'Squat',
+    tags: [Tag.Legs],
     equipment: Equipment.None,
   ),
   Exercise(
     id: 'e3',
-    title: 'Burpees',
-    tags: ['fullbody'],
+    title: 'Burpee',
+    tags: [Tag.FullBody],
     equipment: Equipment.None,
   ),
   Exercise(
     id: 'e4',
-    title: 'Jumping Jacks',
-    tags: ['fullbody'],
+    title: 'Jumping Jack',
+    tags: [Tag.FullBody],
     equipment: Equipment.None,
   ),
   Exercise(
     id: 'e5',
-    title: 'Pullups',
-    tags: ['pull'],
+    title: 'Pullup',
+    tags: [Tag.Pull],
     equipment: Equipment.PullUpBar,
   ),
   Exercise(
     id: 'e6',
-    title: 'Situps',
-    tags: ['core'],
+    title: 'Situp',
+    tags: [Tag.Core],
     equipment: Equipment.YogaMat,
   ),
   Exercise(
     id: 'e7',
-    title: 'Russian Twists',
-    tags: ['core'],
+    title: 'Russian Twist',
+    tags: [Tag.Core],
     equipment: Equipment.YogaMat,
   ),
   Exercise(
     id: 'e8',
-    title: 'Pike Pushups',
-    tags: ['push'],
+    title: 'Pike Pushup',
+    tags: [Tag.Push],
     equipment: Equipment.None,
   ),
   Exercise(
     id: 'e9',
-    title: 'Lunges',
-    tags: ['legs'],
+    title: 'Lunge',
+    tags: [Tag.Legs],
     equipment: Equipment.None,
   ),
   Exercise(
     id: 'e10',
-    title: 'Inverted Rows',
-    tags: ['pull'],
+    title: 'Inverted Row',
+    tags: [Tag.Pull],
     equipment: Equipment.None,
   ),
 ];
