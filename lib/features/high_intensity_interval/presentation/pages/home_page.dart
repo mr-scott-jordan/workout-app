@@ -23,7 +23,10 @@ class HomePage extends StatelessWidget {
                     height: 100,
                   ),
                   Container(
-                    child: Icon(Icons.fitness_center, size: 150),
+                    child: Icon(
+                      Icons.fitness_center_rounded,
+                      size: 150,
+                    ),
                   ),
                   SizedBox(
                     height: 100,
@@ -33,7 +36,7 @@ class HomePage extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, EquipmentPage.routeName);
                       },
-                      buttonText: "Load Workout",
+                      buttonText: "New Workout",
                     ),
                   ),
                 ],
