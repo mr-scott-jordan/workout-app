@@ -1,0 +1,30 @@
+{
+    "tags": [
+        "fullbody"
+    ],
+    "equipment": [
+        "none"
+    ],
+    "exerciseDuration": {
+        "minutes": 0,
+        "seconds": 30
+    },
+    "restDuration": {
+        "minutes": 0,
+        "seconds": 30
+    },
+    "totalDuration": {
+        "minutes": 1,
+        "seconds": 0
+    },
+    "numOfRounds": 1,
+    "numOfExercises": 1,
+    "exercises": [
+        {
+            "id": "e1",
+            "title": "Pushup",
+            "tags": ["push"],
+            "equipment": "none"
+        }
+    ]
+}
