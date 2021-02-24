@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/high_intensity_interval/presentation/bloc/workout_bloc.dart';
 import 'features/high_intensity_interval/presentation/pages/equipment_page.dart';
 import 'features/high_intensity_interval/presentation/pages/home_page.dart';
+import 'features/high_intensity_interval/presentation/pages/workout_page.dart';
 import 'injection_container.dart' as ic;
 import 'injection_container.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           EquipmentPage.routeName: (context) => EquipmentPage(),
           // WorkoutSetupPage.routeName: (context) => WorkoutSetupPage(_workout),
           // BulletinBoardPage.routeName: (context) => BulletinBoardPage(_workout),
-          // WorkoutPage.routeName: (context) => WorkoutPage(_workout),
+          WorkoutPage.routeName: (context) => WorkoutPage(),
         },
       ),
     );
