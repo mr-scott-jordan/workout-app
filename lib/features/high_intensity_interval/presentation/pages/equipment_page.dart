@@ -6,6 +6,7 @@ import '../../domain/enums/equipment.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import 'home_page.dart';
+import 'workout_setup_page.dart';
 
 // ignore: must_be_immutable
 class EquipmentPage extends StatelessWidget {
@@ -84,8 +85,8 @@ class EquipmentPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(
                         context,
-                        HomePage.routeName,
-                        // WorkoutSetupPage.routeName,
+                        // HomePage.routeName,
+                        WorkoutSetupPage.routeName,
                       );
                     },
                     buttonText: "Next",

@@ -85,57 +85,66 @@ class WorkoutSetupPage extends StatelessWidget {
                           ),
                           _buildDropDown(
                             'Rest Duration',
-                            _restDuration,
+                            state.workout.restDuration.toString(),
                             [
                               '00:05',
                               '00:10',
                               '00:15',
                               '00:20',
                             ],
-                            (newValue) {
-                              setState(() {
-                                _restDuration = newValue;
-                                minutes =
-                                    int.parse(_restDuration.split(':')[0]);
-                                seconds =
-                                    int.parse(_restDuration.split(':')[1]);
-                                widget.workout.restDuration = Duration(
-                                    minutes: minutes, seconds: seconds);
-                              });
+                            (value) {
+                              var minutes = int.parse(value.split(':')[0]);
+                              var seconds = int.parse(value.split(':')[1]);
+                              var restDuration =
+                                  Duration(minutes: minutes, seconds: seconds);
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(restDuration: restDuration)
+                                      .workout));
                             },
                           ),
                           _buildDropDown(
                             'Number of Exercises',
-                            _numberOfExercises,
+                            state.workout.numOfExercises.toString(),
                             [
                               '3',
                               '4',
                               '5',
                               '6',
                             ],
-                            (newValue) {
-                              setState(() {
+                            (value) {
+                              var numOfExercises = state.workout.numOfExercises;
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(numOfExercises: numOfExercises)
+                                      .workout));
+                              /*setState(() {
                                 _numberOfExercises = newValue;
                                 widget.workout.numOfExercises =
                                     int.parse(_numberOfExercises);
-                              });
+                              });*/
                             },
                           ),
                           _buildDropDown(
                             'Number of Rounds',
-                            _numberOfRounds,
+                            state.workout.numOfRounds.toString(),
                             [
                               '3',
                               '4',
                               '5',
                               '6',
                             ],
-                            (newValue) {
-                              setState(() {
+                            (value) {
+                              var numOfRounds = state.workout.numOfRounds;
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(numOfRounds: numOfRounds)
+                                      .workout));
+                              /*setState(() {
                                 _numberOfRounds = newValue;
                                 widget.workout.numOfRounds =
                                     int.parse(_numberOfRounds);
-                              });
+                              });*/
                             },
                           ),
                           SwitchListTile(
@@ -155,55 +164,59 @@ class WorkoutSetupPage extends StatelessWidget {
                           SwitchListTile(
                               activeColor: Color(0xfffbc02d),
                               title: Text('Pull'),
-                              value: _pull,
+                              value: _tagStringToBool(
+                                  tagName: 'Pull', tags: state.workout.tags),
                               onChanged: (value) {
-                                setState(() {
-                                  _pull = value;
-                                  value
-                                      ? widget.workout.tags.add(Tags.Pull)
-                                      : widget.workout.tags.remove(Tags.Pull);
-                                  print(_pull);
-                                });
+                                var tags = state.workout.tags.sublist(0);
+                                value
+                                    ? tags.add(Tag.Pull)
+                                    : tags.remove(Tag.Pull);
+                                BlocProvider.of<WorkoutBloc>(context).add(
+                                    EditWorkoutEvent(
+                                        state.copyWith(tags: tags).workout));
                               }),
                           SwitchListTile(
                               activeColor: Color(0xfffbc02d),
                               title: Text('Legs'),
-                              value: _legs,
+                              value: _tagStringToBool(
+                                  tagName: 'Legs', tags: state.workout.tags),
                               onChanged: (value) {
-                                setState(() {
-                                  _legs = value;
-                                  value
-                                      ? widget.workout.tags.add(Tags.Legs)
-                                      : widget.workout.tags.remove(Tags.Legs);
-                                  print(_legs);
-                                });
+                                var tags = state.workout.tags.sublist(0);
+                                value
+                                    ? tags.add(Tag.Legs)
+                                    : tags.remove(Tag.Legs);
+                                BlocProvider.of<WorkoutBloc>(context).add(
+                                    EditWorkoutEvent(
+                                        state.copyWith(tags: tags).workout));
                               }),
                           SwitchListTile(
                               activeColor: Color(0xfffbc02d),
                               title: Text('Core'),
-                              value: _core,
+                              value: _tagStringToBool(
+                                  tagName: 'Core', tags: state.workout.tags),
                               onChanged: (value) {
-                                setState(() {
-                                  _core = value;
-                                  value
-                                      ? widget.workout.tags.add(Tags.Core)
-                                      : widget.workout.tags.remove(Tags.Core);
-                                  print(_core);
-                                });
+                                var tags = state.workout.tags.sublist(0);
+                                value
+                                    ? tags.add(Tag.Core)
+                                    : tags.remove(Tag.Core);
+                                BlocProvider.of<WorkoutBloc>(context).add(
+                                    EditWorkoutEvent(
+                                        state.copyWith(tags: tags).workout));
                               }),
                           SwitchListTile(
                               activeColor: Color(0xfffbc02d),
                               title: Text('FullBody'),
-                              value: _fullbody,
+                              value: _tagStringToBool(
+                                  tagName: 'FullBody',
+                                  tags: state.workout.tags),
                               onChanged: (value) {
-                                setState(() {
-                                  _fullbody = value;
-                                  value
-                                      ? widget.workout.tags.add(Tags.FullBody)
-                                      : widget.workout.tags
-                                          .remove(Tags.FullBody);
-                                  print(_fullbody);
-                                });
+                                var tags = state.workout.tags.sublist(0);
+                                value
+                                    ? tags.add(Tag.FullBody)
+                                    : tags.remove(Tag.FullBody);
+                                BlocProvider.of<WorkoutBloc>(context).add(
+                                    EditWorkoutEvent(
+                                        state.copyWith(tags: tags).workout));
                               }),
                         ],
                       ),
