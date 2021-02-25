@@ -74,10 +74,8 @@ class WorkoutSetupPage extends StatelessWidget {
                               '90',
                             ],
                             (value) {
-                              var minutes = int.parse(value.split(':')[0]);
-                              var seconds = int.parse(value.split(':')[1]);
                               var exerciseDuration =
-                                  Duration(minutes: minutes, seconds: seconds);
+                                  Duration(seconds: int.parse(value));
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(
@@ -97,10 +95,8 @@ class WorkoutSetupPage extends StatelessWidget {
                               '30',
                             ],
                             (value) {
-                              var minutes = int.parse(value.split(':')[0]);
-                              var seconds = int.parse(value.split(':')[1]);
                               var restDuration =
-                                  Duration(minutes: minutes, seconds: seconds);
+                                  Duration(seconds: int.parse(value));
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(restDuration: restDuration)
