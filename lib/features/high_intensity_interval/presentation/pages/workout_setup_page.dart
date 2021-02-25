@@ -63,13 +63,15 @@ class WorkoutSetupPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           _buildDropDown(
-                            'Exercise Duration',
-                            state.workout.exerciseDuration.toString(),
+                            'Exercise Duration in Seconds',
+                            // we have to convert out duration to seconds and it
+                            // must match one item in the possible values
+                            state.workout.exerciseDuration.inSeconds.toString(),
                             [
-                              '00:45',
-                              '01:00',
-                              '01:15',
-                              '01:30',
+                              '40',
+                              '60',
+                              '75',
+                              '90',
                             ],
                             (value) {
                               var minutes = int.parse(value.split(':')[0]);
@@ -84,13 +86,15 @@ class WorkoutSetupPage extends StatelessWidget {
                             },
                           ),
                           _buildDropDown(
-                            'Rest Duration',
-                            state.workout.restDuration.toString(),
+                            'Rest Duration in Seconds',
+                            // we have to convert out duration to seconds and it
+                            // must match one item in the possible values
+                            state.workout.restDuration.inSeconds.toString(),
                             [
-                              '00:05',
-                              '00:10',
-                              '00:15',
-                              '00:20',
+                              '10',
+                              '15',
+                              '20',
+                              '30',
                             ],
                             (value) {
                               var minutes = int.parse(value.split(':')[0]);
@@ -264,6 +268,7 @@ class WorkoutSetupPage extends StatelessWidget {
 
 Widget _buildDropDown(
   String title,
+  // the value passed here must exist in possible values
   String stateValue,
   List<String> possibleValues,
   Function onChanged,
