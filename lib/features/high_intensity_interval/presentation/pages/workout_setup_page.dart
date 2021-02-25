@@ -113,16 +113,12 @@ class WorkoutSetupPage extends StatelessWidget {
                               '6',
                             ],
                             (value) {
+                              // the logic here is just copying the same numOfExercises
                               var numOfExercises = state.workout.numOfExercises;
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(numOfExercises: numOfExercises)
                                       .workout));
-                              /*setState(() {
-                                _numberOfExercises = newValue;
-                                widget.workout.numOfExercises =
-                                    int.parse(_numberOfExercises);
-                              });*/
                             },
                           ),
                           _buildDropDown(
@@ -135,16 +131,12 @@ class WorkoutSetupPage extends StatelessWidget {
                               '6',
                             ],
                             (value) {
+                              // the logic here is just copying the same numOfRounds
                               var numOfRounds = state.workout.numOfRounds;
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(numOfRounds: numOfRounds)
                                       .workout));
-                              /*setState(() {
-                                _numberOfRounds = newValue;
-                                widget.workout.numOfRounds =
-                                    int.parse(_numberOfRounds);
-                              });*/
                             },
                           ),
                           SwitchListTile(
