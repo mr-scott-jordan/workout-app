@@ -15,6 +15,9 @@ class WorkoutSetupPage extends StatelessWidget {
     return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
       // check state and build ui
       if (state is WorkoutLoadedState) {
+        var totalDurationMinutes = state.workout.totalDuration.inMinutes;
+        // TODO: (Lance) - if totalDurationSeconds < 10 -> add a zero to the front
+        var totalDurationSeconds = state.workout.totalDuration.inSeconds % 60;
         return PageAnimationWidget(
           body: Container(
             color: Color(0xff424242),
@@ -36,9 +39,7 @@ class WorkoutSetupPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            (state.workout.totalDuration
-                                .toString()
-                                .split('.')[0]),
+                            ('$totalDurationMinutes:$totalDurationSeconds'),
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -131,7 +132,7 @@ class WorkoutSetupPage extends StatelessWidget {
                               '6',
                             ],
                             (value) {
-                              // the logic here is just copying the same numOfRounds
+                              // the logic below is just copying the same numOfRounds
                               var numOfRounds = state.workout.numOfRounds;
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
@@ -288,7 +289,7 @@ Widget _buildDropDown(
 }
 
 const _kMap = {
-  'Fullbody': Tag.FullBody,
+  'FullBody': Tag.FullBody,
   'Pull': Tag.Pull,
   'Push': Tag.Push,
   'Core': Tag.Core,
