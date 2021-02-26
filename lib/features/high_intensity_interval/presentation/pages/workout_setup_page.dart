@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/enums/tag.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/widgets/formatted_button.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/widgets/page_animation_widget.dart';
 
+import '../../domain/enums/tag.dart';
 import '../bloc/workout_bloc.dart';
+import '../widgets/formatted_button.dart';
+import '../widgets/page_animation_widget.dart';
 import 'home_page.dart';
 
 class WorkoutSetupPage extends StatelessWidget {
@@ -15,9 +15,12 @@ class WorkoutSetupPage extends StatelessWidget {
     return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
       // check state and build ui
       if (state is WorkoutLoadedState) {
-        var totalDurationMinutes = state.workout.totalDuration.inMinutes;
-        // TODO: (Lance) - if totalDurationSeconds < 10 -> add a zero to the front
-        var totalDurationSeconds = state.workout.totalDuration.inSeconds % 60;
+        var totalDuration;
+        if (state.workout.totalDuration.compareTo(Duration(hours: 1)) >= 0)
+          totalDuration = _printDuration(state.workout.totalDuration);
+        else
+          totalDuration =
+              _printDurationMinutesSeconds(state.workout.totalDuration);
         return PageAnimationWidget(
           body: Container(
             color: Color(0xff424242),
@@ -39,7 +42,7 @@ class WorkoutSetupPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            ('$totalDurationMinutes:$totalDurationSeconds'),
+                            ('$totalDuration'),
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -64,19 +67,19 @@ class WorkoutSetupPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           _buildDropDown(
-                            'Exercise Duration in Seconds',
+                            'Exercise Duration',
                             // we have to convert out duration to seconds and it
                             // must match one item in the possible values
-                            state.workout.exerciseDuration.inSeconds.toString(),
+                            '${state.workout.exerciseDuration.inSeconds.toString()}s',
                             [
-                              '40',
-                              '60',
-                              '75',
-                              '90',
+                              '40s',
+                              '60s',
+                              '75s',
+                              '90s',
                             ],
                             (value) {
-                              var exerciseDuration =
-                                  Duration(seconds: int.parse(value));
+                              var exerciseDuration = Duration(
+                                  seconds: int.parse(value.substring(0, 2)));
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(
@@ -85,19 +88,19 @@ class WorkoutSetupPage extends StatelessWidget {
                             },
                           ),
                           _buildDropDown(
-                            'Rest Duration in Seconds',
+                            'Rest Duration',
                             // we have to convert out duration to seconds and it
                             // must match one item in the possible values
-                            state.workout.restDuration.inSeconds.toString(),
+                            '${state.workout.restDuration.inSeconds.toString()}s',
                             [
-                              '10',
-                              '15',
-                              '20',
-                              '30',
+                              '10s',
+                              '15s',
+                              '20s',
+                              '30s',
                             ],
                             (value) {
-                              var restDuration =
-                                  Duration(seconds: int.parse(value));
+                              var restDuration = Duration(
+                                  seconds: int.parse(value.substring(0, 2)));
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(restDuration: restDuration)
@@ -114,8 +117,7 @@ class WorkoutSetupPage extends StatelessWidget {
                               '6',
                             ],
                             (value) {
-                              // the logic here is just copying the same numOfExercises
-                              var numOfExercises = state.workout.numOfExercises;
+                              var numOfExercises = int.parse(value);
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(numOfExercises: numOfExercises)
@@ -132,8 +134,7 @@ class WorkoutSetupPage extends StatelessWidget {
                               '6',
                             ],
                             (value) {
-                              // the logic below is just copying the same numOfRounds
-                              var numOfRounds = state.workout.numOfRounds;
+                              var numOfRounds = int.parse(value);
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(numOfRounds: numOfRounds)
@@ -198,7 +199,7 @@ class WorkoutSetupPage extends StatelessWidget {
                               }),
                           SwitchListTile(
                               activeColor: Color(0xfffbc02d),
-                              title: Text('FullBody'),
+                              title: Text('Full Body'),
                               value: _tagStringToBool(
                                   tagName: 'FullBody',
                                   tags: state.workout.tags),
@@ -298,4 +299,18 @@ const _kMap = {
 
 bool _tagStringToBool({@required String tagName, @required List<Tag> tags}) {
   return tags.any((tag) => tags.contains(_kMap[tagName]));
+}
+
+String _printDuration(Duration duration) {
+  String twoDigits(int n) => n.toString().padLeft(2, "0");
+  String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+  String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+  return "${twoDigits(duration.inHours)}h ${twoDigitMinutes}m ${twoDigitSeconds}s";
+}
+
+String _printDurationMinutesSeconds(Duration duration) {
+  String twoDigits(int n) => n.toString().padLeft(2, "0");
+  String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+  String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+  return "${twoDigitMinutes}m ${twoDigitSeconds}s";
 }
