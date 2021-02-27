@@ -15,12 +15,7 @@ class WorkoutSetupPage extends StatelessWidget {
     return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
       // check state and build ui
       if (state is WorkoutLoadedState) {
-        var totalDuration;
-        if (state.workout.totalDuration.compareTo(Duration(hours: 1)) >= 0)
-          totalDuration = _printDuration(state.workout.totalDuration);
-        else
-          totalDuration =
-              _printDurationMinutesSeconds(state.workout.totalDuration);
+        var totalDuration = _printDuration(state.workout.totalDuration);
         return PageAnimationWidget(
           body: Container(
             color: Color(0xff424242),
@@ -301,16 +296,19 @@ bool _tagStringToBool({@required String tagName, @required List<Tag> tags}) {
   return tags.any((tag) => tags.contains(_kMap[tagName]));
 }
 
-String _printDuration(Duration duration) {
-  String twoDigits(int n) => n.toString().padLeft(2, "0");
-  String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-  String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-  return "${twoDigits(duration.inHours)}h ${twoDigitMinutes}m ${twoDigitSeconds}s";
-}
+// String _printDuration(Duration duration) {
+//   String twoDigits(int n) => n.toString().padLeft(2, "0");
+//   String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+//   String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+//   return "${twoDigits(duration.inHours)}h ${twoDigitMinutes}m ${twoDigitSeconds}s";
+// }
 
-String _printDurationMinutesSeconds(Duration duration) {
-  String twoDigits(int n) => n.toString().padLeft(2, "0");
-  String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-  String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-  return "${twoDigitMinutes}m ${twoDigitSeconds}s";
+String _printDuration(Duration duration) {
+  String formattedDuration = "";
+  if (duration.inHours != 0) formattedDuration += "${duration.inHours}h ";
+  if (duration.inMinutes.remainder(60) != 0)
+    formattedDuration += "${duration.inMinutes.remainder(60)}m ";
+  if (duration.inSeconds.remainder(60) != 0)
+    formattedDuration += "${duration.inSeconds.remainder(60)}s";
+  return formattedDuration;
 }
