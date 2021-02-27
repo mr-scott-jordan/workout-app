@@ -14,6 +14,7 @@ class WorkoutPage extends StatelessWidget {
       if (state is WorkoutLoadedState) {
         return PageAnimationWidget(
           body: Container(
+            color: Color(0xff424242),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -32,7 +33,7 @@ class WorkoutPage extends StatelessWidget {
                     Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'blarg',
+                          'WIP',
                           style: TextStyle(
                             fontSize: 24,
                             color: Colors.white,
