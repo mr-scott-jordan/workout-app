@@ -16,8 +16,10 @@ class BulletinBoardPage extends StatelessWidget {
     var potentialExercises =
         List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
     potentialExercises.shuffle();
+
     return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
       if (state is WorkoutLoadedState) {
+        print(state.workout.exercises);
         return PageAnimationWidget(
           body: Container(
             color: Color(0xff424242),
