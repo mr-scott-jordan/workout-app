@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/exercise.dart';
+
+import '../../domain/entities/exercise.dart';
 import '../models/equipment_model.dart' as equipmentModel;
 import '../models/tag_model.dart' as tagsModel;
 
