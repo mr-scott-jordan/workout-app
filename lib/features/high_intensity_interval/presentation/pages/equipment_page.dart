@@ -18,7 +18,7 @@ class EquipmentPage extends StatelessWidget {
             state.workout.equipment.contains(Equipment.PullUpBar);
         final bool _yogaMat =
             state.workout.equipment.contains(Equipment.YogaMat);
-        final bool _noEquipment = _yogaMat || _pullupBar;
+
         var equipment = state.workout.equipment;
         return PageAnimationWidget(
           body: Container(
