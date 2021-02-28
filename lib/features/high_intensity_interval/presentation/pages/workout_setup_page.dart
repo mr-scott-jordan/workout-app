@@ -5,8 +5,7 @@ import '../../domain/enums/tag.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
-import 'home_page.dart';
-import 'workout_page.dart';
+import 'bulletin_board_page.dart';
 
 class WorkoutSetupPage extends StatelessWidget {
   static const routeName = 'workout-setup-page';
@@ -228,7 +227,7 @@ class WorkoutSetupPage extends StatelessWidget {
                           Navigator.pushNamed(
                             context,
                             // TODO: (Scott) fix routing when all pages marged
-                            WorkoutPage.routeName,
+                            BulletinBoardPage.routeName,
                             //BulletinBoardPage.routeName,
                           );
                         },
