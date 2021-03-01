@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../pages/primary_drawer.dart';
+import 'primary_drawer.dart';
 
 class PageAnimationWidget extends StatefulWidget {
   final Widget body;
