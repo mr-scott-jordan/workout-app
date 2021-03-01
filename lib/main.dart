@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/high_intensity_interval/presentation/bloc/workout_bloc.dart';
+import 'features/high_intensity_interval/presentation/pages/auth_home_page.dart';
 import 'features/high_intensity_interval/presentation/pages/bulletin_board_page.dart';
 import 'features/high_intensity_interval/presentation/pages/equipment_page.dart';
-import 'features/high_intensity_interval/presentation/pages/home_page.dart';
+// import 'features/high_intensity_interval/presentation/pages/home_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_setup_page.dart';
 import 'injection_container.dart' as ic;
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           canvasColor: Color.fromRGBO(42, 79, 122, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: HomePage(),
+        home: AuthHomePage(),
         routes: {
           EquipmentPage.routeName: (context) => EquipmentPage(),
           WorkoutSetupPage.routeName: (context) => WorkoutSetupPage(),
