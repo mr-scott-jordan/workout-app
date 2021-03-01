@@ -30,17 +30,32 @@ class WorkoutLoadedState extends WorkoutState {
     List<Exercise> exercises,
   }) {
     return WorkoutLoadedState(
+      // we don't want to copy the total duration.  it should be calculated everytime
       Workout(
         equipment: equipment ?? this.workout.equipment,
         tags: tags ?? this.workout.tags,
         exerciseDuration: exerciseDuration ?? this.workout.exerciseDuration,
         restDuration: restDuration ?? this.workout.restDuration,
-        totalDuration: this.workout.totalDuration,
+        totalDuration: _getTotalDuration(
+          (numOfRounds ?? this.workout.numOfRounds),
+          (numOfExercises ?? this.workout.numOfExercises),
+          (restDuration ?? this.workout.restDuration),
+          (exerciseDuration ?? this.workout.exerciseDuration),
+        ),
         numOfExercises: numOfExercises ?? this.workout.numOfExercises,
         numOfRounds: numOfRounds ?? this.workout.numOfRounds,
         exercises: exercises ?? this.workout.exercises,
       ),
     );
+  }
+
+  Duration _getTotalDuration(
+    int numOfRounds,
+    int numOfExercises,
+    Duration restDuration,
+    Duration exerciseDuration,
+  ) {
+    return (restDuration + exerciseDuration) * numOfExercises * numOfRounds;
   }
 
   static WorkoutLoadedState initialState() {
@@ -61,7 +76,7 @@ class WorkoutInProgressState extends WorkoutState {
 }
 
 // this should all be moved into a getInitialWorkout usecase
-final List<Exercise> _initialExercises = EXERCISES_DATA.sublist(0, 3);
+final List<Exercise> _initialExercises = EXERCISES_DATA.sublist(0, 4);
 final Workout _initialWorkout = Workout(
   equipment: [
     Equipment.None,

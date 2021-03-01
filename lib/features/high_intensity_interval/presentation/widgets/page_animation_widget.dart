@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/primary_drawer.dart';
+
+import '../pages/primary_drawer.dart';
 
 class PageAnimationWidget extends StatefulWidget {
   final Widget body;

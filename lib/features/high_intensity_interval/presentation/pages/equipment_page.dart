@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/widgets/page_animation_widget.dart';
 
 import '../../domain/enums/equipment.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
-import 'home_page.dart';
+import '../widgets/page_animation_widget.dart';
+import 'workout_setup_page.dart';
 
 // ignore: must_be_immutable
 class EquipmentPage extends StatelessWidget {
@@ -18,7 +18,7 @@ class EquipmentPage extends StatelessWidget {
             state.workout.equipment.contains(Equipment.PullUpBar);
         final bool _yogaMat =
             state.workout.equipment.contains(Equipment.YogaMat);
-        final bool _noEquipment = _yogaMat || _pullupBar;
+
         var equipment = state.workout.equipment;
         return PageAnimationWidget(
           body: Container(
@@ -84,8 +84,8 @@ class EquipmentPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(
                         context,
-                        HomePage.routeName,
-                        // WorkoutSetupPage.routeName,
+                        // HomePage.routeName,
+                        WorkoutSetupPage.routeName,
                       );
                     },
                     buttonText: "Next",

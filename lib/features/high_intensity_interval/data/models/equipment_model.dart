@@ -1,4 +1,4 @@
-import 'package:workout_app/features/high_intensity_interval/domain/enums/equipment.dart';
+import '../../domain/enums/equipment.dart';
 
 const _kMap = {
   'none': Equipment.None,
