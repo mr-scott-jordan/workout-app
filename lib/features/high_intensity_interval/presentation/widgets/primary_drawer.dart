@@ -32,6 +32,15 @@ class PrimaryDrawer extends StatelessWidget {
             },
             buttonText: "New Workout",
           ),
+          SizedBox(
+            height: 50,
+          ),
+          FormattedButton(
+            onPressed: () {
+              // Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
+            },
+            buttonText: "Logout",
+          ),
         ],
       ),
     ));
