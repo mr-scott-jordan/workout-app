@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
+import 'equipment_page.dart';
 // import 'equipment_page.dart';
 
 class AuthHomePage extends StatelessWidget {
@@ -46,6 +47,7 @@ class AuthHomePage extends StatelessWidget {
                     child: FormattedButton(
                       onPressed: () {
                         _signInAnonymously();
+                        Navigator.pushNamed(context, EquipmentPage.routeName);
                       },
                       buttonText: "Go Anonymous",
                     ),
