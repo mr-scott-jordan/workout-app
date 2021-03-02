@@ -38,6 +38,14 @@ class AuthHomePage extends StatelessWidget {
                       buttonText: "Sign in with Google",
                     ),
                   ),
+                  Center(
+                    child: FormattedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, EquipmentPage.routeName);
+                      },
+                      buttonText: "Go Anonymous",
+                    ),
+                  ),
                 ],
               ),
             ),
