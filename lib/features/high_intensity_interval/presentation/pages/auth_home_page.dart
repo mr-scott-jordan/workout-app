@@ -33,7 +33,7 @@ class AuthHomePage extends StatelessWidget {
                   Center(
                     child: FormattedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, EquipmentPage.routeName);
+                        // Navigator.pushNamed(context, EquipmentPage.routeName);
                       },
                       buttonText: "Sign in with Google",
                     ),
@@ -41,7 +41,7 @@ class AuthHomePage extends StatelessWidget {
                   Center(
                     child: FormattedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, EquipmentPage.routeName);
+                        // Navigator.pushNamed(context, EquipmentPage.routeName);
                       },
                       buttonText: "Go Anonymous",
                     ),
