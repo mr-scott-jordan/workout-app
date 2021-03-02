@@ -10,8 +10,12 @@ import 'equipment_page.dart';
 
 class AuthHomePage extends StatelessWidget {
   void _signInAnonymously() async {
-    final userCredentials = await FirebaseAuth.instance.signInAnonymously();
-    print('${userCredentials.user.uid}');
+    try {
+      final userCredentials = await FirebaseAuth.instance.signInAnonymously();
+      print('${userCredentials.user.uid}');
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   static const routeName = '/';
