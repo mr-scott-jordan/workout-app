@@ -1,12 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
-import 'equipment_page.dart';
+// import 'equipment_page.dart';
 
 class AuthHomePage extends StatelessWidget {
+  void _signInAnonymously() async {
+    final userCredentials = await FirebaseAuth.instance.signInAnonymously();
+    print('${userCredentials.user.uid}');
+  }
+
   static const routeName = '/';
   @override
   Widget build(BuildContext context) {
@@ -32,16 +38,14 @@ class AuthHomePage extends StatelessWidget {
                   ),
                   Center(
                     child: FormattedButton(
-                      onPressed: () {
-                        // Navigator.pushNamed(context, EquipmentPage.routeName);
-                      },
+                      onPressed: () {},
                       buttonText: "Sign in with Google",
                     ),
                   ),
                   Center(
                     child: FormattedButton(
                       onPressed: () {
-                        // Navigator.pushNamed(context, EquipmentPage.routeName);
+                        _signInAnonymously();
                       },
                       buttonText: "Go Anonymous",
                     ),
