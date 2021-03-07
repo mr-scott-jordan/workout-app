@@ -27,6 +27,15 @@ class WorkoutPage extends StatelessWidget {
         final Function onComplete = () {
           BlocProvider.of<WorkoutBloc>(context)
               .add(StartExerciseWorkoutEvent(state.workout));
+          // SCOTT: opening the same page again works (with Navigator.pushNamed), but the animation isn't fluid (as you'll see)
+          // but this means 2 things:
+          // 1: onComplete is passing correctly and working
+          // 2: the issue is with the page not "refreshing" when the state changes (so the timer doesn't change)
+          // so I think it has something to do with the package being stateful. Is there a better way to refresh the page?
+          Navigator.pushNamed(
+            context,
+            WorkoutPage.routeName,
+          );
         };
         return CircleTimer(
           duration: state.workout.restDuration.inSeconds,
@@ -36,7 +45,11 @@ class WorkoutPage extends StatelessWidget {
         print(state);
         final Function onComplete = () {
           BlocProvider.of<WorkoutBloc>(context)
-              .add(EditWorkoutEvent(state.workout));
+              .add(StartRestWorkoutEvent(state.workout));
+          Navigator.pushNamed(
+            context,
+            WorkoutPage.routeName,
+          );
         };
         return CircleTimer(
           duration: state.workout.exerciseDuration.inSeconds,
