@@ -7,14 +7,16 @@ import 'page_animation_widget.dart';
 class CircleTimer extends StatelessWidget {
   final int duration;
   final Function onComplete;
+  final CountDownController controller;
   CircleTimer({
     @required this.duration,
     @required this.onComplete,
+    @required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    CountDownController _controller = CountDownController();
+    //CountDownController _controller = CountDownController();
 
     return PageAnimationWidget(
       body: Container(
@@ -27,7 +29,7 @@ class CircleTimer extends StatelessWidget {
             CircularCountDownTimer(
               duration: duration,
               initialDuration: 0,
-              controller: _controller,
+              controller: controller,
               width: MediaQuery.of(context).size.width / 2,
               height: MediaQuery.of(context).size.height / 2,
               ringColor: Colors.grey[300],
@@ -56,19 +58,19 @@ class CircleTimer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FormattedButton(
-                  onPressed: _controller.start,
+                  onPressed: controller.start,
                   buttonText: "Start",
                 ),
                 FormattedButton(
-                  onPressed: _controller.pause,
+                  onPressed: controller.pause,
                   buttonText: "Pause",
                 ),
                 FormattedButton(
-                  onPressed: _controller.resume,
+                  onPressed: controller.resume,
                   buttonText: "Resume",
                 ),
                 FormattedButton(
-                  onPressed: _controller.restart,
+                  onPressed: controller.restart,
                   buttonText: "Restart",
                 ),
               ],
