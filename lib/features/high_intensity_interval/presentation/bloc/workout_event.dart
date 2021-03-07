@@ -22,3 +22,19 @@ class GenerateWorkoutEvent extends WorkoutEvent {
 
   List<Object> get props => [workout];
 }
+
+class StartRestWorkoutEvent extends WorkoutEvent {
+  final Workout workout;
+
+  StartRestWorkoutEvent(this.workout);
+
+  List<Object> get props => [workout];
+}
+
+class StartExerciseWorkoutEvent extends WorkoutEvent {
+  final Workout workout;
+
+  StartExerciseWorkoutEvent(this.workout);
+
+  List<Object> get props => [workout];
+}

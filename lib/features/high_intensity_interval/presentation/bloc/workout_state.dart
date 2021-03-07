@@ -70,9 +70,20 @@ class WorkoutLoadedState extends WorkoutState {
       ];
 }
 
-class WorkoutInProgressState extends WorkoutState {
+class RestInProgressState extends WorkoutState {
+  final Workout workout;
+  RestInProgressState(this.workout);
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [workout];
+}
+
+class ExerciseInProgressState extends WorkoutState {
+  final Workout workout;
+  ExerciseInProgressState(this.workout);
+
+  @override
+  List<Object> get props => [workout];
 }
 
 // this should all be moved into a getInitialWorkout usecase

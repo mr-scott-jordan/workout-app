@@ -36,7 +36,23 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     } else if (event is GenerateWorkoutEvent) {
       yield WorkoutLoadingState();
       yield* _callGenerateWorkout(event.workout);
+    } else if (event is StartRestWorkoutEvent) {
+      yield WorkoutLoadingState();
+      yield* _startRest(event.workout);
+    } else if (event is StartExerciseWorkoutEvent) {
+      yield WorkoutLoadingState();
+      yield* _startExercise(event.workout);
     }
+  }
+
+  Stream<WorkoutState> _startRest(Workout workout) async* {
+    final result = RestInProgressState(workout);
+    yield result;
+  }
+
+  Stream<WorkoutState> _startExercise(Workout workout) async* {
+    final result = ExerciseInProgressState(workout);
+    yield result;
   }
 
   Stream<WorkoutState> _callGenerateWorkout(Workout workout) async* {
