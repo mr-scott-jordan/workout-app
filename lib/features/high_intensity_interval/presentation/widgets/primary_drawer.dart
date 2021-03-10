@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/core/authentication/authentication_service.dart';
 
 import 'formatted_button.dart';
 import '../pages/equipment_page.dart';
+import 'package:provider/provider.dart';
 
 class PrimaryDrawer extends StatelessWidget {
   // final Text text;
@@ -38,6 +40,7 @@ class PrimaryDrawer extends StatelessWidget {
           FormattedButton(
             onPressed: () {
               // Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
+              context.read<AuthenticationService>().signOut();
             },
             buttonText: "Logout",
           ),
