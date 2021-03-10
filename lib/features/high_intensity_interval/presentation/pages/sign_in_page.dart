@@ -54,6 +54,16 @@ class SignInPage extends StatelessWidget {
                           );
                     },
                     child: Text("Sign in"),
+                  ),
+                  // ignore: deprecated_member_use
+                  RaisedButton(
+                    onPressed: () {
+                      context.read<AuthenticationService>().signUp(
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim(),
+                          );
+                    },
+                    child: Text("Sign up"),
                   )
                   //   SizedBox(
                   //     height: 100,
