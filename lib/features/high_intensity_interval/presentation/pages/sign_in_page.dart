@@ -21,7 +21,7 @@ class SignInPage extends StatelessWidget {
     }
   }
 
-  static const routeName = '/';
+  static const routeName = '/sign-in-page';
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WorkoutBloc, WorkoutState>(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/core/authentication/authentication_service.dart';
+import 'package:workout_app/features/high_intensity_interval/presentation/pages/sign_in_page.dart';
 
 import 'formatted_button.dart';
 import '../pages/equipment_page.dart';
@@ -40,7 +41,7 @@ class PrimaryDrawer extends StatelessWidget {
           FormattedButton(
             onPressed: () {
               context.read<AuthenticationService>().signOut();
-              Navigator.pushReplacementNamed(context, '/');
+              Navigator.pushReplacementNamed(context, SignInPage.routeName);
             },
             buttonText: "Logout",
           ),

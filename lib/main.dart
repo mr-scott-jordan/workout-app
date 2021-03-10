@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget {
             WorkoutSetupPage.routeName: (context) => WorkoutSetupPage(),
             BulletinBoardPage.routeName: (context) => BulletinBoardPage(),
             WorkoutPage.routeName: (context) => WorkoutPage(),
+            SignInPage.routeName: (context) => SignInPage(),
           },
         ),
       ),

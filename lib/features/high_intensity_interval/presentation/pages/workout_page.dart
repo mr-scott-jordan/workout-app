@@ -7,7 +7,7 @@ import '../widgets/page_animation_widget.dart';
 import 'home_page.dart';
 
 class WorkoutPage extends StatelessWidget {
-  static const routeName = 'workout-page';
+  static const routeName = '/workout-page';
 
   @override
   Widget build(BuildContext context) {
