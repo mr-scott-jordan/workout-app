@@ -41,6 +41,7 @@ class PrimaryDrawer extends StatelessWidget {
             onPressed: () {
               // Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
               context.read<AuthenticationService>().signOut();
+              Navigator.pushReplacementNamed(context, '/');
             },
             buttonText: "Logout",
           ),
