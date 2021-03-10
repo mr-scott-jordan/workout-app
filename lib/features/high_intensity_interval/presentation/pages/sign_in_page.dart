@@ -13,6 +13,15 @@ class SignInPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  void _signInAnonymously() async {
+    try {
+      final userCredentials = await FirebaseAuth.instance.signInAnonymously();
+      print('${userCredentials.user.uid}');
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   // void _signInAnonymously() async {
   //   try {
   //     final userCredentials = await FirebaseAuth.instance.signInAnonymously();
@@ -62,6 +71,13 @@ class SignInPage extends StatelessWidget {
                           );
                     },
                     buttonText: "Sign up",
+                  ),
+                  FormattedButton(
+                    onPressed: () {
+                      _signInAnonymously();
+                      Navigator.pushNamed(context, EquipmentPage.routeName);
+                    },
+                    buttonText: "Go Anonymous",
                   ),
                   //   SizedBox(
                   //     height: 100,
