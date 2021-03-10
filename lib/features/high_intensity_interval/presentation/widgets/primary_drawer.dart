@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/core/authentication/authentication_service.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/sign_in_page.dart';
-
-import 'formatted_button.dart';
-import '../pages/equipment_page.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../core/authentication/authentication_service.dart';
+import '../pages/equipment_page.dart';
+import '../pages/sign_in_page.dart';
+import 'formatted_button.dart';
 
 class PrimaryDrawer extends StatelessWidget {
   // final Text text;
