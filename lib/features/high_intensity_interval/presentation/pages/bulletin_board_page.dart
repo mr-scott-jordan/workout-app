@@ -9,7 +9,7 @@ import 'workout_page.dart';
 
 // ignore: must_be_immutable
 class BulletinBoardPage extends StatelessWidget {
-  static const routeName = 'bulletin-board-page';
+  static const routeName = '/bulletin-board-page';
 
   @override
   Widget build(BuildContext context) {

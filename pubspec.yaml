@@ -32,6 +32,9 @@ dependencies:
   #the newest version for firebase_auth is 0.20.1 .. but we are using the same version as tutorial
   firebase_auth: 0.18.2
   cloud_firestore: 0.14.3
+  # the provider version number might be wrong, might break build..
+  provider: ^4.3.3
+
 
 
   # The following adds the Cupertino Icons font to your application.

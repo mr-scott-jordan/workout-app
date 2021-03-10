@@ -9,7 +9,7 @@ import 'workout_setup_page.dart';
 
 // ignore: must_be_immutable
 class EquipmentPage extends StatelessWidget {
-  static const routeName = 'equipment-page';
+  static const routeName = '/equipment-page';
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
