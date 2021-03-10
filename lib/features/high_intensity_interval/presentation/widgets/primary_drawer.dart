@@ -39,7 +39,6 @@ class PrimaryDrawer extends StatelessWidget {
           ),
           FormattedButton(
             onPressed: () {
-              // Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
               context.read<AuthenticationService>().signOut();
               Navigator.pushReplacementNamed(context, '/');
             },

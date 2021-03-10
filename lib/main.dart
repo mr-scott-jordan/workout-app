@@ -50,8 +50,6 @@ class MyApp extends StatelessWidget {
             canvasColor: Color.fromRGBO(42, 79, 122, 1),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          // home: AuthHomePage(),
-          // home: SignInPage(),
           home: AuthenticationWrapper(),
           routes: {
             EquipmentPage.routeName: (context) => EquipmentPage(),
@@ -65,17 +63,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class AuthenticationWrapper extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
 class AuthenticationWrapper extends StatelessWidget {
-  // const AuthenticationWrapper({
-  //   Key key,
-  // }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
