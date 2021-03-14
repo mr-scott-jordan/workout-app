@@ -9,15 +9,17 @@ import 'workout_page.dart';
 
 // ignore: must_be_immutable
 class BulletinBoardPage extends StatelessWidget {
-  static const routeName = 'bulletin-board-page';
+  static const routeName = '/bulletin-board-page';
 
   @override
   Widget build(BuildContext context) {
     var potentialExercises =
         List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
     potentialExercises.shuffle();
+
     return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
       if (state is WorkoutLoadedState) {
+        print(state.workout.exercises);
         return PageAnimationWidget(
           body: Container(
             color: Color(0xff424242),

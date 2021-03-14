@@ -9,7 +9,7 @@ import 'workout_setup_page.dart';
 
 // ignore: must_be_immutable
 class EquipmentPage extends StatelessWidget {
-  static const routeName = 'equipment-page';
+  static const routeName = '/equipment-page';
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
@@ -18,7 +18,7 @@ class EquipmentPage extends StatelessWidget {
             state.workout.equipment.contains(Equipment.PullUpBar);
         final bool _yogaMat =
             state.workout.equipment.contains(Equipment.YogaMat);
-        final bool _noEquipment = _yogaMat || _pullupBar;
+
         var equipment = state.workout.equipment;
         return PageAnimationWidget(
           body: Container(

@@ -8,7 +8,7 @@ import '../widgets/page_animation_widget.dart';
 import 'bulletin_board_page.dart';
 
 class WorkoutSetupPage extends StatelessWidget {
-  static const routeName = 'workout-setup-page';
+  static const routeName = '/workout-setup-page';
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +63,6 @@ class WorkoutSetupPage extends StatelessWidget {
                         children: [
                           _buildDropDown(
                             'Exercise Duration',
-                            // we have to convert out duration to seconds and it
-                            // must match one item in the possible values
                             '${state.workout.exerciseDuration.inSeconds.toString()}s',
                             [
                               '40s',
@@ -84,8 +82,6 @@ class WorkoutSetupPage extends StatelessWidget {
                           ),
                           _buildDropDown(
                             'Rest Duration',
-                            // we have to convert out duration to seconds and it
-                            // must match one item in the possible values
                             '${state.workout.restDuration.inSeconds.toString()}s',
                             [
                               '10s',

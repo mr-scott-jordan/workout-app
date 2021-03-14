@@ -87,7 +87,7 @@ class ExerciseInProgressState extends WorkoutState {
 }
 
 // this should all be moved into a getInitialWorkout usecase
-final List<Exercise> _initialExercises = EXERCISES_DATA.sublist(0, 3);
+final List<Exercise> _initialExercises = EXERCISES_DATA.sublist(0, 4);
 final Workout _initialWorkout = Workout(
   equipment: [
     Equipment.None,

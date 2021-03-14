@@ -7,8 +7,8 @@ import '../widgets/page_animation_widget.dart';
 import '../widgets/timer.dart';
 
 class WorkoutPage extends StatelessWidget {
-  static const routeName = 'workout-page';
-  CountDownController controller = CountDownController();
+  static const routeName = '/workout-page';
+  final CountDownController controller = CountDownController();
 
   @override
   Widget build(BuildContext context) {

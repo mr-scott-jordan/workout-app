@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../widgets/formatted_button.dart';
-import 'equipment_page.dart';
+import '../../../../core/authentication/authentication_service.dart';
+import '../pages/equipment_page.dart';
+import '../pages/sign_in_page.dart';
+import 'formatted_button.dart';
 
 class PrimaryDrawer extends StatelessWidget {
   // final Text text;
@@ -31,6 +34,16 @@ class PrimaryDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
             },
             buttonText: "New Workout",
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          FormattedButton(
+            onPressed: () {
+              context.read<AuthenticationService>().signOut();
+              Navigator.pushReplacementNamed(context, SignInPage.routeName);
+            },
+            buttonText: "Logout",
           ),
         ],
       ),
