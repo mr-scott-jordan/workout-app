@@ -42,7 +42,15 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     } else if (event is StartExerciseWorkoutEvent) {
       yield WorkoutLoadingState();
       yield* _startExercise(event.workout);
+    } else if (event is FinishWorkoutEvent) {
+      yield WorkoutLoadingState();
+      yield* _finishWorkout(event.workout);
     }
+  }
+
+  Stream<WorkoutState> _finishWorkout(Workout workout) async* {
+    final result = WorkoutFinishedState(workout);
+    yield result;
   }
 
   Stream<WorkoutState> _startRest(Workout workout) async* {

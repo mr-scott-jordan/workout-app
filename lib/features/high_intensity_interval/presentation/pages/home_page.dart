@@ -42,6 +42,9 @@ class HomePage extends StatelessWidget {
               ),
             ),
           );
+        } else if (state is WorkoutFinishedState) {
+          BlocProvider.of<WorkoutBloc>(context)
+              .add(EditWorkoutEvent(state.workout));
         } else {
           return Center(
             child: Text(

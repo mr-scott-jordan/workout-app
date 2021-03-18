@@ -38,3 +38,11 @@ class StartExerciseWorkoutEvent extends WorkoutEvent {
 
   List<Object> get props => [workout];
 }
+
+class FinishWorkoutEvent extends WorkoutEvent {
+  final Workout workout;
+
+  FinishWorkoutEvent(this.workout);
+
+  List<Object> get props => [workout];
+}

@@ -15,6 +15,14 @@ class WorkoutLoadingState extends WorkoutState {
   List<Object> get props => [];
 }
 
+class WorkoutFinishedState extends WorkoutState {
+  final Workout workout;
+  WorkoutFinishedState(this.workout);
+
+  @override
+  List<Object> get props => [];
+}
+
 class WorkoutLoadedState extends WorkoutState {
   final Workout workout;
   WorkoutLoadedState(this.workout);
