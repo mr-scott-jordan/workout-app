@@ -38,6 +38,14 @@ class HomePage extends StatelessWidget {
                       buttonText: "New Workout",
                     ),
                   ),
+                  Center(
+                    child: FormattedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, EquipmentPage.routeName);
+                      },
+                      buttonText: "Load Workout",
+                    ),
+                  ),
                 ],
               ),
             ),
