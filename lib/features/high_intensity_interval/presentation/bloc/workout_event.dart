@@ -13,6 +13,14 @@ class EditWorkoutEvent extends WorkoutEvent {
   List<Object> get props => [workout];
 }
 
+class ResetWorkoutEvent extends WorkoutEvent {
+  final Workout workout;
+
+  ResetWorkoutEvent(this.workout);
+
+  List<Object> get props => [workout];
+}
+
 // class StartWorkoutEvent extends WorkoutEvent {}
 
 class GenerateWorkoutEvent extends WorkoutEvent {

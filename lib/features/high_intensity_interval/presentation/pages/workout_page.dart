@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_app/features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
 import 'package:workout_app/features/high_intensity_interval/presentation/widgets/formatted_button.dart';
 
 import '../bloc/workout_bloc.dart';
@@ -15,7 +16,21 @@ class WorkoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
+    final CircleTimer timer = CircleTimer(
+      duration: 20,
+      onComplete: null,
+      controller: controller,
+    );
+
+    return BlocConsumer<WorkoutBloc, WorkoutState>(listener: (context, state) {
+      if (state is WorkoutFinishedState) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          WorkoutSummaryPage.routeName,
+          (route) => false,
+        );
+      }
+    }, builder: (context, state) {
       if (state is WorkoutLoadedState) {
         exercises = state.workout.exercises.reversed.toList();
         BlocProvider.of<WorkoutBloc>(context)
@@ -76,11 +91,7 @@ class WorkoutPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                CircleTimer(
-                  duration: state.workout.restDuration.inSeconds,
-                  onComplete: onComplete,
-                  controller: controller,
-                ),
+                timer,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -162,11 +173,7 @@ class WorkoutPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                CircleTimer(
-                  duration: state.workout.exerciseDuration.inSeconds,
-                  onComplete: onComplete,
-                  controller: controller,
-                ),
+                timer,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

@@ -45,6 +45,8 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     } else if (event is FinishWorkoutEvent) {
       yield WorkoutLoadingState();
       yield* _finishWorkout(event.workout);
+    } else if (event is ResetWorkoutEvent) {
+      yield* _loadWorkout(event.workout);
     }
   }
 

@@ -15,10 +15,7 @@ class CircleTimer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //CountDownController _controller = CountDownController();
-
     return Column(
-      //crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CircularCountDownTimer(
@@ -50,10 +47,6 @@ class CircleTimer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // FormattedButton(
-            //   onPressed: controller.start,
-            //   buttonText: "Start",
-            // ),
             FormattedButton(
               onPressed: controller.resume,
               buttonText: "Resume",
