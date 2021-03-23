@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_app/features/high_intensity_interval/presentation/pages/list_of_workouts_page.dart';
 
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
@@ -41,7 +42,8 @@ class HomePage extends StatelessWidget {
                   Center(
                     child: FormattedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, EquipmentPage.routeName);
+                        Navigator.pushNamed(
+                            context, ListOfWorkoutsPage.routeName);
                       },
                       buttonText: "Load Workout",
                     ),
