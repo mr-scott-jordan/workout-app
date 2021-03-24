@@ -16,12 +16,6 @@ class WorkoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CircleTimer timer = CircleTimer(
-      duration: 20,
-      onComplete: null,
-      controller: controller,
-    );
-
     return BlocConsumer<WorkoutBloc, WorkoutState>(listener: (context, state) {
       if (state is WorkoutFinishedState) {
         Navigator.pushNamedAndRemoveUntil(
@@ -91,7 +85,11 @@ class WorkoutPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                timer,
+                CircleTimer(
+                  duration: state.workout.restDuration.inSeconds,
+                  onComplete: onComplete,
+                  controller: controller,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -173,7 +171,11 @@ class WorkoutPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                timer,
+                CircleTimer(
+                  duration: state.workout.exerciseDuration.inSeconds,
+                  onComplete: onComplete,
+                  controller: controller,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
