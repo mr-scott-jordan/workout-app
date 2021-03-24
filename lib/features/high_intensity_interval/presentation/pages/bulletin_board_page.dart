@@ -17,7 +17,12 @@ class BulletinBoardPage extends StatelessWidget {
         List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
     potentialExercises.shuffle();
 
-    return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
+    return BlocConsumer<WorkoutBloc, WorkoutState>(listener: (context, state) {
+      if (state is! WorkoutLoadedState) {
+        BlocProvider.of<WorkoutBloc>(context)
+            .add(ResetWorkoutEvent(state.getWorkout()));
+      }
+    }, builder: (context, state) {
       if (state is WorkoutLoadedState) {
         print(state.workout.exercises);
         return PageAnimationWidget(
@@ -125,7 +130,7 @@ class BulletinBoardPage extends StatelessWidget {
                       ),
                       FormattedButton(
                         onPressed: () {
-                          Navigator.pushNamed(
+                          Navigator.pushReplacementNamed(
                             context,
                             WorkoutPage.routeName,
                           );

@@ -3,13 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/list_of_workouts_page.dart';
+import 'features/high_intensity_interval/presentation/pages/list_of_workouts_page.dart';
+import 'features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
 
 import 'core/authentication/authentication_service.dart';
 import 'features/high_intensity_interval/presentation/bloc/workout_bloc.dart';
 import 'features/high_intensity_interval/presentation/pages/bulletin_board_page.dart';
 import 'features/high_intensity_interval/presentation/pages/equipment_page.dart';
-// import 'features/high_intensity_interval/presentation/pages/home_page.dart';
 import 'features/high_intensity_interval/presentation/pages/home_page.dart';
 import 'features/high_intensity_interval/presentation/pages/sign_in_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_page.dart';
@@ -59,6 +59,7 @@ class MyApp extends StatelessWidget {
             WorkoutPage.routeName: (context) => WorkoutPage(),
             SignInPage.routeName: (context) => SignInPage(),
             ListOfWorkoutsPage.routeName: (context) => ListOfWorkoutsPage(),
+            WorkoutSummaryPage.routeName: (context) => WorkoutSummaryPage(),
           },
         ),
       ),

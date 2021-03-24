@@ -12,7 +12,12 @@ class WorkoutSetupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
+    return BlocConsumer<WorkoutBloc, WorkoutState>(listener: (context, state) {
+      if (state is! WorkoutLoadedState) {
+        BlocProvider.of<WorkoutBloc>(context)
+            .add(ResetWorkoutEvent(state.getWorkout()));
+      }
+    }, builder: (context, state) {
       // check state and build ui
       if (state is WorkoutLoadedState) {
         var totalDuration = _printDuration(state.workout.totalDuration);
@@ -220,11 +225,10 @@ class WorkoutSetupPage extends StatelessWidget {
                       ),
                       FormattedButton(
                         onPressed: () {
-                          Navigator.pushNamed(
+                          Navigator.pushReplacementNamed(
                             context,
                             // TODO: (Scott) fix routing when all pages marged
                             BulletinBoardPage.routeName,
-                            //BulletinBoardPage.routeName,
                           );
                         },
                         buttonText: "Load Workout",
