@@ -21,22 +21,33 @@ class WorkoutSummaryPage extends StatelessWidget {
         if (state is WorkoutFinishedState) {
           return PageAnimationWidget(
             body: Container(
+              width: MediaQuery.of(context).size.width,
               color: Color(0xff424242),
-              child: FormattedButton(
-                buttonText: 'Finish',
-                onPressed: () {
-                  BlocProvider.of<WorkoutBloc>(context)
-                      .add(ResetWorkoutEvent(state.workout));
-                },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text('Congratulations!  You finished your workout!'),
+                  Container(
+                    child: FormattedButton(
+                      buttonText: 'Finish',
+                      onPressed: () {
+                        BlocProvider.of<WorkoutBloc>(context)
+                            .add(ResetWorkoutEvent(state.workout));
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           );
         } else {
           return PageAnimationWidget(
             body: Container(
+              width: MediaQuery.of(context).size.width,
               color: Color(0xff424242),
-              child: Text(
-                state.toString(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [],
               ),
             ),
           );

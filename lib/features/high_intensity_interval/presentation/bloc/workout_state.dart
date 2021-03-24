@@ -1,6 +1,7 @@
 part of 'workout_bloc.dart';
 
 abstract class WorkoutState extends Equatable {
+  getWorkout();
   @override
   List<Object> get props => [];
 }
@@ -8,11 +9,23 @@ abstract class WorkoutState extends Equatable {
 class WorkoutErrorState extends WorkoutState {
   @override
   List<Object> get props => [];
+
+  @override
+  getWorkout() {
+    // TODO: implement getWorkout
+    throw UnimplementedError();
+  }
 }
 
 class WorkoutLoadingState extends WorkoutState {
   @override
   List<Object> get props => [];
+
+  @override
+  getWorkout() {
+    // TODO: implement getWorkout
+    throw UnimplementedError();
+  }
 }
 
 class WorkoutFinishedState extends WorkoutState {
@@ -21,6 +34,12 @@ class WorkoutFinishedState extends WorkoutState {
 
   @override
   List<Object> get props => [];
+
+  @override
+  getWorkout() {
+    // TODO: implement getWorkout
+    return this.workout;
+  }
 }
 
 class WorkoutLoadedState extends WorkoutState {
@@ -76,6 +95,12 @@ class WorkoutLoadedState extends WorkoutState {
   List<Object> get props => [
         workout,
       ];
+
+  @override
+  getWorkout() {
+    // TODO: implement getWorkout
+    return this.workout;
+  }
 }
 
 class RestInProgressState extends WorkoutState {
@@ -84,6 +109,12 @@ class RestInProgressState extends WorkoutState {
 
   @override
   List<Object> get props => [workout];
+
+  @override
+  getWorkout() {
+    // TODO: implement getWorkout
+    return this.workout;
+  }
 }
 
 class ExerciseInProgressState extends WorkoutState {
@@ -92,6 +123,12 @@ class ExerciseInProgressState extends WorkoutState {
 
   @override
   List<Object> get props => [workout];
+
+  @override
+  getWorkout() {
+    // TODO: implement getWorkout
+    return this.workout;
+  }
 }
 
 // this should all be moved into a getInitialWorkout usecase

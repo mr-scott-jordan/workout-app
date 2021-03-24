@@ -196,16 +196,13 @@ class WorkoutPage extends StatelessWidget {
         );
       } else {
         return PageAnimationWidget(
-          body: Column(
-            children: [
-              Text('An Error has occured'),
-              FormattedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, HomePage.routeName);
-                },
-                buttonText: 'Go Home',
-              )
-            ],
+          body: Container(
+            width: MediaQuery.of(context).size.width,
+            color: Color(0xff424242),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [],
+            ),
           ),
         );
       }

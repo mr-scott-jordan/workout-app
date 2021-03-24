@@ -10,7 +10,13 @@ class HomePage extends StatelessWidget {
   static const routeName = '/';
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WorkoutBloc, WorkoutState>(
+    return BlocConsumer<WorkoutBloc, WorkoutState>(
+      listener: (context, state) {
+        if (state is! WorkoutLoadedState) {
+          BlocProvider.of<WorkoutBloc>(context)
+              .add(ResetWorkoutEvent(state.getWorkout()));
+        }
+      },
       builder: (context, state) {
         if (state is WorkoutLoadedState) {
           return PageAnimationWidget(
@@ -33,7 +39,8 @@ class HomePage extends StatelessWidget {
                   Center(
                     child: FormattedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, EquipmentPage.routeName);
+                        Navigator.pushReplacementNamed(
+                            context, EquipmentPage.routeName);
                       },
                       buttonText: "New Workout",
                     ),

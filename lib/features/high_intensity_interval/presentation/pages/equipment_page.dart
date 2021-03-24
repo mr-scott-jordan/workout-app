@@ -12,7 +12,12 @@ class EquipmentPage extends StatelessWidget {
   static const routeName = '/equipment-page';
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
+    return BlocConsumer<WorkoutBloc, WorkoutState>(listener: (context, state) {
+      if (state is! WorkoutLoadedState) {
+        BlocProvider.of<WorkoutBloc>(context)
+            .add(ResetWorkoutEvent(state.getWorkout()));
+      }
+    }, builder: (context, state) {
       if (state is WorkoutLoadedState) {
         final bool _pullupBar =
             state.workout.equipment.contains(Equipment.PullUpBar);
@@ -82,7 +87,7 @@ class EquipmentPage extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: FormattedButton(
                     onPressed: () {
-                      Navigator.pushNamed(
+                      Navigator.pushReplacementNamed(
                         context,
                         // HomePage.routeName,
                         WorkoutSetupPage.routeName,
