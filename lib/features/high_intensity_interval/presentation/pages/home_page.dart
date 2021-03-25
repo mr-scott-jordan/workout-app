@@ -42,10 +42,11 @@ class HomePage extends StatelessWidget {
                   Center(
                     child: FormattedButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, ListOfWorkoutsPage.routeName);
+                        BlocProvider.of<WorkoutBloc>(context).add(
+                          GetWorkoutsEvent(state.workout),
+                        );
                       },
-                      buttonText: "Load Workout",
+                      buttonText: "Load saved workouts",
                     ),
                   ),
                 ],
