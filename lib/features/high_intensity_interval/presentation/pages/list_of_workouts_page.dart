@@ -16,10 +16,11 @@ class ListOfWorkoutsPage extends StatelessWidget {
         // react to states here
       },
       builder: (context, state) {
-        if (state is WorkoutLoadedState) {
+        if (state is ChooseWorkoutListState) {
           return PageAnimationWidget(
             body: Container(
               color: Color(0xff424242),
+              child: Text(state.workouts.length.toString()),
             ),
           );
         } else {
