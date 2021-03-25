@@ -7,7 +7,6 @@ import 'package:workout_app/features/high_intensity_interval/presentation/widget
 import '../bloc/workout_bloc.dart';
 import '../widgets/page_animation_widget.dart';
 import '../widgets/timer.dart';
-import 'home_page.dart';
 
 class WorkoutPage extends StatelessWidget {
   static const routeName = '/workout-page';
@@ -49,17 +48,6 @@ class WorkoutPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'REST',
-                          style: TextStyle(
-                            fontSize: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
@@ -83,6 +71,18 @@ class WorkoutPage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       color: Colors.purple,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'REST',
+                          style: TextStyle(
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
                 CircleTimer(
@@ -93,7 +93,6 @@ class WorkoutPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // currently broken
                     FormattedButton(
                       onPressed: () {
                         BlocProvider.of<WorkoutBloc>(context)
@@ -101,7 +100,11 @@ class WorkoutPage extends StatelessWidget {
                       },
                       buttonText: 'Finish Workout',
                     ),
-                    //FormattedButton(), //TODO: skip button
+                    //TODO: skip button
+                    FormattedButton(
+                      onPressed: () {},
+                      buttonText: 'Skip Exercise',
+                    ),
                   ],
                 )
               ],
@@ -113,8 +116,6 @@ class WorkoutPage extends StatelessWidget {
         final Function onComplete = () {
           exercises.removeLast();
           if (exercises.isEmpty) {
-            // TODO: create workout finished page
-            // after all exercises finish, breaks (navigator problem)
             BlocProvider.of<WorkoutBloc>(context)
                 .add(FinishWorkoutEvent(state.workout));
           } else {
@@ -134,17 +135,6 @@ class WorkoutPage extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'WORK',
-                          style: TextStyle(
-                            fontSize: 30,
-                          ),
-                        ),
-                      ],
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -169,6 +159,18 @@ class WorkoutPage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       color: Colors.purple,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WORK',
+                          style: TextStyle(
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
                 CircleTimer(
@@ -179,7 +181,6 @@ class WorkoutPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // currently broken
                     FormattedButton(
                       onPressed: () {
                         BlocProvider.of<WorkoutBloc>(context)
@@ -187,7 +188,11 @@ class WorkoutPage extends StatelessWidget {
                       },
                       buttonText: 'Finish Workout',
                     ),
-                    //FormattedButton(), //TODO: skip button
+                    //TODO: skip button
+                    FormattedButton(
+                      onPressed: () {},
+                      buttonText: 'Skip Exercise',
+                    ),
                   ],
                 )
               ],
