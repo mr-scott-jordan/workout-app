@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +9,8 @@ class ListOfWorkoutsPage extends StatelessWidget {
   static const routeName = '/list-of-workouts-page';
   @override
   Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+    final String userId = firebaseUser.uid;
     return BlocConsumer<WorkoutBloc, WorkoutState>(
       listener: (context, state) {
         // react to states here
