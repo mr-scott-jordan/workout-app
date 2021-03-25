@@ -36,7 +36,17 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     } else if (event is GenerateWorkoutEvent) {
       yield WorkoutLoadingState();
       yield* _callGenerateWorkout(event.workout);
+    } else if (event is GetWorkoutsEvent) {
+      yield* _getWorkouts(event.workout, event.userId);
     }
+  }
+
+  Stream<WorkoutState> _getWorkouts(Workout workout, String userId) async* {
+    //need to call usecase later
+    final result = ChooseWorkoutListState(
+      [workout, workout],
+    );
+    yield result;
   }
 
   Stream<WorkoutState> _callGenerateWorkout(Workout workout) async* {
