@@ -14,7 +14,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
     final String userId = firebaseUser.uid;
-    return BlocBuilder<WorkoutBloc, WorkoutState>(
+    return BlocConsumer<WorkoutBloc, WorkoutState>(
+      listener: (context, state) {
+        if (state is ChooseWorkoutListState) {
+          Navigator.pushReplacementNamed(context, ListOfWorkoutsPage.routeName);
+        }
+      },
       builder: (context, state) {
         if (state is WorkoutLoadedState) {
           return PageAnimationWidget(
