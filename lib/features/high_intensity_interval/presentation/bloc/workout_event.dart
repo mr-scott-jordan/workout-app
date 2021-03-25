@@ -25,8 +25,8 @@ class GenerateWorkoutEvent extends WorkoutEvent {
 
 class GetWorkoutsEvent extends WorkoutEvent {
   final Workout workout;
-
-  GetWorkoutsEvent(this.workout);
+  final String userId;
+  GetWorkoutsEvent({this.workout, this.userId});
 
   List<Object> get props => [workout];
 }
