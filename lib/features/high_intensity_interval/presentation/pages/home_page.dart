@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_app/features/high_intensity_interval/presentation/pages/list_of_workouts_page.dart';
@@ -11,6 +12,8 @@ class HomePage extends StatelessWidget {
   static const routeName = '/';
   @override
   Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+    final String userId = firebaseUser.uid;
     return BlocBuilder<WorkoutBloc, WorkoutState>(
       builder: (context, state) {
         if (state is WorkoutLoadedState) {
@@ -43,7 +46,10 @@ class HomePage extends StatelessWidget {
                     child: FormattedButton(
                       onPressed: () {
                         BlocProvider.of<WorkoutBloc>(context).add(
-                          GetWorkoutsEvent(state.workout),
+                          GetWorkoutsEvent(
+                            workout: state.workout,
+                            userId: userId,
+                          ),
                         );
                       },
                       buttonText: "Load saved workouts",
