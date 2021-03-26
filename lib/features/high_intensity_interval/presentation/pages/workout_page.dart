@@ -1,88 +1,214 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_app/features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
+import 'package:workout_app/features/high_intensity_interval/presentation/widgets/formatted_button.dart';
 
 import '../bloc/workout_bloc.dart';
-import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
-import 'home_page.dart';
+import '../widgets/timer.dart';
 
 class WorkoutPage extends StatelessWidget {
   static const routeName = '/workout-page';
+  final CountDownController controller = CountDownController();
+  var exercises;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WorkoutBloc, WorkoutState>(builder: (context, state) {
+    return BlocConsumer<WorkoutBloc, WorkoutState>(listener: (context, state) {
+      if (state is WorkoutFinishedState) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          WorkoutSummaryPage.routeName,
+          (route) => false,
+        );
+      }
+    }, builder: (context, state) {
       if (state is WorkoutLoadedState) {
+        exercises = state.workout.exercises.reversed.toList();
+        BlocProvider.of<WorkoutBloc>(context)
+            .add(StartRestWorkoutEvent(state.workout));
+        return Container();
+      } else if (state is RestInProgressState) {
+        print(state);
+        final Function onComplete = () {
+          BlocProvider.of<WorkoutBloc>(context)
+              .add(StartExerciseWorkoutEvent(state.workout));
+          controller.restart(
+            duration: state.workout.exerciseDuration.inSeconds,
+          );
+        };
         return PageAnimationWidget(
           body: Container(
+            width: MediaQuery.of(context).size.width,
             color: Color(0xff424242),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * .8,
-                  child: Placeholder(
-                    fallbackHeight: 250,
-                  ),
-                ),
-                SizedBox(
-                  height: 60,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'WIP',
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Next Exercise:',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color(0xfffbc02d),
+                          ),
+                        ),
+                        Text(
+                          ('${exercises.last.title}'),
                           style: TextStyle(
                             fontSize: 24,
-                            color: Colors.white,
-                            decorationColor: Colors.amberAccent,
                             fontWeight: FontWeight.bold,
                           ),
-                        )),
+                        ),
+                      ],
+                    ),
                     Container(
-                      alignment: Alignment.centerRight,
-                      // child: Countdown(
-                      //   duration: Duration(
-                      //     minutes: minutes,
-                      //   ),
-                      //   onFinish: () {
-                      //     print('finished!');
-                      //   },
-                      //   builder: (BuildContext ctx, Duration remaining) {
-                      //     return Text(
-                      //       minutes > 9
-                      //           ? '${remaining.toString().substring(2, 7)}'
-                      //           : '${remaining.toString().substring(2, 7)}',
-                      //       style: TextStyle(
-                      //         color: Colors.amberAccent,
-                      //         fontSize: 20,
-                      //         fontWeight: FontWeight.w900,
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
+                      height: 2.0,
+                      width: MediaQuery.of(context).size.width,
+                      color: Colors.purple,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'REST',
+                          style: TextStyle(
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 100,
+                CircleTimer(
+                  duration: state.workout.restDuration.inSeconds,
+                  onComplete: onComplete,
+                  controller: controller,
                 ),
-                FormattedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, HomePage.routeName);
-                  },
-                  buttonText: "Finish Workout",
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FormattedButton(
+                      onPressed: () {
+                        BlocProvider.of<WorkoutBloc>(context)
+                            .add(FinishWorkoutEvent(state.workout));
+                      },
+                      buttonText: 'Finish Workout',
+                    ),
+                    //TODO: skip button
+                    FormattedButton(
+                      onPressed: () {},
+                      buttonText: 'Skip Exercise',
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      } else if (state is ExerciseInProgressState) {
+        print(state);
+        final Function onComplete = () {
+          exercises.removeLast();
+          if (exercises.isEmpty) {
+            BlocProvider.of<WorkoutBloc>(context)
+                .add(FinishWorkoutEvent(state.workout));
+          } else {
+            BlocProvider.of<WorkoutBloc>(context)
+                .add(StartRestWorkoutEvent(state.workout));
+            controller.restart(
+              duration: state.workout.restDuration.inSeconds,
+            );
+          }
+        };
+        return PageAnimationWidget(
+          body: Container(
+            width: MediaQuery.of(context).size.width,
+            color: Color(0xff424242),
+            child: Column(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Current Exercise:',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color(0xfffbc02d),
+                          ),
+                        ),
+                        Text(
+                          ('${exercises.last.title}'),
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 2.0,
+                      width: MediaQuery.of(context).size.width,
+                      color: Colors.purple,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WORK',
+                          style: TextStyle(
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
+                CircleTimer(
+                  duration: state.workout.exerciseDuration.inSeconds,
+                  onComplete: onComplete,
+                  controller: controller,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FormattedButton(
+                      onPressed: () {
+                        BlocProvider.of<WorkoutBloc>(context)
+                            .add(FinishWorkoutEvent(state.workout));
+                      },
+                      buttonText: 'Finish Workout',
+                    ),
+                    //TODO: skip button
+                    FormattedButton(
+                      onPressed: () {},
+                      buttonText: 'Skip Exercise',
+                    ),
+                  ],
+                )
               ],
             ),
           ),
         );
       } else {
         return PageAnimationWidget(
-          body: Text('An Error has occured'),
+          body: Container(
+            width: MediaQuery.of(context).size.width,
+            color: Color(0xff424242),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [],
+            ),
+          ),
         );
       }
     });
