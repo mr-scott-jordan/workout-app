@@ -67,8 +67,7 @@ class HomePage extends StatelessWidget {
         } else {
           return PageAnimationWidget(
             body: Center(
-              child: Text(
-                  'You need to investigate why WorkoutLoadedState is being streamed'),
+              child: Text(' '),
             ),
           );
         }
