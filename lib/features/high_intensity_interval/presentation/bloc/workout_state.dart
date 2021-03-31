@@ -20,7 +20,6 @@ class WorkoutErrorState extends WorkoutState {
 class WorkoutLoadingState extends WorkoutState {
   @override
   List<Object> get props => [];
-
   @override
   getWorkout() {
     // TODO: implement getWorkout

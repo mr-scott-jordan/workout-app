@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:workout_app/services/get_workouts_service.dart';
 
 import '../../../../exercise_data.dart';
 import '../../domain/entities/exercise.dart';
@@ -68,9 +69,9 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
   }
 
   Stream<WorkoutState> _getWorkouts(Workout workout, String userId) async* {
-    //need to call usecase later
+    final workouts = await GetWorkoutsService.getWorkouts(userId);
     final result = ChooseWorkoutFromListState(
-      [workout, workout],
+      [...workouts],
     );
     yield result;
   }

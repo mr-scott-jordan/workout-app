@@ -23,6 +23,7 @@ class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
     // TODO: Nathan - hook in firebase create in new class dawg
     // https://github.com/ResoCoder/flutter-tdd-clean-architecture-course/blob/master/lib/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart
     //_getWorkoutFromFirebase();
+    print(userId);
     return _getDummyWorkout();
   }
 
