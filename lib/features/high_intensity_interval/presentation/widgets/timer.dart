@@ -23,7 +23,7 @@ class CircleTimer extends StatelessWidget {
           initialDuration: 0,
           controller: controller,
           width: MediaQuery.of(context).size.width / 2,
-          height: MediaQuery.of(context).size.height / 2,
+          height: MediaQuery.of(context).size.height / 3,
           ringColor: Colors.grey[300],
           ringGradient: null,
           fillColor: Colors.purpleAccent[100],
@@ -47,20 +47,38 @@ class CircleTimer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            FormattedButton(
-              onPressed: controller.resume,
-              buttonText: "Resume",
-            ),
-            FormattedButton(
+            //TODO: maybe create a pause/play button that reacts to state
+            IconButton(
               onPressed: controller.pause,
-              buttonText: "Pause",
+              icon: Icon(
+                Icons.pause_circle_outline_rounded,
+                color: Colors.purple,
+              ),
+              iconSize: 100.0,
             ),
-            FormattedButton(
-              onPressed: controller.restart,
-              buttonText: "Restart",
+            IconButton(
+              onPressed: controller.resume,
+              icon: Icon(
+                Icons.play_circle_outline_rounded,
+                color: Colors.purple,
+              ),
+              iconSize: 100.0,
             ),
           ],
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              onPressed: controller.restart,
+              icon: Icon(
+                Icons.replay_rounded,
+                color: Colors.purple,
+              ),
+              iconSize: 75.0,
+            ),
+          ],
+        )
       ],
     );
   }
