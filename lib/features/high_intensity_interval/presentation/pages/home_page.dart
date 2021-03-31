@@ -65,9 +65,11 @@ class HomePage extends StatelessWidget {
             ),
           );
         } else {
-          return Center(
-            child: Text(
-                'You need to investigate why WorkoutLoadedState is being streamed'),
+          return PageAnimationWidget(
+            body: Center(
+              child: Text(
+                  'You need to investigate why WorkoutLoadedState is being streamed'),
+            ),
           );
         }
       },
