@@ -7,7 +7,6 @@ import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
 import 'workout_page.dart';
 
-// ignore: must_be_immutable
 class BulletinBoardPage extends StatelessWidget {
   static const routeName = '/bulletin-board-page';
 
@@ -32,26 +31,25 @@ class BulletinBoardPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                    flex: 1,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          (state.workout.totalDuration
-                              .toString()
-                              .split('.')[0]),
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        (state.workout.totalDuration.toString().split('.')[0]),
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Container(
-                          height: 2.0,
-                          width: double.infinity,
-                          color: Colors.purple,
-                        ),
-                      ],
-                    )),
+                      ),
+                      Container(
+                        height: 2.0,
+                        width: double.infinity,
+                        color: Colors.purple,
+                      ),
+                    ],
+                  ),
+                ),
                 Expanded(
                   flex: 7,
                   child: ListView.builder(

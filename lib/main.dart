@@ -3,17 +3,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'features/high_intensity_interval/presentation/pages/list_of_workouts_page.dart';
-import 'features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
 
 import 'core/authentication/authentication_service.dart';
 import 'features/high_intensity_interval/presentation/bloc/workout_bloc.dart';
 import 'features/high_intensity_interval/presentation/pages/bulletin_board_page.dart';
 import 'features/high_intensity_interval/presentation/pages/equipment_page.dart';
 import 'features/high_intensity_interval/presentation/pages/home_page.dart';
+import 'features/high_intensity_interval/presentation/pages/list_of_workouts_page.dart';
 import 'features/high_intensity_interval/presentation/pages/sign_in_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_setup_page.dart';
+import 'features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
 import 'injection_container.dart' as ic;
 import 'injection_container.dart';
 
@@ -45,10 +45,10 @@ class MyApp extends StatelessWidget {
           title: 'Workout App',
           theme: ThemeData(
             brightness: Brightness.dark,
-            // primarySwatch: Colors.indigo,
             fontFamily: 'Quicksand',
             accentColor: Colors.black45,
-            canvasColor: Color.fromRGBO(42, 79, 122, 1),
+            // canvasColor: Color.fromRGBO(42, 79, 122, 1),
+            canvasColor: Color(0xff424242),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           home: AuthenticationWrapper(),

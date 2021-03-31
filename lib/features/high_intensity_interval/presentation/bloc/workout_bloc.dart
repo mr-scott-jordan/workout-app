@@ -47,6 +47,8 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
       yield* _finishWorkout(event.workout);
     } else if (event is ResetWorkoutEvent) {
       yield* _loadWorkout(event.workout);
+    } else if (event is GetWorkoutsEvent) {
+      yield* _getWorkouts(event.workout, event.userId);
     }
   }
 
@@ -62,6 +64,14 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
 
   Stream<WorkoutState> _startExercise(Workout workout) async* {
     final result = ExerciseInProgressState(workout);
+    yield result;
+  }
+
+  Stream<WorkoutState> _getWorkouts(Workout workout, String userId) async* {
+    //need to call usecase later
+    final result = ChooseWorkoutFromListState(
+      [workout, workout],
+    );
     yield result;
   }
 

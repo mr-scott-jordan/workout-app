@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,9 +12,14 @@ class HomePage extends StatelessWidget {
   static const routeName = '/';
   @override
   Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+    final String userId = firebaseUser.uid;
     return BlocConsumer<WorkoutBloc, WorkoutState>(
       listener: (context, state) {
-        if (state is! WorkoutLoadedState) {
+        if (state is ChooseWorkoutFromListState) {
+          Navigator.pushReplacementNamed(context, ListOfWorkoutsPage.routeName);
+        } else if (state is! WorkoutLoadedState ||
+            state is! ChooseWorkoutFromListState) {
           BlocProvider.of<WorkoutBloc>(context)
               .add(ResetWorkoutEvent(state.getWorkout()));
         }
@@ -49,10 +55,14 @@ class HomePage extends StatelessWidget {
                   Center(
                     child: FormattedButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, ListOfWorkoutsPage.routeName);
+                        BlocProvider.of<WorkoutBloc>(context).add(
+                          GetWorkoutsEvent(
+                            workout: state.workout,
+                            userId: userId,
+                          ),
+                        );
                       },
-                      buttonText: "Load Workout",
+                      buttonText: "Load saved workouts",
                     ),
                   ),
                 ],
@@ -60,9 +70,10 @@ class HomePage extends StatelessWidget {
             ),
           );
         } else {
-          return Center(
-            child: Text(
-                'You need to investigate why WorkoutLoadedState is being streamed'),
+          return PageAnimationWidget(
+            body: Center(
+              child: Text(' '),
+            ),
           );
         }
       },
