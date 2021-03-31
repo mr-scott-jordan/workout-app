@@ -23,9 +23,9 @@ class WorkoutRepository implements WorkoutRepositoryType {
   });
 
   @override
-  Future<Either<Failure, Workout>> getWorkout() async {
+  Future<Either<Failure, Workout>> getWorkout(String userId) async {
     try {
-      return Right(await remoteDataSource.getWorkout());
+      return Right(await remoteDataSource.getWorkout(userId));
     } on ServerException {
       return Left(ServerFailure());
     }

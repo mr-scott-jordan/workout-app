@@ -10,7 +10,7 @@ abstract class WorkoutRemoteDataSourceType {
   /// Calls endpoint for data
   ///
   /// Throws a [ServerException] for all error codes
-  Future<WorkoutModel> getWorkout();
+  Future<WorkoutModel> getWorkout(String userId);
 }
 
 class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
@@ -19,7 +19,7 @@ class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
   WorkoutRemoteDataSource({@required this.client});
 
   @override
-  Future<WorkoutModel> getWorkout() {
+  Future<WorkoutModel> getWorkout(String userId) {
     // TODO: Nathan - hook in firebase create in new class dawg
     // https://github.com/ResoCoder/flutter-tdd-clean-architecture-course/blob/master/lib/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart
     //_getWorkoutFromFirebase();
