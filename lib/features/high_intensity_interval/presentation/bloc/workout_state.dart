@@ -131,6 +131,20 @@ class ExerciseInProgressState extends WorkoutState {
   }
 }
 
+class SkipExerciseBufferState extends WorkoutState {
+  final Workout workout;
+  SkipExerciseBufferState(this.workout);
+
+  @override
+  List<Object> get props => [workout];
+
+  @override
+  getWorkout() {
+    // TODO: implement getWorkout
+    return this.workout;
+  }
+}
+
 // this should all be moved into a getInitialWorkout usecase
 final List<Exercise> _initialExercises = EXERCISES_DATA.sublist(0, 4);
 final Workout _initialWorkout = Workout(
