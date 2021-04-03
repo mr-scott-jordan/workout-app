@@ -93,6 +93,39 @@ class WorkoutPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    IconButton(
+                      onPressed: controller.restart,
+                      icon: Icon(
+                        Icons.replay_rounded,
+                        color: Colors.purple,
+                      ),
+                      iconSize: 75.0,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        exercises.removeLast();
+                        if (exercises.isEmpty) {
+                          BlocProvider.of<WorkoutBloc>(context)
+                              .add(FinishWorkoutEvent(state.workout));
+                        } else {
+                          BlocProvider.of<WorkoutBloc>(context)
+                              .add(SkipWorkoutEvent(state.workout));
+                          controller.restart(
+                            duration: 10,
+                          );
+                        }
+                      },
+                      icon: Icon(
+                        Icons.skip_next_rounded,
+                        color: Colors.purple,
+                      ),
+                      iconSize: 75.0,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
                     FormattedButton(
                       onPressed: () {
                         BlocProvider.of<WorkoutBloc>(context)
@@ -100,13 +133,8 @@ class WorkoutPage extends StatelessWidget {
                       },
                       buttonText: 'Finish Workout',
                     ),
-                    //TODO: skip button
-                    FormattedButton(
-                      onPressed: () {},
-                      buttonText: 'Skip Exercise',
-                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -181,6 +209,39 @@ class WorkoutPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    IconButton(
+                      onPressed: controller.restart,
+                      icon: Icon(
+                        Icons.replay_rounded,
+                        color: Colors.purple,
+                      ),
+                      iconSize: 75.0,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        exercises.removeLast();
+                        if (exercises.isEmpty) {
+                          BlocProvider.of<WorkoutBloc>(context)
+                              .add(FinishWorkoutEvent(state.workout));
+                        } else {
+                          BlocProvider.of<WorkoutBloc>(context)
+                              .add(SkipWorkoutEvent(state.workout));
+                          controller.restart(
+                            duration: 10,
+                          );
+                        }
+                      },
+                      icon: Icon(
+                        Icons.skip_next_rounded,
+                        color: Colors.purple,
+                      ),
+                      iconSize: 75.0,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
                     FormattedButton(
                       onPressed: () {
                         BlocProvider.of<WorkoutBloc>(context)
@@ -188,13 +249,118 @@ class WorkoutPage extends StatelessWidget {
                       },
                       buttonText: 'Finish Workout',
                     ),
-                    //TODO: skip button
-                    FormattedButton(
-                      onPressed: () {},
-                      buttonText: 'Skip Exercise',
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      } else if (state is SkipExerciseBufferState) {
+        print(state);
+        final Function onComplete = () {
+          BlocProvider.of<WorkoutBloc>(context)
+              .add(StartExerciseWorkoutEvent(state.workout));
+          controller.restart(
+            duration: state.workout.exerciseDuration.inSeconds,
+          );
+        };
+        return PageAnimationWidget(
+          body: Container(
+            width: MediaQuery.of(context).size.width,
+            color: Color(0xff424242),
+            child: Column(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Next Exercise:',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color(0xfffbc02d),
+                          ),
+                        ),
+                        Text(
+                          ('${exercises.last.title}'),
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 2.0,
+                      width: MediaQuery.of(context).size.width,
+                      color: Colors.purple,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'REST',
+                          style: TextStyle(
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
-                )
+                ),
+                CircleTimer(
+                  duration: 10,
+                  onComplete: onComplete,
+                  controller: controller,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      onPressed: controller.restart,
+                      icon: Icon(
+                        Icons.replay_rounded,
+                        color: Colors.purple,
+                      ),
+                      iconSize: 75.0,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        exercises.removeLast();
+                        if (exercises.isEmpty) {
+                          BlocProvider.of<WorkoutBloc>(context)
+                              .add(FinishWorkoutEvent(state.workout));
+                        } else {
+                          BlocProvider.of<WorkoutBloc>(context)
+                              .add(SkipWorkoutEvent(state.workout));
+                          controller.restart(
+                            duration: 10,
+                          );
+                        }
+                      },
+                      icon: Icon(
+                        Icons.skip_next_rounded,
+                        color: Colors.purple,
+                      ),
+                      iconSize: 75.0,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FormattedButton(
+                      onPressed: () {
+                        BlocProvider.of<WorkoutBloc>(context)
+                            .add(FinishWorkoutEvent(state.workout));
+                      },
+                      buttonText: 'Finish Workout',
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
