@@ -1,8 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 
-import 'formatted_button.dart';
-
 class CircleTimer extends StatelessWidget {
   final int duration;
   final Function onComplete;
