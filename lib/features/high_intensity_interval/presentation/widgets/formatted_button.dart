@@ -4,7 +4,10 @@ class FormattedButton extends StatelessWidget {
   final String buttonText;
   final Function onPressed;
 
-  FormattedButton({@required this.onPressed, this.buttonText});
+  FormattedButton({
+    @required this.onPressed,
+    this.buttonText,
+  });
 
   @override
   Widget build(BuildContext context) {
