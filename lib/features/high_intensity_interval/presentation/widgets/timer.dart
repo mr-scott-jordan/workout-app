@@ -1,8 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 
-import 'formatted_button.dart';
-
 class CircleTimer extends StatelessWidget {
   final int duration;
   final Function onComplete;
@@ -66,19 +64,6 @@ class CircleTimer extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              onPressed: controller.restart,
-              icon: Icon(
-                Icons.replay_rounded,
-                color: Colors.purple,
-              ),
-              iconSize: 75.0,
-            ),
-          ],
-        )
       ],
     );
   }
