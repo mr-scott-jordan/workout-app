@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'primary_drawer.dart';
 
@@ -34,7 +35,7 @@ class _PageAnimationWidgetState extends State<PageAnimationWidget>
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIOverlays([]);
     final rightSlide = MediaQuery.of(context).size.width * 0.6;
     final height = MediaQuery.of(context).size.height;
     return AnimatedBuilder(
