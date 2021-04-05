@@ -70,8 +70,11 @@ class BulletinBoardPage extends StatelessWidget {
                               .workout));
                     },
                     itemCount: state.workout.exercises.length,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (context, index) {
+                      final String exerciseName =
+                          state.workout.exercises[index].title;
                       return ListTile(
+                        key: ValueKey(exerciseName),
                         // leading: Text(
                         //   workout.exercises[index].title,
                         //   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
@@ -86,6 +89,7 @@ class BulletinBoardPage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
+                              Icon(Icons.reorder_rounded),
                               IconButton(
                                   icon: Icon(Icons.swap_calls_rounded),
                                   onPressed: () {
