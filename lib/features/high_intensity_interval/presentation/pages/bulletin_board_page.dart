@@ -54,7 +54,21 @@ class BulletinBoardPage extends StatelessWidget {
                     )),
                 Expanded(
                   flex: 7,
-                  child: ListView.builder(
+                  child: ReorderableListView.builder(
+                    onReorder: (int oldIndex, int newIndex) {
+                      if (oldIndex < newIndex) {
+                        newIndex -= 1;
+                      }
+                      var exercises = state.workout.exercises.sublist(0);
+                      var item = exercises.removeAt(oldIndex);
+                      exercises.insert(newIndex, item);
+                      BlocProvider.of<WorkoutBloc>(context)
+                          .add(EditWorkoutEvent(state
+                              .copyWith(
+                                exercises: exercises,
+                              )
+                              .workout));
+                    },
                     itemCount: state.workout.exercises.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
