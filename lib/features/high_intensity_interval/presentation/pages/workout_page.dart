@@ -301,7 +301,7 @@ class WorkoutPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'REST',
+                          'GET READY',
                           style: TextStyle(
                             fontSize: 45,
                             fontWeight: FontWeight.bold,
