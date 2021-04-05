@@ -17,6 +17,8 @@ class BulletinBoardPage extends StatelessWidget {
         List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
     potentialExercises.shuffle();
 
+    print(potentialExercises);
+
     return BlocConsumer<WorkoutBloc, WorkoutState>(listener: (context, state) {
       if (state is! WorkoutLoadedState) {
         BlocProvider.of<WorkoutBloc>(context)
