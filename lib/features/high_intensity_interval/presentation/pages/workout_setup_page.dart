@@ -296,13 +296,6 @@ bool _tagStringToBool({@required String tagName, @required List<Tag> tags}) {
   return tags.any((tag) => tags.contains(_kMap[tagName]));
 }
 
-// String _printDuration(Duration duration) {
-//   String twoDigits(int n) => n.toString().padLeft(2, "0");
-//   String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-//   String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-//   return "${twoDigits(duration.inHours)}h ${twoDigitMinutes}m ${twoDigitSeconds}s";
-// }
-
 String _printDuration(Duration duration) {
   String formattedDuration = "";
   if (duration.inHours != 0) formattedDuration += "${duration.inHours}h ";
