@@ -1,16 +1,14 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/exercise.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/widgets/formatted_button.dart';
-import 'workout_summary_page.dart';
-import '../widgets/formatted_button.dart';
 
+import '../../domain/entities/exercise.dart';
+import '../../domain/entities/workout.dart';
 import '../bloc/workout_bloc.dart';
+import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
 import '../widgets/timer.dart';
+import 'workout_summary_page.dart';
 
 class WorkoutPage extends StatelessWidget {
   static const routeName = '/workout-page';
