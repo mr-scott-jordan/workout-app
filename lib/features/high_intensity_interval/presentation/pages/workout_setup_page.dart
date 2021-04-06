@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../exercise_data.dart';
 import '../../domain/enums/tag.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
@@ -225,6 +226,15 @@ class WorkoutSetupPage extends StatelessWidget {
                       ),
                       FormattedButton(
                         onPressed: () {
+                          state.workout.potentialExercises.shuffle();
+                          var exercises = state.workout.potentialExercises
+                              .sublist(0, state.workout.numOfExercises);
+                          BlocProvider.of<WorkoutBloc>(context)
+                              .add(EditWorkoutEvent(state
+                                  .copyWith(
+                                    exercises: exercises,
+                                  )
+                                  .workout));
                           Navigator.pushReplacementNamed(
                             context,
                             // TODO: (Scott) fix routing when all pages marged
