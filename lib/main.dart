@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
 
 import 'core/authentication/authentication_service.dart';
 import 'features/high_intensity_interval/presentation/bloc/workout_bloc.dart';
@@ -11,9 +10,10 @@ import 'features/high_intensity_interval/presentation/pages/bulletin_board_page.
 import 'features/high_intensity_interval/presentation/pages/equipment_page.dart';
 // import 'features/high_intensity_interval/presentation/pages/home_page.dart';
 import 'features/high_intensity_interval/presentation/pages/home_page.dart';
-import 'features/high_intensity_interval/presentation/pages/sign_in_page.dart';
+import 'features/high_intensity_interval/presentation/pages/login_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_setup_page.dart';
+import 'features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
 import 'injection_container.dart' as ic;
 import 'injection_container.dart';
 
@@ -39,15 +39,16 @@ class MyApp extends StatelessWidget {
           StreamProvider(
             create: (context) =>
                 context.read<AuthenticationService>().authstateChanges,
+            initialData: null,
           ),
         ],
         child: MaterialApp(
           title: 'Workout App',
           theme: ThemeData(
             brightness: Brightness.dark,
-            // primarySwatch: Colors.indigo,
             fontFamily: 'Quicksand',
-            accentColor: Colors.black45,
+            accentColor: Colors.white70,
+            backgroundColor: const Color(0xff424242),
             canvasColor: Color.fromRGBO(42, 79, 122, 1),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
             WorkoutSetupPage.routeName: (context) => WorkoutSetupPage(),
             BulletinBoardPage.routeName: (context) => BulletinBoardPage(),
             WorkoutPage.routeName: (context) => WorkoutPage(),
-            SignInPage.routeName: (context) => SignInPage(),
+            LoginPage.routeName: (context) => LoginPage(),
             WorkoutSummaryPage.routeName: (context) => WorkoutSummaryPage(),
           },
         ),
@@ -74,7 +75,7 @@ class AuthenticationWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       return HomePage();
     }
-    return SignInPage();
+    return LoginPage();
   }
 }
 

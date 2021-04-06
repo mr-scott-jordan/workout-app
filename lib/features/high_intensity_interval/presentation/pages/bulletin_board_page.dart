@@ -56,10 +56,27 @@ class BulletinBoardPage extends StatelessWidget {
                     )),
                 Expanded(
                   flex: 7,
-                  child: ListView.builder(
+                  child: ReorderableListView.builder(
+                    onReorder: (int oldIndex, int newIndex) {
+                      if (oldIndex < newIndex) {
+                        newIndex -= 1;
+                      }
+                      var exercises = state.workout.exercises.sublist(0);
+                      var item = exercises.removeAt(oldIndex);
+                      exercises.insert(newIndex, item);
+                      BlocProvider.of<WorkoutBloc>(context)
+                          .add(EditWorkoutEvent(state
+                              .copyWith(
+                                exercises: exercises,
+                              )
+                              .workout));
+                    },
                     itemCount: state.workout.exercises.length,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (context, index) {
+                      final String exerciseName =
+                          state.workout.exercises[index].title;
                       return ListTile(
+                        key: ValueKey(exerciseName),
                         // leading: Text(
                         //   workout.exercises[index].title,
                         //   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
@@ -74,6 +91,7 @@ class BulletinBoardPage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
+                              Icon(Icons.reorder_rounded),
                               IconButton(
                                   icon: Icon(Icons.swap_calls_rounded),
                                   onPressed: () {
