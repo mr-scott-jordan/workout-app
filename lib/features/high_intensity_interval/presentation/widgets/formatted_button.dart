@@ -6,7 +6,7 @@ class FormattedButton extends StatelessWidget {
 
   FormattedButton({
     @required this.onPressed,
-    this.buttonText,
+    @required this.buttonText,
   });
 
   @override
