@@ -21,6 +21,14 @@ class ResetWorkoutEvent extends WorkoutEvent {
   List<Object> get props => [workout];
 }
 
+class SkipWorkoutEvent extends WorkoutEvent {
+  final Workout workout;
+
+  SkipWorkoutEvent(this.workout);
+
+  List<Object> get props => [workout];
+}
+
 // class StartWorkoutEvent extends WorkoutEvent {}
 
 class GenerateWorkoutEvent extends WorkoutEvent {

@@ -12,7 +12,6 @@ class WorkoutErrorState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     throw UnimplementedError();
   }
 }
@@ -23,7 +22,6 @@ class WorkoutLoadingState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     throw UnimplementedError();
   }
 }
@@ -37,7 +35,6 @@ class WorkoutFinishedState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     return this.workout;
   }
 }
@@ -98,7 +95,6 @@ class WorkoutLoadedState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     return this.workout;
   }
 }
@@ -112,7 +108,6 @@ class RestInProgressState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     return this.workout;
   }
 }
@@ -126,7 +121,19 @@ class ExerciseInProgressState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
+    return this.workout;
+  }
+}
+
+class SkipExerciseBufferState extends WorkoutState {
+  final Workout workout;
+  SkipExerciseBufferState(this.workout);
+
+  @override
+  List<Object> get props => [workout];
+
+  @override
+  getWorkout() {
     return this.workout;
   }
 }

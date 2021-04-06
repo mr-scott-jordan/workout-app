@@ -47,6 +47,9 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
       yield* _finishWorkout(event.workout);
     } else if (event is ResetWorkoutEvent) {
       yield* _loadWorkout(event.workout);
+    } else if (event is SkipWorkoutEvent) {
+      yield WorkoutLoadingState();
+      yield* _skipExercise(event.workout);
     }
   }
 
@@ -62,6 +65,11 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
 
   Stream<WorkoutState> _startExercise(Workout workout) async* {
     final result = ExerciseInProgressState(workout);
+    yield result;
+  }
+
+  Stream<WorkoutState> _skipExercise(Workout workout) async* {
+    final result = SkipExerciseBufferState(workout);
     yield result;
   }
 
