@@ -28,11 +28,7 @@ class HomePage extends StatelessWidget {
                     height: 100,
                   ),
                   Container(
-                    child: Icon(
-                      Icons.fitness_center_rounded,
-                      size: 150,
-                    ),
-                  ),
+                      child: Image.asset('assets/images/love_hate_logo.png')),
                   SizedBox(
                     height: 100,
                   ),

@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/authentication/authentication_service.dart';
 import '../pages/equipment_page.dart';
+import '../pages/login_page.dart';
+
 import '../pages/sign_in_page.dart';
 import 'formatted_button.dart';
 
@@ -41,7 +43,6 @@ class PrimaryDrawer extends StatelessWidget {
           FormattedButton(
             onPressed: () {
               context.read<AuthenticationService>().signOut();
-              Navigator.pushReplacementNamed(context, SignInPage.routeName);
             },
             buttonText: "Logout",
           ),

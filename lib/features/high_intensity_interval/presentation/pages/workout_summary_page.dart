@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/home_page.dart';
 
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
+import 'home_page.dart';
 
 class WorkoutSummaryPage extends StatelessWidget {
   static const routeName = '/workout-summary';

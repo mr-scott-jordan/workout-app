@@ -5,6 +5,8 @@ import 'package:workout_app/features/high_intensity_interval/domain/entities/exe
 import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
 import 'package:workout_app/features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
 import 'package:workout_app/features/high_intensity_interval/presentation/widgets/formatted_button.dart';
+import 'workout_summary_page.dart';
+import '../widgets/formatted_button.dart';
 
 import '../bloc/workout_bloc.dart';
 import '../widgets/page_animation_widget.dart';
