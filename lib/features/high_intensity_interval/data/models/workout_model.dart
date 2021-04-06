@@ -17,6 +17,7 @@ class WorkoutModel extends Workout {
     @required int numOfRounds,
     @required int numOfExercises,
     @required List<Exercise> exercises,
+    @required List<Exercise> potentialExercises,
     @required Duration totalDuration,
   }) : super(
           tags: tags,
@@ -26,6 +27,7 @@ class WorkoutModel extends Workout {
           numOfRounds: numOfRounds,
           numOfExercises: numOfExercises,
           exercises: exercises,
+          potentialExercises: potentialExercises,
           totalDuration: totalDuration,
         );
 
@@ -44,6 +46,7 @@ class WorkoutModel extends Workout {
       numOfRounds: json['numOfRounds'],
       numOfExercises: json['numOfExercises'],
       exercises: ExercisesModel.fromList(json['exercises']),
+      potentialExercises: ExercisesModel.fromList(json['exercises']),
       totalDuration: Duration(
         minutes: json['totalDuration']['minutes'],
         seconds: json['totalDuration']['seconds'],
