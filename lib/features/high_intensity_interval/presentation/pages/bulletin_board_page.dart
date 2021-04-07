@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../exercise_data.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
@@ -13,10 +12,6 @@ class BulletinBoardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var potentialExercises =
-        List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
-    potentialExercises.shuffle();
-
     return BlocConsumer<WorkoutBloc, WorkoutState>(listener: (context, state) {
       if (state is! WorkoutLoadedState) {
         BlocProvider.of<WorkoutBloc>(context)
@@ -95,10 +90,13 @@ class BulletinBoardPage extends StatelessWidget {
                                   onPressed: () {
                                     var exercises =
                                         state.workout.exercises.sublist(0);
-                                    exercises[index] =
-                                        potentialExercises.firstWhere((value) =>
-                                            value !=
-                                            state.workout.exercises[index]);
+                                    print(exercises);
+                                    state.workout.potentialExercises.shuffle();
+                                    exercises[index] = state
+                                        .workout.potentialExercises
+                                        .firstWhere((value) => !state
+                                            .workout.exercises
+                                            .contains(value));
                                     BlocProvider.of<WorkoutBloc>(context).add(
                                         EditWorkoutEvent(state
                                             .copyWith(exercises: exercises)
