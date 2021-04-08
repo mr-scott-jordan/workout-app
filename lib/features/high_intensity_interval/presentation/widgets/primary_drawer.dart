@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
 import 'package:workout_app/features/high_intensity_interval/presentation/pages/login_page.dart';
 
 import '../../../../core/authentication/authentication_service.dart';
@@ -40,7 +42,9 @@ class PrimaryDrawer extends StatelessWidget {
           ),
           FormattedButton(
             onPressed: () {
-              context.read<AuthenticationService>().signOut();
+              BlocProvider.of<UserBloc>(context).add(
+                SignOutEvent(),
+              );
             },
             buttonText: "Logout",
           ),

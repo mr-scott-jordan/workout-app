@@ -8,7 +8,15 @@ abstract class UserEvent extends Equatable {
 }
 
 class SignInEvent extends UserEvent {
-  //TODO: do it
+  final String email;
+  final String password;
+
+  SignInEvent({
+    @required this.email,
+    @required this.password,
+  });
+
+  List<Object> get props => [email, password];
 }
 
 class SignUpEvent extends UserEvent {
