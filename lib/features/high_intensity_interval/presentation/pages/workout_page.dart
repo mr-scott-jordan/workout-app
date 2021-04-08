@@ -22,7 +22,11 @@ class WorkoutPage extends StatelessWidget {
     return BlocListener<UserBloc, UserState>(
       listener: (BuildContext context, state) {
         if (state is UserUnauthenticatedState) {
-          Navigator.pushReplacementNamed(context, LoginPage.routeName);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            LoginPage.routeName,
+            (route) => false,
+          );
         }
       },
       child:
