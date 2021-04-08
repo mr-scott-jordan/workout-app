@@ -51,8 +51,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Stream<UserState> _signIn(String email, String password) async* {
     try {
-      final isAuthenticated =
-          await auth.signIn(email: email, password: password);
+      final isAuthenticated = await auth.signIn(
+        email: email,
+        password: password,
+      );
       if (isAuthenticated == "Signed in") {
         yield UserAuthenticatedState();
       }

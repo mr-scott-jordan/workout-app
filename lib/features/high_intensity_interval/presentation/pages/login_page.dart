@@ -68,10 +68,14 @@ class LoginPage extends StatelessWidget {
                     .then((value) => null);
               },
               onSignup: (LoginData data) {
-                return context.read<AuthenticationService>().signUp(
-                      email: data.name,
-                      password: data.password,
-                    );
+                BlocProvider.of<UserBloc>(context).add(
+                  SignUpEvent(
+                    email: data.name,
+                    password: data.password,
+                  ),
+                );
+                return Future.delayed(Duration(seconds: 1))
+                    .then((value) => null);
               },
             );
           },
