@@ -7,12 +7,20 @@ part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  UserBloc() : super(UserInitial());
+  UserBloc() : super(UserUnauthenticatedState());
 
   @override
   Stream<UserState> mapEventToState(
     UserEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    if (event is SignInEvent) {
+      //logs in
+    } else if (event is SignOutEvent) {
+      //sings out
+    } else if (event is RecoverPasswordEvent) {
+      //recover password
+    } else if (event is SignUpEvent) {
+      //sign up user
+    }
   }
 }
