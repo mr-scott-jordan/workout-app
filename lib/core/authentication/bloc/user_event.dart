@@ -20,7 +20,15 @@ class SignInEvent extends UserEvent {
 }
 
 class SignUpEvent extends UserEvent {
-  //adfsasdf
+  final String email;
+  final String password;
+
+  SignUpEvent({
+    @required this.email,
+    @required this.password,
+  });
+
+  List<Object> get props => [email, password];
 }
 
 class RecoverPasswordEvent extends UserEvent {

@@ -25,7 +25,22 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     } else if (event is RecoverPasswordEvent) {
       //recover password
     } else if (event is SignUpEvent) {
-      //sign up user
+      yield* _signUp(event.email, event.password);
+    }
+  }
+
+  Stream<UserState> _signUp(String email, String password) async* {
+    try {
+      final isAuthenticated = await auth.signUp(
+        email: email,
+        password: password,
+      );
+      if (isAuthenticated == "Signed up") {
+        yield UserAuthenticatedState();
+      }
+    } catch (e) {
+      print(e);
+      yield UserUnauthenticatedState();
     }
   }
 
