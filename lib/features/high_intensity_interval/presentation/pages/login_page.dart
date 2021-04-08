@@ -28,7 +28,13 @@ class LoginPage extends StatelessWidget {
           Navigator.pushReplacementNamed(context, HomePage.routeName);
         }
       },
-      child: BlocBuilder<WorkoutBloc, WorkoutState>(
+      child: BlocConsumer<WorkoutBloc, WorkoutState>(
+        listener: (context, state) {
+          if (state is! WorkoutLoadedState) {
+            BlocProvider.of<WorkoutBloc>(context)
+                .add(ResetWorkoutEvent(state.getWorkout()));
+          }
+        },
         builder: (context, state) {
           if (state is WorkoutLoadedState) {
             return FlutterLogin(
