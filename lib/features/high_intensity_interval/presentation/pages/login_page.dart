@@ -22,49 +22,59 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UserBloc, UserState>(listener: (context, state) {
-      if (state is UserAuthenticatedState) {
-        Navigator.pushReplacementNamed(context, HomePage.routeName);
-      }
-    }, child: BlocBuilder(
-      builder: (BuildContext context, state) {
-        return FlutterLogin(
-          logo: 'assets/images/love_hate_logo.png',
-          theme: LoginTheme(
-            errorColor: Colors.orangeAccent,
-            cardTheme: CardTheme(
-              color: Color.fromRGBO(96, 92, 96, .8),
-            ),
-            accentColor: Colors.purple,
-            textFieldStyle: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          onLogin: (LoginData data) {
-            BlocProvider.of<WorkoutBloc>(context).add(
-              ResetWorkoutEvent(
-                state.getWorkout(),
-              ),
-            );
-            BlocProvider.of<UserBloc>(context).add(
-              SignInEvent(
-                email: data.name,
-                password: data.password,
-              ),
-            );
-            return Future.delayed(Duration(seconds: 1)).then((value) => null);
+    return BlocListener<UserBloc, UserState>(
+        listener: (context, state) {
+          if (state is UserAuthenticatedState) {
+            Navigator.pushReplacementNamed(context, HomePage.routeName);
+          }
+        },
+        child: BlocConsumer<WorkoutBloc, WorkoutState>(
+          listener: (context, state) {
+            if (state is! WorkoutLoadedState) {
+              BlocProvider.of<WorkoutBloc>(context)
+                  .add(ResetWorkoutEvent(state.getWorkout()));
+            }
           },
-          onRecoverPassword: (_) {
-            return Future.delayed(Duration(seconds: 1)).then((value) => null);
-          },
-          onSignup: (LoginData data) {
-            return context.read<AuthenticationService>().signUp(
-                  email: data.name,
-                  password: data.password,
+          builder: (BuildContext context, state) {
+            return FlutterLogin(
+              logo: 'assets/images/love_hate_logo.png',
+              theme: LoginTheme(
+                errorColor: Colors.orangeAccent,
+                cardTheme: CardTheme(
+                  color: Color.fromRGBO(96, 92, 96, .8),
+                ),
+                accentColor: Colors.purple,
+                textFieldStyle: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              onLogin: (LoginData data) {
+                BlocProvider.of<WorkoutBloc>(context).add(
+                  ResetWorkoutEvent(
+                    state.getWorkout(),
+                  ),
                 );
+                BlocProvider.of<UserBloc>(context).add(
+                  SignInEvent(
+                    email: data.name,
+                    password: data.password,
+                  ),
+                );
+                return Future.delayed(Duration(seconds: 1))
+                    .then((value) => null);
+              },
+              onRecoverPassword: (_) {
+                return Future.delayed(Duration(seconds: 1))
+                    .then((value) => null);
+              },
+              onSignup: (LoginData data) {
+                return context.read<AuthenticationService>().signUp(
+                      email: data.name,
+                      password: data.password,
+                    );
+              },
+            );
           },
-        );
-      },
-    ));
+        ));
   }
 }
