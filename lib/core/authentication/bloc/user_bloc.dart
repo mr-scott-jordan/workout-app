@@ -22,8 +22,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       yield* _signIn(event.email, event.password);
     } else if (event is SignOutEvent) {
       yield* _signOut();
-    } else if (event is RecoverPasswordEvent) {
-      //recover password
     } else if (event is SignUpEvent) {
       yield* _signUp(event.email, event.password);
     }

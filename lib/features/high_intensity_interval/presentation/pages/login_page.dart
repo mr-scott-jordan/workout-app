@@ -37,6 +37,7 @@ class LoginPage extends StatelessWidget {
           },
           builder: (BuildContext context, state) {
             return FlutterLogin(
+              hideForgotPasswordButton: true,
               logo: 'assets/images/love_hate_logo.png',
               theme: LoginTheme(
                 errorColor: Colors.orangeAccent,
@@ -68,6 +69,9 @@ class LoginPage extends StatelessWidget {
                     .then((value) => null);
               },
               onSignup: (LoginData data) {
+                BlocProvider.of<WorkoutBloc>(context).add(ResetWorkoutEvent(
+                  state.getWorkout(),
+                ));
                 BlocProvider.of<UserBloc>(context).add(
                   SignUpEvent(
                     email: data.name,
