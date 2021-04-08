@@ -41,7 +41,6 @@ class PrimaryDrawer extends StatelessWidget {
           FormattedButton(
             onPressed: () {
               context.read<AuthenticationService>().signOut();
-              Navigator.pushReplacementNamed(context, LoginPage.routeName);
             },
             buttonText: "Logout",
           ),
