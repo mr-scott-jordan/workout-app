@@ -61,7 +61,10 @@ class _PageAnimationWidgetState extends State<PageAnimationWidget>
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
-                      colors: [Colors.blue[400], Colors.purple],
+                      colors: [
+                        Colors.blue[400],
+                        Colors.purple,
+                      ],
                     ),
                   ),
                   child: Column(
