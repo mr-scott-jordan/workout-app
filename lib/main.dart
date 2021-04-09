@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
 
 import 'core/authentication/authentication_service.dart';
 import 'features/high_intensity_interval/presentation/bloc/workout_bloc.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<WorkoutBloc>(create: (_) => sl<WorkoutBloc>()),
+        BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()),
       ],
       child: MultiProvider(
         providers: [

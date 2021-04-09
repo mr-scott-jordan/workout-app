@@ -64,21 +64,47 @@ class _PageAnimationWidgetState extends State<PageAnimationWidget>
                       colors: [Colors.blue[400], Colors.purple],
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButton(
-                          onPressed: () => _toggleAnimation(),
-                          icon: AnimatedIcon(
-                            icon: AnimatedIcons.menu_close,
-                            progress: _animationController,
+                  child: Column(
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  IconButton(
+                                    onPressed: () => _toggleAnimation(),
+                                    icon: AnimatedIcon(
+                                      icon: AnimatedIcons.menu_close,
+                                      progress: _animationController,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Love | Hate',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
