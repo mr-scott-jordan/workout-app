@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../exercise_data.dart';
 import '../../domain/enums/tag.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
