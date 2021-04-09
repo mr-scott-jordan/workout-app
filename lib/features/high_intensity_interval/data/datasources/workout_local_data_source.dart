@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/exercise.dart';
 
 import '../../../../exercise_data.dart';
+import '../../domain/entities/exercise.dart';
 import '../../domain/enums/equipment.dart';
 import '../../domain/enums/tag.dart';
 import '../models/workout_model.dart';
