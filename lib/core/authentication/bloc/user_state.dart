@@ -8,7 +8,13 @@ abstract class UserState extends Equatable {
 }
 
 class UserAuthenticatedState extends UserState {
-  //adfadsf
+  final String userID;
+
+  UserAuthenticatedState(this.userID);
+
+  String getUserID() {
+    return this.userID;
+  }
 }
 
 class UserUnauthenticatedState extends UserState {

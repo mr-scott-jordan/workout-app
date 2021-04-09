@@ -35,7 +35,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         password: password,
       );
       if (isAuthenticated == "Signed up") {
-        yield UserAuthenticatedState();
+        yield UserAuthenticatedState(auth.getUserID());
       }
     } catch (e) {
       print(e);
@@ -55,7 +55,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         password: password,
       );
       if (isAuthenticated == "Signed in") {
-        yield UserAuthenticatedState();
+        yield UserAuthenticatedState(auth.getUserID());
       }
     } catch (e) {
       print(e);

@@ -30,4 +30,12 @@ class AuthenticationService {
       return e.message;
     }
   }
+
+  String getUserID() {
+    try {
+      return _firebaseAuth.currentUser.uid;
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
+  }
 }
