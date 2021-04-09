@@ -12,7 +12,6 @@ class WorkoutErrorState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     throw UnimplementedError();
   }
 }
@@ -22,7 +21,6 @@ class WorkoutLoadingState extends WorkoutState {
   List<Object> get props => [];
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     throw UnimplementedError();
   }
 }
@@ -36,7 +34,6 @@ class WorkoutFinishedState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     return this.workout;
   }
 }
@@ -69,6 +66,7 @@ class WorkoutLoadedState extends WorkoutState {
     int numOfRounds,
     int numOfExercises,
     List<Exercise> exercises,
+    List<Exercise> potentialExercises,
   }) {
     return WorkoutLoadedState(
       // we don't want to copy the total duration.  it should be calculated everytime
@@ -86,6 +84,8 @@ class WorkoutLoadedState extends WorkoutState {
         numOfExercises: numOfExercises ?? this.workout.numOfExercises,
         numOfRounds: numOfRounds ?? this.workout.numOfRounds,
         exercises: exercises ?? this.workout.exercises,
+        potentialExercises:
+            potentialExercises ?? this.workout.potentialExercises,
       ),
     );
   }
@@ -112,7 +112,6 @@ class WorkoutLoadedState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     return this.workout;
   }
 }
@@ -126,7 +125,6 @@ class RestInProgressState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
     return this.workout;
   }
 }
@@ -140,7 +138,19 @@ class ExerciseInProgressState extends WorkoutState {
 
   @override
   getWorkout() {
-    // TODO: implement getWorkout
+    return this.workout;
+  }
+}
+
+class SkipExerciseBufferState extends WorkoutState {
+  final Workout workout;
+  SkipExerciseBufferState(this.workout);
+
+  @override
+  List<Object> get props => [workout];
+
+  @override
+  getWorkout() {
     return this.workout;
   }
 }
@@ -163,4 +173,5 @@ final Workout _initialWorkout = Workout(
   // calculated by (restDuration + exerciseDuration) * numOfExercises * numOfRounds
   // the order matters
   totalDuration: Duration(seconds: 60) * 4 * 4,
+  potentialExercises: EXERCISES_DATA.sublist(0),
 );

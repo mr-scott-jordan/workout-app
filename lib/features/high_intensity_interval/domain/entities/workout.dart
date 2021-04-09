@@ -14,6 +14,7 @@ class Workout extends Equatable {
   final int numOfExercises;
   final Duration totalDuration;
 
+  final List<Exercise> potentialExercises;
   final List<Exercise> exercises;
 
   Workout({
@@ -25,6 +26,7 @@ class Workout extends Equatable {
     @required this.numOfExercises,
     @required this.exercises,
     @required this.totalDuration,
+    @required this.potentialExercises,
   });
 
   @override
@@ -37,5 +39,6 @@ class Workout extends Equatable {
         numOfExercises,
         exercises,
         totalDuration,
+        potentialExercises,
       ];
 }

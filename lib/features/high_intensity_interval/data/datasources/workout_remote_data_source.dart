@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../../exercise_data.dart';
 import '../../domain/enums/equipment.dart';
 import '../../domain/enums/tag.dart';
 import '../models/exercise_model.dart';
@@ -47,6 +48,7 @@ class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
       restDuration: Duration(seconds: 30),
       tags: [Tag.FullBody],
       totalDuration: Duration(minutes: 1),
+      potentialExercises: EXERCISES_DATA.sublist(0),
     );
   }
 }

@@ -64,19 +64,6 @@ class CircleTimer extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              onPressed: controller.restart,
-              icon: Icon(
-                Icons.replay_rounded,
-                color: Colors.purple,
-              ),
-              iconSize: 75.0,
-            ),
-          ],
-        )
       ],
     );
   }

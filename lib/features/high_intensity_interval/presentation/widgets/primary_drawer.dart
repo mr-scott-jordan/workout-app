@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import '../../../../core/authentication/bloc/user_bloc.dart';
+import '../pages/login_page.dart';
 
 import '../../../../core/authentication/authentication_service.dart';
 import '../pages/equipment_page.dart';
-import '../pages/sign_in_page.dart';
 import 'formatted_button.dart';
 
 class PrimaryDrawer extends StatelessWidget {
@@ -40,8 +42,9 @@ class PrimaryDrawer extends StatelessWidget {
           ),
           FormattedButton(
             onPressed: () {
-              context.read<AuthenticationService>().signOut();
-              Navigator.pushReplacementNamed(context, SignInPage.routeName);
+              BlocProvider.of<UserBloc>(context).add(
+                SignOutEvent(),
+              );
             },
             buttonText: "Logout",
           ),

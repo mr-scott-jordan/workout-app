@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:workout_app/services/get_workouts_service.dart';
+import '../../../../services/get_workouts_service.dart';
 
 import '../../../../exercise_data.dart';
 import '../../domain/entities/exercise.dart';
@@ -16,7 +16,6 @@ part 'workout_event.dart';
 part 'workout_state.dart';
 
 class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
-  // need firebase before _getWorkout can be used
   final GetWorkout getWorkout;
   final GenerateWorkout generateWorkout;
 
@@ -50,6 +49,9 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
       yield* _loadWorkout(event.workout);
     } else if (event is GetWorkoutsEvent) {
       yield* _getWorkouts(event.workout, event.userId);
+    } else if (event is SkipWorkoutEvent) {
+      yield WorkoutLoadingState();
+      yield* _skipExercise(event.workout);
     }
   }
 
@@ -73,6 +75,10 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     final result = ChooseWorkoutFromListState(
       [...workouts],
     );
+  }
+
+  Stream<WorkoutState> _skipExercise(Workout workout) async* {
+    final result = SkipExerciseBufferState(workout);
     yield result;
   }
 

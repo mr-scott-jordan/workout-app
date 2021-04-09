@@ -5,12 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'core/authentication/authentication_service.dart';
+import 'core/authentication/bloc/user_bloc.dart';
 import 'features/high_intensity_interval/presentation/bloc/workout_bloc.dart';
 import 'features/high_intensity_interval/presentation/pages/bulletin_board_page.dart';
 import 'features/high_intensity_interval/presentation/pages/equipment_page.dart';
 import 'features/high_intensity_interval/presentation/pages/home_page.dart';
 import 'features/high_intensity_interval/presentation/pages/list_of_workouts_page.dart';
-import 'features/high_intensity_interval/presentation/pages/sign_in_page.dart';
+import 'features/high_intensity_interval/presentation/pages/login_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_setup_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<WorkoutBloc>(create: (_) => sl<WorkoutBloc>()),
+        BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()),
       ],
       child: MultiProvider(
         providers: [
@@ -39,6 +41,7 @@ class MyApp extends StatelessWidget {
           StreamProvider(
             create: (context) =>
                 context.read<AuthenticationService>().authstateChanges,
+            initialData: null,
           ),
         ],
         child: MaterialApp(
@@ -46,9 +49,9 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             brightness: Brightness.dark,
             fontFamily: 'Quicksand',
-            accentColor: Colors.black45,
-            // canvasColor: Color.fromRGBO(42, 79, 122, 1),
-            canvasColor: Color(0xff424242),
+            accentColor: Colors.white70,
+            backgroundColor: const Color(0xff424242),
+            canvasColor: Color.fromRGBO(42, 79, 122, 1),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           home: AuthenticationWrapper(),
@@ -57,9 +60,9 @@ class MyApp extends StatelessWidget {
             WorkoutSetupPage.routeName: (context) => WorkoutSetupPage(),
             BulletinBoardPage.routeName: (context) => BulletinBoardPage(),
             WorkoutPage.routeName: (context) => WorkoutPage(),
-            SignInPage.routeName: (context) => SignInPage(),
-            ListOfWorkoutsPage.routeName: (context) => ListOfWorkoutsPage(),
+            LoginPage.routeName: (context) => LoginPage(),
             WorkoutSummaryPage.routeName: (context) => WorkoutSummaryPage(),
+            ListOfWorkoutsPage.routeName: (context) => ListOfWorkoutsPage(),
           },
         ),
       ),
@@ -75,7 +78,7 @@ class AuthenticationWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       return HomePage();
     }
-    return SignInPage();
+    return LoginPage();
   }
 }
 

@@ -46,6 +46,7 @@ class WorkoutLocalDataSource implements WorkoutLocalDataSourceType {
       restDuration: restDuration,
       tags: tags,
       totalDuration: totalDuration,
+      potentialExercises: EXERCISES_DATA.sublist(0),
     );
   }
 }
