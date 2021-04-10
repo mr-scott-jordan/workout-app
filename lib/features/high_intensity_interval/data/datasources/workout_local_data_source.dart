@@ -34,7 +34,7 @@ class WorkoutLocalDataSource implements WorkoutLocalDataSourceType {
         List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
     List<Exercise> potentialExercises = [];
     listOfAllExercises.forEach((element) {
-      if (tags.contains(element.tags[0]) &&
+      if (tags.any((item) => element.tags.contains(item)) &&
           equipment.contains(element.equipment)) {
         potentialExercises.add(element);
       }
