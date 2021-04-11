@@ -47,7 +47,7 @@ class EquipmentPage extends StatelessWidget {
                     width: 300,
                     alignment: Alignment.topCenter,
                     child: Text(
-                      'Please select equipment!',
+                      'Please select equipment.',
                       style: TextStyle(
                         fontSize: 20,
                         color: Color.fromRGBO(255, 188, 2, 1),
