@@ -40,16 +40,18 @@ class WorkoutFinishedState extends WorkoutState {
 
 class ChooseWorkoutFromListState extends WorkoutState {
   final List<Workout> workouts;
+  final Workout workout;
 
-  ChooseWorkoutFromListState(this.workouts);
+  ChooseWorkoutFromListState({
+    @required this.workouts,
+    @required this.workout,
+  });
   @override
   List<Object> get props => [workouts];
 
   @override
   getWorkout() {
-    // TODO: (anyone) - maybe this should return a specific workout?
-    // not intended as functionality for the time being
-    return this.workouts[0];
+    return this.workout;
   }
 }
 

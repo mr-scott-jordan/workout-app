@@ -1,10 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
 
+import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/page_animation_widget.dart';
+import 'login_page.dart';
 
 class ListOfWorkoutsPage extends StatelessWidget {
   static const routeName = '/list-of-workouts-page';
@@ -13,28 +13,47 @@ class ListOfWorkoutsPage extends StatelessWidget {
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
         if (state is UserUnauthenticatedState) {
-          Navigator.pushReplacementNamed(context, routeName);
+          Navigator.pushReplacementNamed(
+            context,
+            LoginPage.routeName,
+          );
         }
       },
-      child: BlocConsumer<WorkoutBloc, WorkoutState>(
-        listener: (context, state) {
-          // react to states here
-        },
+      child: BlocBuilder<WorkoutBloc, WorkoutState>(
         builder: (context, state) {
           if (state is ChooseWorkoutFromListState) {
             return PageAnimationWidget(
-              body: Column(
-                children: [
-                  Container(
-                    color: Color(0xff424242),
-                    child: Text(state.workouts[0].exercises.toString()),
-                  ),
-                ],
+              body: Container(
+                width: double.infinity,
+                color: Color(0xff424242),
+                child: Column(
+                  children: [
+                    Container(
+                      color: Color(0xff424242),
+                      child: Text(
+                        state.workouts.toString(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else if (state is WorkoutLoadedState) {
+            return PageAnimationWidget(
+              body: Container(
+                width: double.infinity,
+                color: Color(0xff424242),
               ),
             );
           } else {
-            return Center(
-              child: Text('List Of Workouts Page'),
+            return PageAnimationWidget(
+              body: Container(
+                width: double.infinity,
+                color: Color(0xff424242),
+                child: Center(
+                  child: Text('List Of Workouts Page'),
+                ),
+              ),
             );
           }
         },

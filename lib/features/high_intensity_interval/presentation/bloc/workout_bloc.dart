@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../../services/get_workouts_service.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../exercise_data.dart';
+import '../../../../services/get_workouts_service.dart';
 import '../../domain/entities/exercise.dart';
 import '../../domain/entities/workout.dart';
 import '../../domain/enums/equipment.dart';
@@ -73,7 +74,8 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
   Stream<WorkoutState> _getWorkouts(Workout workout, String userId) async* {
     final workouts = await GetWorkoutsService.getWorkouts(userId);
     final result = ChooseWorkoutFromListState(
-      [...workouts],
+      workouts: workouts,
+      workout: workout,
     );
     yield result;
   }
