@@ -35,6 +35,11 @@ class PrimaryDrawer extends StatelessWidget {
           ),
           FormattedButton(
             onPressed: () {
+              final Workout workout =
+                  BlocProvider.of<WorkoutBloc>(context).state.getWorkout();
+              BlocProvider.of<WorkoutBloc>(context).add(
+                ResetWorkoutEvent(workout),
+              );
               Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
             },
             buttonText: "New Workout",
