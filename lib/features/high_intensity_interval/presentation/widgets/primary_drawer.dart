@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-import '../../../../core/authentication/bloc/user_bloc.dart';
-import '../pages/login_page.dart';
 
-import '../../../../core/authentication/authentication_service.dart';
+import '../../../../core/authentication/bloc/user_bloc.dart';
+import '../../domain/entities/workout.dart';
+import '../bloc/workout_bloc.dart';
 import '../pages/equipment_page.dart';
 import 'formatted_button.dart';
 
 class PrimaryDrawer extends StatelessWidget {
-  // final Text text;
-  // PrimaryDrawer(this.text);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -24,6 +21,11 @@ class PrimaryDrawer extends StatelessWidget {
           ),
           FormattedButton(
             onPressed: () {
+              final Workout workout =
+                  BlocProvider.of<WorkoutBloc>(context).state.getWorkout();
+              BlocProvider.of<WorkoutBloc>(context).add(
+                ResetWorkoutEvent(workout),
+              );
               Navigator.pushReplacementNamed(context, '/');
             },
             buttonText: "Main Menu",
