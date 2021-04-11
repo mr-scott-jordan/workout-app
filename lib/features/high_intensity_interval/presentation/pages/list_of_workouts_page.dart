@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/page_animation_widget.dart';
+import 'bulletin_board_page.dart';
 import 'login_page.dart';
 
 class ListOfWorkoutsPage extends StatelessWidget {
@@ -19,23 +20,33 @@ class ListOfWorkoutsPage extends StatelessWidget {
           );
         }
       },
-      child: BlocBuilder<WorkoutBloc, WorkoutState>(
+      child: BlocConsumer<WorkoutBloc, WorkoutState>(
+        listener: (context, state) {
+          if (state is WorkoutLoadedState) {
+            Navigator.pushReplacementNamed(
+                context, BulletinBoardPage.routeName);
+          }
+        },
         builder: (context, state) {
           if (state is ChooseWorkoutFromListState) {
             return PageAnimationWidget(
               body: Container(
                 width: double.infinity,
                 color: Color(0xff424242),
-                child: Column(
-                  children: [
-                    Container(
-                      color: Color(0xff424242),
-                      child: Text(
-                        state.workouts.toString(),
+                child: state.workouts.length > 0
+                    ? ListView.builder(
+                        itemCount: state.workouts.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                              title: Text('Workout[$index]'),
+                              onTap: () {
+                                BlocProvider.of<WorkoutBloc>(context).add(
+                                    EditWorkoutEvent(state.workouts[index]));
+                              });
+                        })
+                    : Center(
+                        child: Text('No Workouts Saved'),
                       ),
-                    ),
-                  ],
-                ),
               ),
             );
           } else if (state is WorkoutLoadedState) {
