@@ -61,11 +61,11 @@ class LoginPage extends StatelessWidget {
                   ),
                 );
                 return Future.delayed(Duration(seconds: 1))
-                    .then((value) => null);
+                    .then((value) => 'Error signing in');
               },
               onRecoverPassword: (_) {
                 return Future.delayed(Duration(seconds: 1))
-                    .then((value) => null);
+                    .then((value) => 'Error recovering password');
               },
               onSignup: (LoginData data) {
                 BlocProvider.of<WorkoutBloc>(context).add(ResetWorkoutEvent(
@@ -78,7 +78,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 );
                 return Future.delayed(Duration(seconds: 1))
-                    .then((value) => null);
+                    .then((value) => 'Error signing up');
               },
             );
           },
