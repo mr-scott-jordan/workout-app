@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/login_page.dart';
 
+import '../../../../core/authentication/bloc/user_bloc.dart';
+import '../../domain/entities/workout.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
 import 'equipment_page.dart';
+import 'list_of_workouts_page.dart';
+import 'login_page.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/';
@@ -20,13 +22,20 @@ class HomePage extends StatelessWidget {
       },
       child: BlocConsumer<WorkoutBloc, WorkoutState>(
         listener: (context, state) {
-          if (state is! WorkoutLoadedState) {
+          if (state is ChooseWorkoutFromListState) {
+            Navigator.pushReplacementNamed(
+                context, ListOfWorkoutsPage.routeName);
+          } else if (state is! WorkoutLoadedState) {
             BlocProvider.of<WorkoutBloc>(context)
                 .add(ResetWorkoutEvent(state.getWorkout()));
           }
         },
         builder: (context, state) {
           if (state is WorkoutLoadedState) {
+            var center = Center(
+                child: _loadSavedWorkoutsButton(
+              state.getWorkout(),
+            ));
             return PageAnimationWidget(
               body: Container(
                 color: Color(0xff424242),
@@ -49,17 +58,59 @@ class HomePage extends StatelessWidget {
                         buttonText: "New Workout",
                       ),
                     ),
+                    center,
                   ],
                 ),
               ),
             );
           } else {
-            return Center(
-              child: Text('Homepage'),
+            return PageAnimationWidget(
+              body: Center(
+                child: Text(' Home Page'),
+              ),
             );
           }
         },
       ),
+    );
+  }
+
+  Widget _loadSavedWorkoutsButton(Workout workout) {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        if (state is UserAuthenticatedState) {
+          return FormattedButton(
+            onPressed: () {
+              BlocProvider.of<WorkoutBloc>(context).add(
+                GetWorkoutsEvent(
+                  workout: workout,
+                  // todo for nathan
+                  userId: state.getUserID(),
+                ),
+              );
+            },
+            buttonText: "Load saved workouts",
+          );
+        } else {
+          return PageAnimationWidget(
+            body: Center(
+              child: Text('Home Page'),
+            ),
+          );
+          // return FormattedButton(
+          //   onPressed: () {
+          //     BlocProvider.of<WorkoutBloc>(context).add(
+          //       GetWorkoutsEvent(
+          //         workout: workout,
+          //         // todo for nathan
+          //         userId: context.watch<User>().uid,
+          //       ),
+          //     );
+          //   },
+          //   buttonText: "Load saved workouts",
+          // );
+        }
+      },
     );
   }
 }

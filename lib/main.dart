@@ -3,14 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
 
 import 'core/authentication/authentication_service.dart';
+import 'core/authentication/bloc/user_bloc.dart';
 import 'features/high_intensity_interval/presentation/bloc/workout_bloc.dart';
 import 'features/high_intensity_interval/presentation/pages/bulletin_board_page.dart';
 import 'features/high_intensity_interval/presentation/pages/equipment_page.dart';
-// import 'features/high_intensity_interval/presentation/pages/home_page.dart';
 import 'features/high_intensity_interval/presentation/pages/home_page.dart';
+import 'features/high_intensity_interval/presentation/pages/list_of_workouts_page.dart';
 import 'features/high_intensity_interval/presentation/pages/login_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_setup_page.dart';
@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
             WorkoutPage.routeName: (context) => WorkoutPage(),
             LoginPage.routeName: (context) => LoginPage(),
             WorkoutSummaryPage.routeName: (context) => WorkoutSummaryPage(),
+            ListOfWorkoutsPage.routeName: (context) => ListOfWorkoutsPage(),
           },
         ),
       ),
@@ -72,13 +73,12 @@ class MyApp extends StatelessWidget {
 class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User>();
-
-    if (firebaseUser != null) {
-      return HomePage();
-    }
-    return LoginPage();
+    return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+      if (state is UserAuthenticatedState) {
+        return HomePage();
+      } else {
+        return LoginPage();
+      }
+    });
   }
 }
-
-class HomeForm {}

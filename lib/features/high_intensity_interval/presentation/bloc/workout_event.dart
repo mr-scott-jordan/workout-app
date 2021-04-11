@@ -59,6 +59,15 @@ class FinishWorkoutEvent extends WorkoutEvent {
   final Workout workout;
 
   FinishWorkoutEvent(this.workout);
+}
+
+class GetWorkoutsEvent extends WorkoutEvent {
+  final Workout workout;
+  final String userId;
+  GetWorkoutsEvent({
+    this.workout,
+    this.userId,
+  });
 
   List<Object> get props => [workout];
 }

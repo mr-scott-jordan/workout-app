@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/login_page.dart';
 
+import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
+import 'login_page.dart';
 import 'workout_page.dart';
 
-// ignore: must_be_immutable
 class BulletinBoardPage extends StatelessWidget {
   static const routeName = '/bulletin-board-page';
 

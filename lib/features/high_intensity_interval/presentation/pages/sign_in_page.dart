@@ -78,8 +78,7 @@ class SignInPage extends StatelessWidget {
           );
         } else {
           return Center(
-            child: Text(
-                'You need to investigate why WorkoutLoadedState is being streamed'),
+            child: Text(' '),
           );
         }
       },
