@@ -42,6 +42,18 @@ class EquipmentPage extends StatelessWidget {
                   SizedBox(
                     height: 100,
                   ),
+                  Container(
+                    height: 125,
+                    width: 300,
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'Please select equipment.',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromRGBO(255, 188, 2, 1),
+                      ),
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
