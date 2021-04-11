@@ -73,13 +73,12 @@ class MyApp extends StatelessWidget {
 class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User>();
-
-    if (firebaseUser != null) {
-      return HomePage();
-    }
-    return LoginPage();
+    return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+      if (state is UserAuthenticatedState) {
+        return HomePage();
+      } else {
+        return LoginPage();
+      }
+    });
   }
 }
-
-class HomeForm {}
