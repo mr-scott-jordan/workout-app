@@ -56,6 +56,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       );
       if (isAuthenticated == "Signed in") {
         yield UserAuthenticatedState(auth.getUserID());
+      } else {
+        yield UserUnauthenticatedState();
       }
     } catch (e) {
       print(e);
