@@ -111,24 +111,6 @@ class BulletinBoardPage extends StatelessWidget {
                                               .copyWith(exercises: exercises)
                                               .workout));
                                     }),
-                                IconButton(
-                                  icon: Icon(Icons.delete),
-                                  onPressed: () {
-                                    var exercises =
-                                        state.workout.exercises.sublist(0);
-                                    exercises.removeAt(index);
-                                    var numOfExercises =
-                                        state.workout.numOfExercises - 1;
-
-                                    BlocProvider.of<WorkoutBloc>(context)
-                                        .add(EditWorkoutEvent(state
-                                            .copyWith(
-                                              numOfExercises: numOfExercises,
-                                              exercises: exercises,
-                                            )
-                                            .workout));
-                                  },
-                                ),
                               ],
                             ),
                           ),

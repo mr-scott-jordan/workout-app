@@ -235,20 +235,19 @@ class WorkoutSetupPage extends StatelessWidget {
                         ),
                         FormattedButton(
                           onPressed: () {
-                            state.workout.potentialExercises.shuffle();
-                            var exercises = state.workout.potentialExercises
-                                .sublist(0, state.workout.numOfExercises);
-                            BlocProvider.of<WorkoutBloc>(context)
-                                .add(EditWorkoutEvent(state
-                                    .copyWith(
-                                      exercises: exercises,
-                                    )
-                                    .workout));
-                            Navigator.pushReplacementNamed(
-                              context,
-                              // TODO: (Scott) fix routing when all pages marged
-                              BulletinBoardPage.routeName,
-                            );
+                            if (state.workout.potentialExercises.isEmpty)
+                              throw UnimplementedError(
+                                  'Potential Exercises is empty. You must select a tag!');
+                            else {
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                GenerateWorkoutEvent(state.workout),
+                              );
+                              Navigator.pushReplacementNamed(
+                                context,
+                                // TODO: (Scott) fix routing when all pages marged
+                                BulletinBoardPage.routeName,
+                              );
+                            }
                           },
                           buttonText: "Load Workout",
                         ),
