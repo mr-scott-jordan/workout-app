@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
+import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
 import 'package:workout_app/features/high_intensity_interval/presentation/pages/login_page.dart';
 
 import '../bloc/workout_bloc.dart';
@@ -31,6 +33,10 @@ class HomePage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is WorkoutLoadedState) {
+            var center = Center(
+                child: _loadSavedWorkoutsButton(
+              state.getWorkout(),
+            ));
             return PageAnimationWidget(
               body: Container(
                 color: Color(0xff424242),
@@ -53,28 +59,7 @@ class HomePage extends StatelessWidget {
                         buttonText: "New Workout",
                       ),
                     ),
-                    Center(
-                      child: BlocBuilder<UserBloc, UserState>(
-                        builder: (context, state) {
-                          if (state is UserAuthenticatedState) {
-                            return FormattedButton(
-                              onPressed: () {
-                                BlocProvider.of<WorkoutBloc>(context).add(
-                                  GetWorkoutsEvent(
-                                    workout: context
-                                        .read<WorkoutState>()
-                                        .getWorkout(),
-                                    // todo for nathan
-                                    userId: state.getUserID(),
-                                  ),
-                                );
-                              },
-                              buttonText: "Load saved workouts",
-                            );
-                          }
-                        },
-                      ),
-                    ),
+                    center,
                   ],
                 ),
               ),
@@ -88,6 +73,45 @@ class HomePage extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+
+  Widget _loadSavedWorkoutsButton(Workout workout) {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        if (state is UserAuthenticatedState) {
+          return FormattedButton(
+            onPressed: () {
+              BlocProvider.of<WorkoutBloc>(context).add(
+                GetWorkoutsEvent(
+                  workout: workout,
+                  // todo for nathan
+                  userId: state.getUserID(),
+                ),
+              );
+            },
+            buttonText: "Load saved workouts",
+          );
+        } else {
+          return PageAnimationWidget(
+            body: Center(
+              child: Text('Home Page'),
+            ),
+          );
+          // return FormattedButton(
+          //   onPressed: () {
+          //     BlocProvider.of<WorkoutBloc>(context).add(
+          //       GetWorkoutsEvent(
+          //         workout: workout,
+          //         // todo for nathan
+          //         userId: context.watch<User>().uid,
+          //       ),
+          //     );
+          //   },
+          //   buttonText: "Load saved workouts",
+          // );
+        }
+      },
     );
   }
 }

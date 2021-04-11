@@ -75,6 +75,7 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     final result = ChooseWorkoutFromListState(
       [...workouts],
     );
+    yield result;
   }
 
   Stream<WorkoutState> _skipExercise(Workout workout) async* {
