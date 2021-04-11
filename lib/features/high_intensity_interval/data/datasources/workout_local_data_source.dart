@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../exercise_data.dart';
+import '../../domain/entities/exercise.dart';
 import '../../domain/enums/equipment.dart';
 import '../../domain/enums/tag.dart';
 import '../models/workout_model.dart';
@@ -31,9 +32,21 @@ class WorkoutLocalDataSource implements WorkoutLocalDataSourceType {
   }) async {
     var listOfAllExercises =
         List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
-    listOfAllExercises.shuffle();
-    var exercises = List.generate(
-        numberOfExercises, (index) => listOfAllExercises.elementAt(index));
+    List<Exercise> potentialExercises = [];
+    listOfAllExercises.forEach((element) {
+      if (tags.any((item) => element.tags.contains(item)) &&
+          equipment.contains(element.equipment)) {
+        potentialExercises.add(element);
+      }
+    });
+    var exercises;
+    // if there are enough exercises in pool
+    if (potentialExercises.length >= numberOfExercises) {
+      potentialExercises.shuffle();
+      exercises = List.generate(
+          numberOfExercises, (index) => potentialExercises.elementAt(index));
+    } else
+      throw UnimplementedError();
     var totalDuration =
         (exerciseDuration + restDuration) * numberOfExercises * numberOfRounds;
 
@@ -46,7 +59,7 @@ class WorkoutLocalDataSource implements WorkoutLocalDataSourceType {
       restDuration: restDuration,
       tags: tags,
       totalDuration: totalDuration,
-      potentialExercises: EXERCISES_DATA.sublist(0),
+      potentialExercises: potentialExercises,
     );
   }
 }

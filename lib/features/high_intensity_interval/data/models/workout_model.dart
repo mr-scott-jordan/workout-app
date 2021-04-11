@@ -46,7 +46,7 @@ class WorkoutModel extends Workout {
       numOfRounds: json['numOfRounds'],
       numOfExercises: json['numOfExercises'],
       exercises: ExercisesModel.fromList(json['exercises']),
-      potentialExercises: ExercisesModel.fromList(json['exercises']),
+      potentialExercises: ExercisesModel.fromList(json['potentialExercises']),
       totalDuration: Duration(
         minutes: json['totalDuration']['minutes'],
         seconds: json['totalDuration']['seconds'],
