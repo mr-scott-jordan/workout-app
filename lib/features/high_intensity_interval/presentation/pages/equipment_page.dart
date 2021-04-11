@@ -32,6 +32,8 @@ class EquipmentPage extends StatelessWidget {
               state.workout.equipment.contains(Equipment.PullUpBar);
           final bool _yogaMat =
               state.workout.equipment.contains(Equipment.YogaMat);
+          final bool _plyoBox =
+              state.workout.equipment.contains(Equipment.PlyometricBox);
 
           var equipment = state.workout.equipment;
           return PageAnimationWidget(
@@ -82,6 +84,30 @@ class EquipmentPage extends StatelessWidget {
                                       .workout));
                             } else {
                               equipment.remove(Equipment.YogaMat);
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(equipment: equipment)
+                                      .workout));
+                            }
+                          }),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Plyometric Box'),
+                      Switch(
+                          activeColor: Color(0xfffbc02d),
+                          value: _plyoBox,
+                          onChanged: (value) {
+                            if (value) {
+                              equipment.add(Equipment.PlyometricBox);
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(equipment: equipment)
+                                      .workout));
+                            } else {
+                              equipment.remove(Equipment.PlyometricBox);
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(equipment: equipment)
