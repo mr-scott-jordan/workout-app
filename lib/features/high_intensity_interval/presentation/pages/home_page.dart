@@ -83,8 +83,8 @@ class HomePage extends StatelessWidget {
             );
           } else {
             return PageAnimationWidget(
-              body: Center(
-                child: Text('Home Page'),
+              body: Container(
+                color: Color(0xff424242),
               ),
             );
           }
@@ -111,8 +111,8 @@ class HomePage extends StatelessWidget {
           );
         } else {
           return PageAnimationWidget(
-            body: Center(
-              child: Text('Home Page'),
+            body: Container(
+              color: Color(0xff424242),
             ),
           );
           // return FormattedButton(

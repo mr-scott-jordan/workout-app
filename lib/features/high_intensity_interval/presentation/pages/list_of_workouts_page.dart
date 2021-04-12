@@ -29,26 +29,6 @@ class ListOfWorkoutsPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is ChooseWorkoutFromListState) {
-            // return PageAnimationWidget(
-            //   body: Container(
-            //     width: double.infinity,
-            //     color: Color(0xff424242),
-            //     child: state.workouts.length > 0
-            //         ? ListView.builder(
-            //             itemCount: state.workouts.length,
-            //             itemBuilder: (context, index) {
-            //               return ListTile(
-            //                   title: Text('Workout[$index]'),
-            //                   onTap: () {
-            //                     BlocProvider.of<WorkoutBloc>(context).add(
-            //                         EditWorkoutEvent(state.workouts[index]));
-            //                   });
-            //             })
-            //         : Center(
-            //             child: Text('No Workouts Saved'),
-            //           ),
-            //   ),
-            // );
             return PageAnimationWidget(
               body: Container(
                 color: Color(0xff424242),
@@ -88,27 +68,24 @@ class ListOfWorkoutsPage extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 9,
-                      child: SingleChildScrollView(
-                        child: Container(
-                          width: double.infinity,
-                          child: state.workouts.length > 0
-                              ? ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: state.workouts.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                        title: Text(
-                                            state.workouts[index].workoutName),
-                                        onTap: () {
-                                          BlocProvider.of<WorkoutBloc>(context)
-                                              .add(EditWorkoutEvent(
-                                                  state.workouts[index]));
-                                        });
-                                  })
-                              : Center(
-                                  child: Text('No workouts saved.'),
-                                ),
-                        ),
+                      child: Container(
+                        width: double.infinity,
+                        child: state.workouts.length > 0
+                            ? ListView.builder(
+                                itemCount: state.workouts.length,
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                      title: Text(
+                                          state.workouts[index].workoutName),
+                                      onTap: () {
+                                        BlocProvider.of<WorkoutBloc>(context)
+                                            .add(EditWorkoutEvent(
+                                                state.workouts[index]));
+                                      });
+                                })
+                            : Center(
+                                child: Text('No workouts saved.'),
+                              ),
                       ),
                     ),
                   ],
