@@ -34,6 +34,8 @@ class EquipmentPage extends StatelessWidget {
               state.workout.equipment.contains(Equipment.YogaMat);
           final bool _plyoBox =
               state.workout.equipment.contains(Equipment.PlyometricBox);
+          final bool _dumbbell =
+              state.workout.equipment.contains(Equipment.Dumbbell);
 
           var equipment = state.workout.equipment;
           return PageAnimationWidget(
@@ -108,6 +110,30 @@ class EquipmentPage extends StatelessWidget {
                                       .workout));
                             } else {
                               equipment.remove(Equipment.PlyometricBox);
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(equipment: equipment)
+                                      .workout));
+                            }
+                          }),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Dumbbell'),
+                      Switch(
+                          activeColor: Color(0xfffbc02d),
+                          value: _dumbbell,
+                          onChanged: (value) {
+                            if (value) {
+                              equipment.add(Equipment.Dumbbell);
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(equipment: equipment)
+                                      .workout));
+                            } else {
+                              equipment.remove(Equipment.Dumbbell);
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(equipment: equipment)
