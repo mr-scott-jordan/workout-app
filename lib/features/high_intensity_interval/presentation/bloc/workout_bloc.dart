@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../exercise_data.dart';
 import '../../../../services/get_workouts_service.dart';
+import '../../data/models/workout_model.dart';
 import '../../domain/entities/exercise.dart';
 import '../../domain/entities/workout.dart';
 import '../../domain/enums/equipment.dart';
@@ -54,7 +55,7 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
 
   Stream<WorkoutState> _editWorkoutName(
       Workout workout, String workoutName) async* {
-    final newWorkout = Workout(
+    final newWorkout = WorkoutModel(
       workoutName: workoutName,
       equipment: workout.equipment,
       exerciseDuration: workout.exerciseDuration,

@@ -68,9 +68,11 @@ class WorkoutSummaryPage extends StatelessWidget {
                               textAlign: TextAlign.center,
                               onSubmitted: (String workoutName) {
                                 BlocProvider.of<WorkoutBloc>(context).add(
-                                    EditWorkoutNameEvent(
-                                        workout: state.workout,
-                                        workoutName: workoutName));
+                                  EditWorkoutNameEvent(
+                                    workout: state.workout,
+                                    workoutName: workoutName,
+                                  ),
+                                );
                               },
                             ),
                           ),
@@ -106,16 +108,6 @@ class WorkoutSummaryPage extends StatelessWidget {
                             },
                           ),
                         ],
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: FormattedButton(
-                        buttonText: 'Finish',
-                        onPressed: () {
-                          BlocProvider.of<WorkoutBloc>(context)
-                              .add(ResetWorkoutEvent(state.workout));
-                        },
                       ),
                     ),
                   ],
