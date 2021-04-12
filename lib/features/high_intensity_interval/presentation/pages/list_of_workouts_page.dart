@@ -68,28 +68,24 @@ class ListOfWorkoutsPage extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 9,
-                      child: SingleChildScrollView(
-                        child: Container(
-                          width: double.infinity,
-                          child: state.workouts.length > 0
-                              ? ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: state.workouts.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                        title: Text(
-                                            state.workouts[index].workoutName),
-                                        onTap: () {
-                                          BlocProvider.of<WorkoutBloc>(context)
-                                              .add(EditWorkoutEvent(
-                                                  state.workouts[index]));
-                                        });
-                                  })
-                              : Center(
-                                  child: Text('No workouts saved.'),
-                                ),
-                        ),
+                      child: Container(
+                        width: double.infinity,
+                        child: state.workouts.length > 0
+                            ? ListView.builder(
+                                itemCount: state.workouts.length,
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                      title: Text(
+                                          state.workouts[index].workoutName),
+                                      onTap: () {
+                                        BlocProvider.of<WorkoutBloc>(context)
+                                            .add(EditWorkoutEvent(
+                                                state.workouts[index]));
+                                      });
+                                })
+                            : Center(
+                                child: Text('No workouts saved.'),
+                              ),
                       ),
                     ),
                   ],
