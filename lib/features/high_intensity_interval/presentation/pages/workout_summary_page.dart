@@ -35,7 +35,7 @@ class WorkoutSummaryPage extends StatelessWidget {
                 child: ListView(
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.91,
                       child: Column(
                         children: [
                           Expanded(
