@@ -53,7 +53,22 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
   }
 
   Stream<WorkoutState> _editWorkoutName(
-      Workout workout, String workoutName) async* {final newWorkout = Workout(workoutName: workoutName, ),}
+      Workout workout, String workoutName) async* {
+    final newWorkout = Workout(
+      workoutName: workoutName,
+      equipment: workout.equipment,
+      exerciseDuration: workout.exerciseDuration,
+      exercises: workout.exercises,
+      numOfExercises: workout.numOfExercises,
+      numOfRounds: workout.numOfRounds,
+      potentialExercises: workout.potentialExercises,
+      restDuration: workout.restDuration,
+      tags: workout.tags,
+      totalDuration: workout.totalDuration,
+    );
+    final result = WorkoutFinishedState(newWorkout);
+    yield result;
+  }
 
   Stream<WorkoutState> _finishWorkout(Workout workout) async* {
     final result = WorkoutFinishedState(workout);

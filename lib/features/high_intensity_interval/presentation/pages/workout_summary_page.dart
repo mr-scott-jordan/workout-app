@@ -28,7 +28,6 @@ class WorkoutSummaryPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is WorkoutFinishedState) {
-            var savedWorkoutName = state.workout.workoutName;
             return PageAnimationWidget(
               body: Container(
                 width: MediaQuery.of(context).size.width,
@@ -65,8 +64,11 @@ class WorkoutSummaryPage extends StatelessWidget {
                         decoration: InputDecoration(
                             hintText: 'To save your workout enter a name.'),
                         textAlign: TextAlign.center,
-                        onSubmitted: (String savedWorkoutName) {
-                          savedWorkoutName = savedWorkoutName;
+                        onSubmitted: (String workoutName) {
+                          BlocProvider.of<WorkoutBloc>(context).add(
+                              EditWorkoutNameEvent(
+                                  workout: state.workout,
+                                  workoutName: workoutName));
                         },
                       ),
                     ),

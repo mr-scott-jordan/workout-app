@@ -65,7 +65,10 @@ class EditWorkoutNameEvent extends WorkoutEvent {
   final Workout workout;
   final String workoutName;
 
-  EditWorkoutNameEvent({@required this.workout, @required this.workoutName});
+  EditWorkoutNameEvent({
+    @required this.workout,
+    @required this.workoutName,
+  });
 }
 
 class GetWorkoutsEvent extends WorkoutEvent {
