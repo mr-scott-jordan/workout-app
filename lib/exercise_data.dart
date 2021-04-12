@@ -135,11 +135,10 @@ final EXERCISES_DATA = [
     tags: [Tag.Push],
     equipment: Equipment.None,
   ),
-  //TODO: add Tag.Legs if logic changed
   Exercise(
     id: 'e23',
     title: 'Raised Leg Push-up',
-    tags: [Tag.Push],
+    tags: [Tag.Push, Tag.Legs],
     equipment: Equipment.None,
   ),
   Exercise(
@@ -628,6 +627,12 @@ final EXERCISES_DATA = [
     title: 'Plank Jack',
     tags: [Tag.FullBody],
     equipment: Equipment.None,
+  ),
+  Exercise(
+    id: 'e105',
+    title: 'Inverted Row',
+    tags: [Tag.Pull],
+    equipment: Equipment.PullUpBar,
   ),
   // Exercise(
   //   id: '',
