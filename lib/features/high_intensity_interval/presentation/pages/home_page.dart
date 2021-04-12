@@ -40,33 +40,51 @@ class HomePage extends StatelessWidget {
               body: Container(
                 color: Color(0xff424242),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Container(
-                        child: Image.asset('assets/images/love_hate_logo.png')),
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Center(
-                      child: FormattedButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, EquipmentPage.routeName);
-                        },
-                        buttonText: "New Workout",
+                    Expanded(
+                      flex: 8,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            child:
+                                Image.asset('assets/images/love_hate_logo.png'),
+                          ),
+                        ],
                       ),
                     ),
-                    center,
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            height: 2.0,
+                            width: double.infinity,
+                            color: Colors.purple,
+                          ),
+                          Center(
+                            child: FormattedButton(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, EquipmentPage.routeName);
+                              },
+                              buttonText: "New Workout",
+                            ),
+                          ),
+                          center,
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
             );
           } else {
             return PageAnimationWidget(
-              body: Center(
-                child: Text(' Home Page'),
+              body: Container(
+                color: Color(0xff424242),
               ),
             );
           }
@@ -89,12 +107,12 @@ class HomePage extends StatelessWidget {
                 ),
               );
             },
-            buttonText: "Load saved workouts",
+            buttonText: "Load Saved Workout",
           );
         } else {
           return PageAnimationWidget(
-            body: Center(
-              child: Text('Home Page'),
+            body: Container(
+              color: Color(0xff424242),
             ),
           );
           // return FormattedButton(

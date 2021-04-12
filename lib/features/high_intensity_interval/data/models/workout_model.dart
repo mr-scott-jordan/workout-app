@@ -19,6 +19,7 @@ class WorkoutModel extends Workout {
     @required List<Exercise> exercises,
     @required List<Exercise> potentialExercises,
     @required Duration totalDuration,
+    @required String workoutName,
   }) : super(
           tags: tags,
           equipment: equipment,
@@ -29,6 +30,7 @@ class WorkoutModel extends Workout {
           exercises: exercises,
           potentialExercises: potentialExercises,
           totalDuration: totalDuration,
+          workoutName: workoutName,
         );
 
   factory WorkoutModel.fromJson(Map<String, dynamic> json) {
@@ -51,6 +53,7 @@ class WorkoutModel extends Workout {
         minutes: json['totalDuration']['minutes'],
         seconds: json['totalDuration']['seconds'],
       ),
+      workoutName: json['workoutName'],
     );
   }
 
@@ -74,6 +77,7 @@ class WorkoutModel extends Workout {
       "numOfExercises": numOfExercises,
       "exercises": ExercisesModel.toList(exercises),
       "userId": userId,
+      "workoutName": workoutName,
     };
   }
 }

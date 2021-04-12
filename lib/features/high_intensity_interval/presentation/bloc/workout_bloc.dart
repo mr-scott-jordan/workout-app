@@ -87,6 +87,7 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
       exerciseDuration: workout.exerciseDuration,
       restDuration: workout.restDuration,
       numberOfRounds: workout.numOfRounds,
+      workoutName: workout.workoutName,
     );
     final result = await generateWorkout.call(params);
 

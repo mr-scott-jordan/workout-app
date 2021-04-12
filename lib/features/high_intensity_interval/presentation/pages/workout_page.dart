@@ -161,98 +161,130 @@ Widget _buildPage(
       color: Color(0xff424242),
       child: Column(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    pageParams.exerciseText,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Color(0xfffbc02d),
+          Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      pageParams.exerciseText,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xfffbc02d),
+                      ),
                     ),
-                  ),
-                  Text(
-                    ('${pageParams.exercises.last.title}'),
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      ('${pageParams.exercises.last.title}'),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Container(
-                height: 2.0,
-                width: MediaQuery.of(pageParams.context).size.width,
-                color: Colors.purple,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    pageParams.taskText,
-                    style: TextStyle(
-                      fontSize: 45,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          CircleTimer(
-            duration: pageParams.stateDuration,
-            onComplete: pageParams.onComplete,
-            controller: pageParams.controller,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // restart button
-              IconButton(
-                onPressed: pageParams.controller.restart,
-                icon: Icon(
-                  Icons.replay_rounded,
+                  ],
+                ),
+                Container(
+                  height: 2.0,
+                  width: double.infinity,
                   color: Colors.purple,
                 ),
-                iconSize: 75.0,
-              ),
-              // skip exercise button
-              IconButton(
-                onPressed: () {
-                  pageParams.exercises.removeLast();
-                  if (pageParams.exercises.isEmpty) {
-                    BlocProvider.of<WorkoutBloc>(pageParams.context)
-                        .add(FinishWorkoutEvent(pageParams.workout));
-                  } else {
-                    BlocProvider.of<WorkoutBloc>(pageParams.context)
-                        .add(SkipWorkoutEvent(pageParams.workout));
-                    pageParams.controller.restart(
-                      duration: pageParams.bufferDuration,
-                    );
-                  }
-                },
-                icon: Icon(
-                  Icons.skip_next_rounded,
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      pageParams.taskText,
+                      style: TextStyle(
+                        fontSize: 45,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 7,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CircleTimer(
+                  duration: pageParams.stateDuration,
+                  onComplete: pageParams.onComplete,
+                  controller: pageParams.controller,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // restart button
+                    IconButton(
+                      onPressed: pageParams.controller.restart,
+                      icon: Icon(
+                        Icons.replay_rounded,
+                        color: Colors.purple,
+                      ),
+                      iconSize: 75.0,
+                    ),
+                    // skip exercise button
+                    IconButton(
+                      onPressed: () {
+                        pageParams.exercises.removeLast();
+                        if (pageParams.exercises.isEmpty) {
+                          BlocProvider.of<WorkoutBloc>(pageParams.context)
+                              .add(FinishWorkoutEvent(pageParams.workout));
+                        } else {
+                          BlocProvider.of<WorkoutBloc>(pageParams.context)
+                              .add(SkipWorkoutEvent(pageParams.workout));
+                          pageParams.controller.restart(
+                            duration: pageParams.bufferDuration,
+                          );
+                        }
+                      },
+                      icon: Icon(
+                        Icons.skip_next_rounded,
+                        color: Colors.purple,
+                      ),
+                      iconSize: 75.0,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: 2.0,
+                  width: double.infinity,
                   color: Colors.purple,
                 ),
-                iconSize: 75.0,
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              FormattedButton(
-                onPressed: () {
-                  BlocProvider.of<WorkoutBloc>(pageParams.context)
-                      .add(FinishWorkoutEvent(pageParams.workout));
-                },
-                buttonText: 'Finish Workout',
-              ),
-            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FormattedButton(
+                      onPressed: () {
+                        BlocProvider.of<WorkoutBloc>(pageParams.context)
+                            .add(FinishWorkoutEvent(pageParams.workout));
+                      },
+                      buttonText: 'Finish Workout',
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
