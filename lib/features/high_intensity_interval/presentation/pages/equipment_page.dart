@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
 
+import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../../domain/enums/equipment.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
@@ -45,6 +45,18 @@ class EquipmentPage extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 100,
+                  ),
+                  Container(
+                    height: 125,
+                    width: 300,
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'Please select equipment.',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromRGBO(255, 188, 2, 1),
+                      ),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

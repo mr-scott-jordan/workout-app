@@ -4,7 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_app/core/authentication/authentication_service.dart';
+
+import '../authentication_service.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
@@ -34,7 +35,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         password: password,
       );
       if (isAuthenticated == "Signed up") {
-        yield UserAuthenticatedState();
+        yield UserAuthenticatedState(auth.getUserID());
       }
     } catch (e) {
       print(e);
@@ -54,7 +55,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         password: password,
       );
       if (isAuthenticated == "Signed in") {
-        yield UserAuthenticatedState();
+        yield UserAuthenticatedState(auth.getUserID());
+      } else {
+        yield UserUnauthenticatedState();
       }
     } catch (e) {
       print(e);

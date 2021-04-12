@@ -19,7 +19,6 @@ class WorkoutErrorState extends WorkoutState {
 class WorkoutLoadingState extends WorkoutState {
   @override
   List<Object> get props => [];
-
   @override
   getWorkout() {
     throw UnimplementedError();
@@ -32,6 +31,23 @@ class WorkoutFinishedState extends WorkoutState {
 
   @override
   List<Object> get props => [];
+
+  @override
+  getWorkout() {
+    return this.workout;
+  }
+}
+
+class ChooseWorkoutFromListState extends WorkoutState {
+  final List<Workout> workouts;
+  final Workout workout;
+
+  ChooseWorkoutFromListState({
+    @required this.workouts,
+    @required this.workout,
+  });
+  @override
+  List<Object> get props => [workouts];
 
   @override
   getWorkout() {
