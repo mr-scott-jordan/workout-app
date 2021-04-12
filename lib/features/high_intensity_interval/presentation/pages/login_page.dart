@@ -2,11 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/home_page.dart';
 
-import '../../../../core/authentication/authentication_service.dart';
+import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../bloc/workout_bloc.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatelessWidget {
   static const routeName = '/login-page';
@@ -62,11 +61,11 @@ class LoginPage extends StatelessWidget {
                   ),
                 );
                 return Future.delayed(Duration(seconds: 1))
-                    .then((value) => null);
+                    .then((value) => 'Error signing in');
               },
               onRecoverPassword: (_) {
                 return Future.delayed(Duration(seconds: 1))
-                    .then((value) => null);
+                    .then((value) => 'Error recovering password');
               },
               onSignup: (LoginData data) {
                 BlocProvider.of<WorkoutBloc>(context).add(ResetWorkoutEvent(
@@ -79,7 +78,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 );
                 return Future.delayed(Duration(seconds: 1))
-                    .then((value) => null);
+                    .then((value) => 'Error signing up');
               },
             );
           },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
 
+import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../../domain/enums/equipment.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
@@ -32,6 +32,10 @@ class EquipmentPage extends StatelessWidget {
               state.workout.equipment.contains(Equipment.PullUpBar);
           final bool _yogaMat =
               state.workout.equipment.contains(Equipment.YogaMat);
+          final bool _plyoBox =
+              state.workout.equipment.contains(Equipment.PlyometricBox);
+          final bool _dumbbell =
+              state.workout.equipment.contains(Equipment.Dumbbell);
 
           var equipment = state.workout.equipment;
           return PageAnimationWidget(
@@ -41,6 +45,18 @@ class EquipmentPage extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 100,
+                  ),
+                  Container(
+                    height: 125,
+                    width: 300,
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'Please select equipment.',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromRGBO(255, 188, 2, 1),
+                      ),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -82,6 +98,54 @@ class EquipmentPage extends StatelessWidget {
                                       .workout));
                             } else {
                               equipment.remove(Equipment.YogaMat);
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(equipment: equipment)
+                                      .workout));
+                            }
+                          }),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Plyometric Box'),
+                      Switch(
+                          activeColor: Color(0xfffbc02d),
+                          value: _plyoBox,
+                          onChanged: (value) {
+                            if (value) {
+                              equipment.add(Equipment.PlyometricBox);
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(equipment: equipment)
+                                      .workout));
+                            } else {
+                              equipment.remove(Equipment.PlyometricBox);
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(equipment: equipment)
+                                      .workout));
+                            }
+                          }),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Dumbbell'),
+                      Switch(
+                          activeColor: Color(0xfffbc02d),
+                          value: _dumbbell,
+                          onChanged: (value) {
+                            if (value) {
+                              equipment.add(Equipment.Dumbbell);
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutEvent(state
+                                      .copyWith(equipment: equipment)
+                                      .workout));
+                            } else {
+                              equipment.remove(Equipment.Dumbbell);
                               BlocProvider.of<WorkoutBloc>(context).add(
                                   EditWorkoutEvent(state
                                       .copyWith(equipment: equipment)

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/login_page.dart';
 
+import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
+import 'login_page.dart';
 import 'workout_page.dart';
 
-// ignore: must_be_immutable
 class BulletinBoardPage extends StatelessWidget {
   static const routeName = '/bulletin-board-page';
 
@@ -93,7 +92,6 @@ class BulletinBoardPage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Icon(Icons.reorder_rounded),
                                 IconButton(
                                     icon: Icon(Icons.swap_calls_rounded),
                                     onPressed: () {
@@ -112,23 +110,7 @@ class BulletinBoardPage extends StatelessWidget {
                                               .copyWith(exercises: exercises)
                                               .workout));
                                     }),
-                                IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () {
-                                      var exercises =
-                                          state.workout.exercises.sublist(0);
-                                      exercises.removeAt(index);
-                                      var numOfExercises =
-                                          state.workout.numOfExercises - 1;
-
-                                      BlocProvider.of<WorkoutBloc>(context)
-                                          .add(EditWorkoutEvent(state
-                                              .copyWith(
-                                                numOfExercises: numOfExercises,
-                                                exercises: exercises,
-                                              )
-                                              .workout));
-                                    }),
+                                Icon(Icons.reorder_rounded),
                               ],
                             ),
                           ),

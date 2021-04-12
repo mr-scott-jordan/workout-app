@@ -16,5 +16,5 @@ abstract class WorkoutRepositoryType {
     @required int numberOfRounds,
   });
 
-  Future<Either<Failure, Workout>> getWorkout();
+  Future<Either<Failure, Workout>> getWorkout(String userId);
 }

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/core/authentication/bloc/user_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/presentation/pages/login_page.dart';
 
-import '../../../../exercise_data.dart';
+import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../../domain/enums/tag.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';
 import 'bulletin_board_page.dart';
+import 'login_page.dart';
 
 class WorkoutSetupPage extends StatelessWidget {
   static const routeName = '/workout-setup-page';
@@ -236,20 +235,19 @@ class WorkoutSetupPage extends StatelessWidget {
                         ),
                         FormattedButton(
                           onPressed: () {
-                            state.workout.potentialExercises.shuffle();
-                            var exercises = state.workout.potentialExercises
-                                .sublist(0, state.workout.numOfExercises);
-                            BlocProvider.of<WorkoutBloc>(context)
-                                .add(EditWorkoutEvent(state
-                                    .copyWith(
-                                      exercises: exercises,
-                                    )
-                                    .workout));
-                            Navigator.pushReplacementNamed(
-                              context,
-                              // TODO: (Scott) fix routing when all pages marged
-                              BulletinBoardPage.routeName,
-                            );
+                            if (state.workout.potentialExercises.isEmpty)
+                              throw UnimplementedError(
+                                  'Potential Exercises is empty. You must select a tag!');
+                            else {
+                              BlocProvider.of<WorkoutBloc>(context).add(
+                                GenerateWorkoutEvent(state.workout),
+                              );
+                              Navigator.pushReplacementNamed(
+                                context,
+                                // TODO: (Scott) fix routing when all pages marged
+                                BulletinBoardPage.routeName,
+                              );
+                            }
                           },
                           buttonText: "Load Workout",
                         ),
