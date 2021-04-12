@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_app/features/high_intensity_interval/data/assets/print_duration_asset.dart';
 
 import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../bloc/workout_bloc.dart';
@@ -35,26 +36,37 @@ class BulletinBoardPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                      flex: 1,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            (state.workout.totalDuration
-                                .toString()
-                                .split('.')[0]),
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                    flex: 1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              'Total Workout Duration:',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color(0xfffbc02d),
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: 2.0,
-                            width: double.infinity,
-                            color: Colors.purple,
-                          ),
-                        ],
-                      )),
+                            Text(
+                              ('${printDuration(state.workout.totalDuration)}'),
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 2.0,
+                          width: double.infinity,
+                          color: Colors.purple,
+                        ),
+                      ],
+                    ),
+                  ),
                   Expanded(
                     flex: 7,
                     child: ReorderableListView.builder(

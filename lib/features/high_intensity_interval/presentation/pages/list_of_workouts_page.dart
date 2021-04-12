@@ -29,24 +29,90 @@ class ListOfWorkoutsPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is ChooseWorkoutFromListState) {
+            // return PageAnimationWidget(
+            //   body: Container(
+            //     width: double.infinity,
+            //     color: Color(0xff424242),
+            //     child: state.workouts.length > 0
+            //         ? ListView.builder(
+            //             itemCount: state.workouts.length,
+            //             itemBuilder: (context, index) {
+            //               return ListTile(
+            //                   title: Text('Workout[$index]'),
+            //                   onTap: () {
+            //                     BlocProvider.of<WorkoutBloc>(context).add(
+            //                         EditWorkoutEvent(state.workouts[index]));
+            //                   });
+            //             })
+            //         : Center(
+            //             child: Text('No Workouts Saved'),
+            //           ),
+            //   ),
+            // );
             return PageAnimationWidget(
               body: Container(
-                width: double.infinity,
                 color: Color(0xff424242),
-                child: state.workouts.length > 0
-                    ? ListView.builder(
-                        itemCount: state.workouts.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                              title: Text('Workout[$index]'),
-                              onTap: () {
-                                BlocProvider.of<WorkoutBloc>(context).add(
-                                    EditWorkoutEvent(state.workouts[index]));
-                              });
-                        })
-                    : Center(
-                        child: Text('No Workouts Saved'),
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Please select a saved workout.',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xfffbc02d),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 2.0,
+                            width: double.infinity,
+                            color: Colors.purple,
+                          ),
+                        ],
                       ),
+                    ),
+                    Expanded(
+                      flex: 9,
+                      child: SingleChildScrollView(
+                        child: Container(
+                          width: double.infinity,
+                          child: state.workouts.length > 0
+                              ? ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: state.workouts.length,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                        title: Text(
+                                            state.workouts[index].workoutName),
+                                        onTap: () {
+                                          BlocProvider.of<WorkoutBloc>(context)
+                                              .add(EditWorkoutEvent(
+                                                  state.workouts[index]));
+                                        });
+                                  })
+                              : Center(
+                                  child: Text('No workouts saved.'),
+                                ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           } else if (state is WorkoutLoadedState) {

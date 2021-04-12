@@ -39,6 +39,7 @@ class WorkoutRepository implements WorkoutRepositoryType {
     @required Duration exerciseDuration,
     @required Duration restDuration,
     @required int numberOfRounds,
+    @required String workoutName,
   }) async {
     return Right(await localDataSourceType.generateWorkout(
       tags: tags,
@@ -47,6 +48,7 @@ class WorkoutRepository implements WorkoutRepositoryType {
       restDuration: restDuration,
       exerciseDuration: exerciseDuration,
       numberOfRounds: numberOfRounds,
+      workoutName: workoutName,
     ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
 
 import '../../../../exercise_data.dart';
 import '../../domain/entities/exercise.dart';
@@ -15,6 +16,7 @@ abstract class WorkoutLocalDataSourceType {
     @required Duration exerciseDuration,
     @required Duration restDuration,
     @required int numberOfRounds,
+    @required String workoutName,
   });
 }
 
@@ -29,6 +31,7 @@ class WorkoutLocalDataSource implements WorkoutLocalDataSourceType {
     @required Duration exerciseDuration,
     @required Duration restDuration,
     @required int numberOfRounds,
+    @required String workoutName,
   }) async {
     var listOfAllExercises =
         List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
@@ -60,6 +63,7 @@ class WorkoutLocalDataSource implements WorkoutLocalDataSourceType {
       tags: tags,
       totalDuration: totalDuration,
       potentialExercises: potentialExercises,
+      workoutName: workoutName,
     );
   }
 }
