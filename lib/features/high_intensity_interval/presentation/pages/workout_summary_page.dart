@@ -33,9 +33,31 @@ class WorkoutSummaryPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 color: Color(0xff424242),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text('Congratulations!  You finished your workout!'),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      child: Text(
+                        'Congratulations! You finished your workout! Hit finish to continue or hit save workout to save your workout for future use.',
+                        style: TextStyle(
+                          color: Color.fromRGBO(255, 188, 2, 1),
+                          fontSize: 17,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      child: Image.asset('assets/images/stoked.gif'),
+                    ),
+                    SizedBox(
+                      height: 80,
+                    ),
                     Container(
                       padding: EdgeInsets.all(10),
                       child: FormattedButton(
