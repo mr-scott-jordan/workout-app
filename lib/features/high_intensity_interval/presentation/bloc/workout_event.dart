@@ -57,17 +57,11 @@ class StartExerciseWorkoutEvent extends WorkoutEvent {
 
 class FinishWorkoutEvent extends WorkoutEvent {
   final Workout workout;
-
-  FinishWorkoutEvent(this.workout);
-}
-
-class EditWorkoutNameEvent extends WorkoutEvent {
-  final Workout workout;
   final String workoutName;
 
-  EditWorkoutNameEvent({
+  FinishWorkoutEvent({
     @required this.workout,
-    @required this.workoutName,
+    this.workoutName,
   });
 }
 
