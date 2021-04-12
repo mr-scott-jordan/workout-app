@@ -38,7 +38,7 @@ class ListOfWorkoutsPage extends StatelessWidget {
                         itemCount: state.workouts.length,
                         itemBuilder: (context, index) {
                           return ListTile(
-                              title: Text('Workout[$index]'),
+                              title: Text(state.workouts[index].workoutName),
                               onTap: () {
                                 BlocProvider.of<WorkoutBloc>(context).add(
                                     EditWorkoutEvent(state.workouts[index]));

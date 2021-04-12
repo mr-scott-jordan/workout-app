@@ -14,6 +14,7 @@ abstract class WorkoutRepositoryType {
     @required Duration exerciseDuration,
     @required Duration restDuration,
     @required int numberOfRounds,
+    @required String workoutName,
   });
 
   Future<Either<Failure, Workout>> getWorkout(String userId);

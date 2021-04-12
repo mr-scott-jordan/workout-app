@@ -69,6 +69,7 @@ class WorkoutLoadedState extends WorkoutState {
     int numOfExercises,
     List<Exercise> exercises,
     List<Exercise> potentialExercises,
+    String workoutName,
   }) {
     return WorkoutLoadedState(
       // we don't want to copy the total duration.  it should be calculated everytime
@@ -88,6 +89,7 @@ class WorkoutLoadedState extends WorkoutState {
         exercises: exercises ?? this.workout.exercises,
         potentialExercises:
             potentialExercises ?? this.workout.potentialExercises,
+        workoutName: workoutName ?? this.workout.workoutName,
       ),
     );
   }
@@ -174,4 +176,5 @@ final Workout _initialWorkout = Workout(
   // the order matters
   totalDuration: Duration(seconds: 60) * 4 * 4,
   potentialExercises: EXERCISES_DATA.sublist(0),
+  workoutName: 'defaultWorkoutName',
 );

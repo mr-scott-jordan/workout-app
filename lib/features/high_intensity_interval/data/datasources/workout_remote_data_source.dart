@@ -49,6 +49,7 @@ class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
       tags: [Tag.FullBody],
       totalDuration: Duration(minutes: 1),
       potentialExercises: EXERCISES_DATA.sublist(0),
+      workoutName: 'workoutName',
     );
   }
 }

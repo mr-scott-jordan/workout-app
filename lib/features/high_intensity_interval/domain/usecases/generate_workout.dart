@@ -22,6 +22,7 @@ class GenerateWorkout implements UseCase<Workout, GenerateWorkoutParams> {
       exerciseDuration: params.exerciseDuration,
       restDuration: params.restDuration,
       numberOfRounds: params.numberOfRounds,
+      workoutName: params.workoutName,
     );
   }
 }
@@ -33,6 +34,7 @@ class GenerateWorkoutParams extends Params {
   final Duration exerciseDuration;
   final Duration restDuration;
   final int numberOfRounds;
+  final String workoutName;
 
   GenerateWorkoutParams({
     @required this.numberOfExercises,
@@ -41,6 +43,7 @@ class GenerateWorkoutParams extends Params {
     @required this.exerciseDuration,
     @required this.restDuration,
     @required this.numberOfRounds,
+    @required this.workoutName,
   });
 
   @override
@@ -51,5 +54,6 @@ class GenerateWorkoutParams extends Params {
         exerciseDuration,
         restDuration,
         numberOfRounds,
+        workoutName,
       ];
 }
