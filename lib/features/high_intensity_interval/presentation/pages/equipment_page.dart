@@ -20,30 +20,31 @@ class EquipmentPage extends StatelessWidget {
           Navigator.pushReplacementNamed(context, LoginPage.routeName);
         }
       },
-      child:
-          BlocConsumer<WorkoutBloc, WorkoutState>(listener: (context, state) {
-        if (state is! WorkoutLoadedState) {
-          BlocProvider.of<WorkoutBloc>(context)
-              .add(ResetWorkoutEvent(state.getWorkout()));
-        }
-      }, builder: (context, state) {
-        if (state is WorkoutLoadedState) {
-          final bool _pullupBar =
-              state.workout.equipment.contains(Equipment.PullUpBar);
-          final bool _yogaMat =
-              state.workout.equipment.contains(Equipment.YogaMat);
-          final bool _plyoBox =
-              state.workout.equipment.contains(Equipment.PlyometricBox);
-          final bool _dumbbell =
-              state.workout.equipment.contains(Equipment.Dumbbell);
+      child: BlocConsumer<WorkoutBloc, WorkoutState>(
+        listener: (context, state) {
+          if (state is! WorkoutLoadedState) {
+            BlocProvider.of<WorkoutBloc>(context)
+                .add(ResetWorkoutEvent(state.getWorkout()));
+          }
+        },
+        builder: (context, state) {
+          if (state is WorkoutLoadedState) {
+            final bool _pullupBar =
+                state.workout.equipment.contains(Equipment.PullUpBar);
+            final bool _yogaMat =
+                state.workout.equipment.contains(Equipment.YogaMat);
+            final bool _plyoBox =
+                state.workout.equipment.contains(Equipment.PlyometricBox);
+            final bool _dumbbell =
+                state.workout.equipment.contains(Equipment.Dumbbell);
 
-          var equipment = state.workout.equipment;
-          return PageAnimationWidget(
-            body: Container(
-              color: Color(0xff424242),
-              child: Column(
-                children: [
-                  Expanded(
+            var equipment = state.workout.equipment;
+            return PageAnimationWidget(
+              body: Container(
+                color: Color(0xff424242),
+                child: Column(
+                  children: [
+                    Expanded(
                       flex: 2,
                       child: Container(
                         alignment: Alignment.center,
@@ -56,23 +57,24 @@ class EquipmentPage extends StatelessWidget {
                               'Please select your available equipment.',
                               style: TextStyle(
                                 fontSize: 20,
-                                color: Color.fromRGBO(255, 188, 2, 1),
+                                color: Color(0xfffbc02d),
                               ),
                             ),
                           ],
                         ),
-                      )),
-                  Expanded(
-                    flex: 7,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Pullup Bar'),
-                            Switch(
+                      ),
+                    ),
+                    Expanded(
+                      flex: 7,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Pullup Bar'),
+                              Switch(
                                 activeColor: Color(0xfffbc02d),
                                 value: _pullupBar,
                                 onChanged: (value) {
@@ -89,14 +91,15 @@ class EquipmentPage extends StatelessWidget {
                                             .copyWith(equipment: equipment)
                                             .workout));
                                   }
-                                }),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Yoga Mat'),
-                            Switch(
+                                },
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Yoga Mat'),
+                              Switch(
                                 activeColor: Color(0xfffbc02d),
                                 value: _yogaMat,
                                 onChanged: (value) {
@@ -113,14 +116,15 @@ class EquipmentPage extends StatelessWidget {
                                             .copyWith(equipment: equipment)
                                             .workout));
                                   }
-                                }),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Plyometric Box'),
-                            Switch(
+                                },
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Plyometric Box'),
+                              Switch(
                                 activeColor: Color(0xfffbc02d),
                                 value: _plyoBox,
                                 onChanged: (value) {
@@ -137,14 +141,15 @@ class EquipmentPage extends StatelessWidget {
                                             .copyWith(equipment: equipment)
                                             .workout));
                                   }
-                                }),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Dumbbell'),
-                            Switch(
+                                },
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Dumbbell'),
+                              Switch(
                                 activeColor: Color(0xfffbc02d),
                                 value: _dumbbell,
                                 onChanged: (value) {
@@ -161,47 +166,49 @@ class EquipmentPage extends StatelessWidget {
                                             .copyWith(equipment: equipment)
                                             .workout));
                                   }
-                                }),
-                          ],
-                        ),
-                      ],
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          height: 2.0,
-                          width: double.infinity,
-                          color: Colors.purple,
-                        ),
-                        FormattedButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              // HomePage.routeName,
-                              WorkoutSetupPage.routeName,
-                            );
-                          },
-                          buttonText: "Next",
-                        ),
-                      ],
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            height: 2.0,
+                            width: double.infinity,
+                            color: Colors.purple,
+                          ),
+                          FormattedButton(
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                // HomePage.routeName,
+                                WorkoutSetupPage.routeName,
+                              );
+                            },
+                            buttonText: "Next",
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          );
-        } else {
-          return Scaffold(
-            body: Center(
-              child: Text('An error occured'),
-            ),
-          );
-        }
-      }),
+            );
+          } else {
+            return Scaffold(
+              body: Center(
+                child: Text('An error occured'),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
