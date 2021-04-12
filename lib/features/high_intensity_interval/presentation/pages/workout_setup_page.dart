@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_app/features/high_intensity_interval/data/assets/print_duration_asset.dart';
 
 import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../../domain/enums/tag.dart';
@@ -29,7 +30,6 @@ class WorkoutSetupPage extends StatelessWidget {
       }, builder: (context, state) {
         // check state and build ui
         if (state is WorkoutLoadedState) {
-          var totalDuration = _printDuration(state.workout.totalDuration);
           return PageAnimationWidget(
             body: Container(
               color: Color(0xff424242),
@@ -51,7 +51,7 @@ class WorkoutSetupPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              ('$totalDuration'),
+                              ('${printDuration(state.workout.totalDuration)}'),
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -313,14 +313,4 @@ const _kMap = {
 
 bool _tagStringToBool({@required String tagName, @required List<Tag> tags}) {
   return tags.any((tag) => tags.contains(_kMap[tagName]));
-}
-
-String _printDuration(Duration duration) {
-  String formattedDuration = "";
-  if (duration.inHours != 0) formattedDuration += "${duration.inHours}h ";
-  if (duration.inMinutes.remainder(60) != 0)
-    formattedDuration += "${duration.inMinutes.remainder(60)}m ";
-  if (duration.inSeconds.remainder(60) != 0)
-    formattedDuration += "${duration.inSeconds.remainder(60)}s";
-  return formattedDuration;
 }
