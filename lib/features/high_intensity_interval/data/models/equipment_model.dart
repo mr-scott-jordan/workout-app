@@ -4,6 +4,8 @@ const _kMap = {
   'none': Equipment.None,
   'pullupbar': Equipment.PullUpBar,
   'yogamat': Equipment.YogaMat,
+  'plyobox': Equipment.PlyometricBox,
+  'dumbbell': Equipment.Dumbbell,
 };
 
 List<Equipment> fromList(List<dynamic> strings) {
