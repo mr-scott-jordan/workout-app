@@ -43,130 +43,151 @@ class EquipmentPage extends StatelessWidget {
               color: Color(0xff424242),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 100,
-                  ),
-                  Container(
-                    height: 125,
-                    width: 300,
-                    alignment: Alignment.topCenter,
-                    child: Text(
-                      'Please select equipment.',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color.fromRGBO(255, 188, 2, 1),
-                      ),
+                  Expanded(
+                      flex: 2,
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Please select your available equipment.',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Color.fromRGBO(255, 188, 2, 1),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                  Expanded(
+                    flex: 7,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Pullup Bar'),
+                            Switch(
+                                activeColor: Color(0xfffbc02d),
+                                value: _pullupBar,
+                                onChanged: (value) {
+                                  if (value) {
+                                    equipment.add(Equipment.PullUpBar);
+                                    BlocProvider.of<WorkoutBloc>(context).add(
+                                        EditWorkoutEvent(state
+                                            .copyWith(equipment: equipment)
+                                            .workout));
+                                  } else {
+                                    equipment.remove(Equipment.PullUpBar);
+                                    BlocProvider.of<WorkoutBloc>(context).add(
+                                        EditWorkoutEvent(state
+                                            .copyWith(equipment: equipment)
+                                            .workout));
+                                  }
+                                }),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Yoga Mat'),
+                            Switch(
+                                activeColor: Color(0xfffbc02d),
+                                value: _yogaMat,
+                                onChanged: (value) {
+                                  if (value) {
+                                    equipment.add(Equipment.YogaMat);
+                                    BlocProvider.of<WorkoutBloc>(context).add(
+                                        EditWorkoutEvent(state
+                                            .copyWith(equipment: equipment)
+                                            .workout));
+                                  } else {
+                                    equipment.remove(Equipment.YogaMat);
+                                    BlocProvider.of<WorkoutBloc>(context).add(
+                                        EditWorkoutEvent(state
+                                            .copyWith(equipment: equipment)
+                                            .workout));
+                                  }
+                                }),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Plyometric Box'),
+                            Switch(
+                                activeColor: Color(0xfffbc02d),
+                                value: _plyoBox,
+                                onChanged: (value) {
+                                  if (value) {
+                                    equipment.add(Equipment.PlyometricBox);
+                                    BlocProvider.of<WorkoutBloc>(context).add(
+                                        EditWorkoutEvent(state
+                                            .copyWith(equipment: equipment)
+                                            .workout));
+                                  } else {
+                                    equipment.remove(Equipment.PlyometricBox);
+                                    BlocProvider.of<WorkoutBloc>(context).add(
+                                        EditWorkoutEvent(state
+                                            .copyWith(equipment: equipment)
+                                            .workout));
+                                  }
+                                }),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Dumbbell'),
+                            Switch(
+                                activeColor: Color(0xfffbc02d),
+                                value: _dumbbell,
+                                onChanged: (value) {
+                                  if (value) {
+                                    equipment.add(Equipment.Dumbbell);
+                                    BlocProvider.of<WorkoutBloc>(context).add(
+                                        EditWorkoutEvent(state
+                                            .copyWith(equipment: equipment)
+                                            .workout));
+                                  } else {
+                                    equipment.remove(Equipment.Dumbbell);
+                                    BlocProvider.of<WorkoutBloc>(context).add(
+                                        EditWorkoutEvent(state
+                                            .copyWith(equipment: equipment)
+                                            .workout));
+                                  }
+                                }),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Pullup Bar'),
-                      Switch(
-                          activeColor: Color(0xfffbc02d),
-                          value: _pullupBar,
-                          onChanged: (value) {
-                            if (value) {
-                              equipment.add(Equipment.PullUpBar);
-                              BlocProvider.of<WorkoutBloc>(context).add(
-                                  EditWorkoutEvent(state
-                                      .copyWith(equipment: equipment)
-                                      .workout));
-                            } else {
-                              equipment.remove(Equipment.PullUpBar);
-                              BlocProvider.of<WorkoutBloc>(context).add(
-                                  EditWorkoutEvent(state
-                                      .copyWith(equipment: equipment)
-                                      .workout));
-                            }
-                          }),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Yoga Mat'),
-                      Switch(
-                          activeColor: Color(0xfffbc02d),
-                          value: _yogaMat,
-                          onChanged: (value) {
-                            if (value) {
-                              equipment.add(Equipment.YogaMat);
-                              BlocProvider.of<WorkoutBloc>(context).add(
-                                  EditWorkoutEvent(state
-                                      .copyWith(equipment: equipment)
-                                      .workout));
-                            } else {
-                              equipment.remove(Equipment.YogaMat);
-                              BlocProvider.of<WorkoutBloc>(context).add(
-                                  EditWorkoutEvent(state
-                                      .copyWith(equipment: equipment)
-                                      .workout));
-                            }
-                          }),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Plyometric Box'),
-                      Switch(
-                          activeColor: Color(0xfffbc02d),
-                          value: _plyoBox,
-                          onChanged: (value) {
-                            if (value) {
-                              equipment.add(Equipment.PlyometricBox);
-                              BlocProvider.of<WorkoutBloc>(context).add(
-                                  EditWorkoutEvent(state
-                                      .copyWith(equipment: equipment)
-                                      .workout));
-                            } else {
-                              equipment.remove(Equipment.PlyometricBox);
-                              BlocProvider.of<WorkoutBloc>(context).add(
-                                  EditWorkoutEvent(state
-                                      .copyWith(equipment: equipment)
-                                      .workout));
-                            }
-                          }),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Dumbbell'),
-                      Switch(
-                          activeColor: Color(0xfffbc02d),
-                          value: _dumbbell,
-                          onChanged: (value) {
-                            if (value) {
-                              equipment.add(Equipment.Dumbbell);
-                              BlocProvider.of<WorkoutBloc>(context).add(
-                                  EditWorkoutEvent(state
-                                      .copyWith(equipment: equipment)
-                                      .workout));
-                            } else {
-                              equipment.remove(Equipment.Dumbbell);
-                              BlocProvider.of<WorkoutBloc>(context).add(
-                                  EditWorkoutEvent(state
-                                      .copyWith(equipment: equipment)
-                                      .workout));
-                            }
-                          }),
-                    ],
-                  ),
-                  Container(
-                    height: 200,
-                    width: 200,
-                    alignment: Alignment.bottomCenter,
-                    child: FormattedButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          // HomePage.routeName,
-                          WorkoutSetupPage.routeName,
-                        );
-                      },
-                      buttonText: "Next",
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          height: 2.0,
+                          width: double.infinity,
+                          color: Colors.purple,
+                        ),
+                        FormattedButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              // HomePage.routeName,
+                              WorkoutSetupPage.routeName,
+                            );
+                          },
+                          buttonText: "Next",
+                        ),
+                      ],
                     ),
                   ),
                 ],
