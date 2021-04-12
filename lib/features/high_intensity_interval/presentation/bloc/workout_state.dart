@@ -27,34 +27,7 @@ class WorkoutLoadingState extends WorkoutState {
 
 class WorkoutFinishedState extends WorkoutState {
   final Workout workout;
-
-  WorkoutFinishedState({
-    @required this.workout,
-  });
-
-  WorkoutFinishedState copyWith(
-    String workoutName,
-  ) {
-    return WorkoutFinishedState(
-      workout: WorkoutModel(
-        equipment: this.workout.equipment,
-        tags: this.workout.tags,
-        exerciseDuration: this.workout.exerciseDuration,
-        restDuration: this.workout.restDuration,
-        totalDuration: getTotalDuration(
-          (this.workout.numOfRounds),
-          (this.workout.numOfExercises),
-          (this.workout.restDuration),
-          (this.workout.exerciseDuration),
-        ),
-        numOfExercises: this.workout.numOfExercises,
-        numOfRounds: this.workout.numOfRounds,
-        exercises: this.workout.exercises,
-        potentialExercises: this.workout.potentialExercises,
-        workoutName: workoutName ?? this.workout.workoutName,
-      ),
-    );
-  }
+  WorkoutFinishedState(this.workout);
 
   @override
   List<Object> get props => [];
@@ -105,7 +78,7 @@ class WorkoutLoadedState extends WorkoutState {
         tags: tags ?? this.workout.tags,
         exerciseDuration: exerciseDuration ?? this.workout.exerciseDuration,
         restDuration: restDuration ?? this.workout.restDuration,
-        totalDuration: getTotalDuration(
+        totalDuration: _getTotalDuration(
           (numOfRounds ?? this.workout.numOfRounds),
           (numOfExercises ?? this.workout.numOfExercises),
           (restDuration ?? this.workout.restDuration),
@@ -119,6 +92,15 @@ class WorkoutLoadedState extends WorkoutState {
         workoutName: workoutName ?? this.workout.workoutName,
       ),
     );
+  }
+
+  Duration _getTotalDuration(
+    int numOfRounds,
+    int numOfExercises,
+    Duration restDuration,
+    Duration exerciseDuration,
+  ) {
+    return (restDuration + exerciseDuration) * numOfExercises * numOfRounds;
   }
 
   static WorkoutLoadedState initialState() {
@@ -136,15 +118,6 @@ class WorkoutLoadedState extends WorkoutState {
   getWorkout() {
     return this.workout;
   }
-}
-
-Duration getTotalDuration(
-  int numOfRounds,
-  int numOfExercises,
-  Duration restDuration,
-  Duration exerciseDuration,
-) {
-  return (restDuration + exerciseDuration) * numOfExercises * numOfRounds;
 }
 
 class RestInProgressState extends WorkoutState {

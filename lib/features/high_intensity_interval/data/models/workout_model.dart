@@ -57,10 +57,7 @@ class WorkoutModel extends Workout {
     );
   }
 
-  Map<String, dynamic> toJson({
-    @required String userId,
-    String workoutName,
-  }) {
+  Map<String, dynamic> toJson(String userId) {
     return {
       'tags': tagsModel.toList(tags),
       'equipment': equipmentModel.toList(equipment),
@@ -80,7 +77,7 @@ class WorkoutModel extends Workout {
       "numOfExercises": numOfExercises,
       "exercises": ExercisesModel.toList(exercises),
       "userId": userId,
-      "workoutName": workoutName ?? this.workoutName,
+      "workoutName": workoutName,
     };
   }
 }

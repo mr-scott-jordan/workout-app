@@ -33,38 +33,46 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     WorkoutEvent event,
   ) async* {
     if (event is EditWorkoutEvent) {
-      yield WorkoutLoadingState();
       yield* _loadWorkout(event.workout);
     } else if (event is GenerateWorkoutEvent) {
-      yield WorkoutLoadingState();
       yield* _callGenerateWorkout(event.workout);
     } else if (event is StartRestWorkoutEvent) {
-      yield WorkoutLoadingState();
       yield* _startRest(event.workout);
     } else if (event is StartExerciseWorkoutEvent) {
-      yield WorkoutLoadingState();
       yield* _startExercise(event.workout);
     } else if (event is FinishWorkoutEvent) {
-      yield WorkoutLoadingState();
       yield* _finishWorkout(event.workout);
     } else if (event is ResetWorkoutEvent) {
-      yield WorkoutLoadingState();
       yield* _loadWorkout(event.workout);
     } else if (event is GetWorkoutsEvent) {
-      yield WorkoutLoadingState();
       yield* _getWorkouts(event.workout, event.userId);
     } else if (event is SkipWorkoutEvent) {
-      yield WorkoutLoadingState();
       yield* _skipExercise(event.workout);
+    } else if (event is EditWorkoutNameEvent) {
+      yield* _editWorkoutName(event.workout, event.workoutName);
     }
   }
 
-  Stream<WorkoutState> _finishWorkout(
-    Workout workout,
-  ) async* {
-    final result = WorkoutFinishedState(
-      workout: workout,
+  Stream<WorkoutState> _editWorkoutName(
+      Workout workout, String workoutName) async* {
+    final newWorkout = WorkoutModel(
+      workoutName: workoutName,
+      equipment: workout.equipment,
+      exerciseDuration: workout.exerciseDuration,
+      exercises: workout.exercises,
+      numOfExercises: workout.numOfExercises,
+      numOfRounds: workout.numOfRounds,
+      potentialExercises: workout.potentialExercises,
+      restDuration: workout.restDuration,
+      tags: workout.tags,
+      totalDuration: workout.totalDuration,
     );
+    final result = WorkoutFinishedState(newWorkout);
+    yield result;
+  }
+
+  Stream<WorkoutState> _finishWorkout(Workout workout) async* {
+    final result = WorkoutFinishedState(workout);
     yield result;
   }
 

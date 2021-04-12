@@ -11,8 +11,6 @@ import 'login_page.dart';
 
 class WorkoutSummaryPage extends StatelessWidget {
   static const routeName = '/workout-summary';
-  final _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<UserBloc, UserState>(
@@ -69,7 +67,12 @@ class WorkoutSummaryPage extends StatelessWidget {
                                       'To save your workout enter a name.'),
                               textAlign: TextAlign.center,
                               onSubmitted: (String workoutName) {
-                                _controller.text = workoutName;
+                                BlocProvider.of<WorkoutBloc>(context).add(
+                                  EditWorkoutNameEvent(
+                                    workout: state.workout,
+                                    workoutName: workoutName,
+                                  ),
+                                );
                               },
                             ),
                           ),
@@ -99,10 +102,8 @@ class WorkoutSummaryPage extends StatelessWidget {
                               var user =
                                   BlocProvider.of<UserBloc>(context).state;
                               SaveWorkoutService.saveWorkout(
-                                userId: (user as UserAuthenticatedState)
-                                    .getUserID(),
-                                workout: state.workout,
-                                workoutName: _controller.text,
+                                (user as UserAuthenticatedState).getUserID(),
+                                state.workout,
                               );
                             },
                           ),

@@ -71,7 +71,7 @@ class WorkoutPage extends StatelessWidget {
             exercises.removeLast();
             if (exercises.isEmpty) {
               BlocProvider.of<WorkoutBloc>(context)
-                  .add(FinishWorkoutEvent(workout: state.workout));
+                  .add(FinishWorkoutEvent(state.workout));
             } else {
               BlocProvider.of<WorkoutBloc>(context)
                   .add(StartRestWorkoutEvent(state.workout));
@@ -240,8 +240,8 @@ Widget _buildPage(
                       onPressed: () {
                         pageParams.exercises.removeLast();
                         if (pageParams.exercises.isEmpty) {
-                          BlocProvider.of<WorkoutBloc>(pageParams.context).add(
-                              FinishWorkoutEvent(workout: pageParams.workout));
+                          BlocProvider.of<WorkoutBloc>(pageParams.context)
+                              .add(FinishWorkoutEvent(pageParams.workout));
                         } else {
                           BlocProvider.of<WorkoutBloc>(pageParams.context)
                               .add(SkipWorkoutEvent(pageParams.workout));
@@ -276,8 +276,8 @@ Widget _buildPage(
                   children: [
                     FormattedButton(
                       onPressed: () {
-                        BlocProvider.of<WorkoutBloc>(pageParams.context).add(
-                            FinishWorkoutEvent(workout: pageParams.workout));
+                        BlocProvider.of<WorkoutBloc>(pageParams.context)
+                            .add(FinishWorkoutEvent(pageParams.workout));
                       },
                       buttonText: 'Finish Workout',
                     ),
