@@ -93,7 +93,6 @@ class BulletinBoardPage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Icon(Icons.reorder_rounded),
                                 IconButton(
                                     icon: Icon(Icons.swap_calls_rounded),
                                     onPressed: () {
@@ -112,6 +111,7 @@ class BulletinBoardPage extends StatelessWidget {
                                               .copyWith(exercises: exercises)
                                               .workout));
                                     }),
+                                Icon(Icons.reorder_rounded),
                               ],
                             ),
                           ),
