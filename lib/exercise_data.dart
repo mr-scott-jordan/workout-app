@@ -29,7 +29,7 @@ final EXERCISES_DATA = [
   ),
   Exercise(
     id: 'e5',
-    title: 'Pullup',
+    title: 'Pull-up',
     tags: [Tag.Pull],
     equipment: Equipment.PullUpBar,
   ),
