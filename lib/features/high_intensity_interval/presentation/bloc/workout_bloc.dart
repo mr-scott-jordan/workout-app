@@ -47,8 +47,13 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
       yield* _getWorkouts(event.workout, event.userId);
     } else if (event is SkipWorkoutEvent) {
       yield* _skipExercise(event.workout);
+    } else if (event is EditWorkoutNameEvent) {
+      yield* _editWorkoutName(event.workout, event.workoutName);
     }
   }
+
+  Stream<WorkoutState> _editWorkoutName(
+      Workout workout, String workoutName) async* {final newWorkout = Workout(workoutName: workoutName, ),}
 
   Stream<WorkoutState> _finishWorkout(Workout workout) async* {
     final result = WorkoutFinishedState(workout);

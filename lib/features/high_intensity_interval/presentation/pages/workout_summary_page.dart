@@ -28,6 +28,7 @@ class WorkoutSummaryPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is WorkoutFinishedState) {
+            var savedWorkoutName = state.workout.workoutName;
             return PageAnimationWidget(
               body: Container(
                 width: MediaQuery.of(context).size.width,
@@ -35,9 +36,9 @@ class WorkoutSummaryPage extends StatelessWidget {
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(
-                      height: 50,
-                    ),
+                    // SizedBox(
+                    //   height: 50,
+                    // ),
                     Container(
                       padding: EdgeInsets.all(15),
                       child: Text(
@@ -58,13 +59,14 @@ class WorkoutSummaryPage extends StatelessWidget {
                     SizedBox(
                       height: 80,
                     ),
+
                     Container(
-                      padding: EdgeInsets.all(10),
-                      child: FormattedButton(
-                        buttonText: 'Finish',
-                        onPressed: () {
-                          BlocProvider.of<WorkoutBloc>(context)
-                              .add(ResetWorkoutEvent(state.workout));
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: 'To save your workout enter a name.'),
+                        textAlign: TextAlign.center,
+                        onSubmitted: (String savedWorkoutName) {
+                          savedWorkoutName = savedWorkoutName;
                         },
                       ),
                     ),
@@ -78,6 +80,16 @@ class WorkoutSummaryPage extends StatelessWidget {
                             (user as UserAuthenticatedState).getUserID(),
                             state.workout,
                           );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: FormattedButton(
+                        buttonText: 'Finish',
+                        onPressed: () {
+                          BlocProvider.of<WorkoutBloc>(context)
+                              .add(ResetWorkoutEvent(state.workout));
                         },
                       ),
                     ),
