@@ -40,7 +40,7 @@ class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
           tags: [
             Tag.Push,
           ],
-          title: 'Pushup',
+          title: 'Push-up',
         ),
       ],
       numOfExercises: 1,

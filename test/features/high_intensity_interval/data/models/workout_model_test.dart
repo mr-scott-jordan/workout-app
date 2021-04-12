@@ -21,7 +21,7 @@ void main() {
         tags: [
           Tag.Push,
         ],
-        title: 'Pushup',
+        title: 'Push-up',
       ),
     ],
     numOfExercises: 1,
