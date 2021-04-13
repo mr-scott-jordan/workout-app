@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/data/assets/print_duration_asset.dart';
+import '../../data/assets/print_duration_asset.dart';
 
 import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../../domain/enums/tag.dart';

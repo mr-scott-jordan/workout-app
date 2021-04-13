@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/features/high_intensity_interval/data/assets/print_duration_asset.dart';
 
 import '../../../../core/authentication/bloc/user_bloc.dart';
+import '../../data/assets/print_duration_asset.dart';
 import '../bloc/workout_bloc.dart';
 import '../widgets/formatted_button.dart';
 import '../widgets/page_animation_widget.dart';

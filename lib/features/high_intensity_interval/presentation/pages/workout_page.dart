@@ -179,7 +179,7 @@ Widget _buildPage(
                     Text(
                       ('${pageParams.exercises.last.title}'),
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

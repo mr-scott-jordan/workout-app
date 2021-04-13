@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/workout.dart';
 
 import '../../../../exercise_data.dart';
 import '../../domain/entities/exercise.dart';
