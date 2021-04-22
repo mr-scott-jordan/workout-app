@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay/overlay.dart';
 
 import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../../domain/entities/exercise.dart';
@@ -45,32 +46,7 @@ class WorkoutPage extends StatelessWidget {
           exercises = state.workout.exercises.reversed.toList();
           BlocProvider.of<WorkoutBloc>(context)
               .add(StartRestWorkoutEvent(state.workout));
-          // Expanded(
-          //   flex: 5,
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       Image.asset('assets/gifs/'),
-          //     ],
-          //   ),
-          // );
           return Container();
-          // if (state is WorkoutLoadedState) {
-          //   exercises = state.workout.exercises.reversed.toList();
-          //   BlocProvider.of<WorkoutBloc>(context)
-          //       .add(StartRestWorkoutEvent(state.workout));
-          //       return PageAnimationWidget(body:
-          //       Container(
-          //         width: MediaQuery.of(context).size.width,
-          //         color: Color(0xff424242),
-          //         child: Image.asset( 'assets/gifs/'
-
-          //         ),
-
-          //         )
-          //       ),
-          //     ),
-          //   return Container();
         } else if (state is RestInProgressState) {
           print(state);
           final Function onComplete = () {
@@ -202,12 +178,28 @@ Widget _buildPage(
                         color: Color(0xfffbc02d),
                       ),
                     ),
-                    Text(
-                      ('${pageParams.exercises.last.title}'),
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                    InkWell(
+                      child: Text(
+                        ('${pageParams.exercises.last.title}'),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
+                      onTap: () {
+                        if (pageParams.exercises.last.asset != '')
+                          CustomOverlay(
+                            context: pageParams.context,
+                            overlayWidget: Container(
+                              height: MediaQuery.of(pageParams.context)
+                                      .size
+                                      .height *
+                                  0.3,
+                              child:
+                                  Image.asset(pageParams.exercises.last.asset),
+                            ),
+                          );
+                      },
                     ),
                   ],
                 ),

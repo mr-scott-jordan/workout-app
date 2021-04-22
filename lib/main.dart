@@ -15,6 +15,7 @@ import 'features/high_intensity_interval/presentation/pages/login_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_setup_page.dart';
 import 'features/high_intensity_interval/presentation/pages/workout_summary_page.dart';
+//import 'features/high_intensity_interval/presentation/pages/exercise_modal_page.dart';
 import 'injection_container.dart' as ic;
 import 'injection_container.dart';
 

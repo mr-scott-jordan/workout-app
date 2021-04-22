@@ -36,6 +36,7 @@ dependencies:
   # the provider version number might be wrong, might break build..
   provider: ^5.0.0
   flutter_login: ^1.1.0
+  overlay: ^0.0.1
 
 
 

@@ -57,7 +57,7 @@ final EXERCISES_DATA = [
     title: 'Pike Push-up',
     tags: [Tag.Push],
     equipment: Equipment.None,
-    asset: 'assets/gifs/Pushup.gif',
+    asset: 'assets/gifs/Pike_Push_Up.gif',
   ),
   Exercise(
     id: 'e9',
@@ -365,14 +365,14 @@ final EXERCISES_DATA = [
     title: 'Mountain Climber',
     tags: [Tag.Core],
     equipment: Equipment.None,
-    asset: 'assets/gifs/Pushup.gif',
+    asset: 'assets/gifs/Mountain_Climber.gif',
   ),
   Exercise(
     id: 'e53',
     title: 'Scissor Kick',
     tags: [Tag.Core],
     equipment: Equipment.None,
-    asset: 'assets/gifs/Pushup.gif',
+    asset: 'assets/gifs/Scissor_Kick.gif',
   ),
   Exercise(
     id: 'e54',
@@ -730,7 +730,7 @@ final EXERCISES_DATA = [
     title: 'Plank Jack',
     tags: [Tag.FullBody],
     equipment: Equipment.None,
-    asset: 'assets/gifs/Pushup.gif',
+    asset: 'assets/gifs/Plank_Jack.gif',
   ),
   Exercise(
     id: 'e105',
