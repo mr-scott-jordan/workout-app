@@ -187,18 +187,17 @@ Widget _buildPage(
                         ),
                       ),
                       onTap: () {
-                        if (pageParams.exercises.last.asset != '')
-                          CustomOverlay(
-                            context: pageParams.context,
-                            overlayWidget: Container(
-                              height: MediaQuery.of(pageParams.context)
-                                      .size
-                                      .height *
-                                  0.3,
-                              child:
-                                  Image.asset(pageParams.exercises.last.asset),
-                            ),
-                          );
+                        CustomOverlay(
+                          context: pageParams.context,
+                          overlayWidget: Container(
+                            height:
+                                MediaQuery.of(pageParams.context).size.height *
+                                    0.3,
+                            child: (pageParams.exercises.last.asset != '')
+                                ? Image.asset(pageParams.exercises.last.asset)
+                                : Image.asset('assets/gifs/no_content.gif'),
+                          ),
+                        );
                       },
                     ),
                   ],
