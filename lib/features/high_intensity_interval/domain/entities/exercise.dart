@@ -9,13 +9,19 @@ class Exercise extends Equatable {
   final String title;
   final List<Tag> tags;
   final Equipment equipment;
+  final String asset;
 
   Exercise({
     @required this.id,
     @required this.title,
     @required this.tags,
     @required this.equipment,
-  }) : assert(id != null && title != null && tags != null && equipment != null);
+    @required this.asset,
+  }) : assert(id != null &&
+            title != null &&
+            tags != null &&
+            equipment != null &&
+            asset != null);
 
   @override
   List<Object> get props => [
@@ -23,5 +29,6 @@ class Exercise extends Equatable {
         title,
         tags,
         equipment,
+        asset,
       ];
 }

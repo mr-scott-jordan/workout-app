@@ -11,6 +11,7 @@ import '../widgets/page_animation_widget.dart';
 import '../widgets/timer.dart';
 import 'login_page.dart';
 import 'workout_summary_page.dart';
+//import '../'
 
 // ignore: must_be_immutable
 class WorkoutPage extends StatelessWidget {
@@ -44,7 +45,32 @@ class WorkoutPage extends StatelessWidget {
           exercises = state.workout.exercises.reversed.toList();
           BlocProvider.of<WorkoutBloc>(context)
               .add(StartRestWorkoutEvent(state.workout));
+          // Expanded(
+          //   flex: 5,
+          //   child: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       Image.asset('assets/gifs/'),
+          //     ],
+          //   ),
+          // );
           return Container();
+          // if (state is WorkoutLoadedState) {
+          //   exercises = state.workout.exercises.reversed.toList();
+          //   BlocProvider.of<WorkoutBloc>(context)
+          //       .add(StartRestWorkoutEvent(state.workout));
+          //       return PageAnimationWidget(body:
+          //       Container(
+          //         width: MediaQuery.of(context).size.width,
+          //         color: Color(0xff424242),
+          //         child: Image.asset( 'assets/gifs/'
+
+          //         ),
+
+          //         )
+          //       ),
+          //     ),
+          //   return Container();
         } else if (state is RestInProgressState) {
           print(state);
           final Function onComplete = () {

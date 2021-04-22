@@ -10,11 +10,13 @@ class ExerciseModel extends Exercise {
     @required title,
     @required tags,
     @required equipment,
+    @required asset,
   }) : super(
           equipment: equipment,
           id: id,
           title: title,
           tags: tags,
+          asset: asset,
         );
 
   factory ExerciseModel.fromJson(dynamic json) {
@@ -23,6 +25,7 @@ class ExerciseModel extends Exercise {
       title: json['title'],
       tags: tagsModel.fromList(json['tags']),
       equipment: equipmentModel.fromString(json['equipment']),
+      asset: json['asset'],
     );
   }
 
@@ -32,6 +35,7 @@ class ExerciseModel extends Exercise {
       'title': exercise.title,
       'tags': tagsModel.toList(exercise.tags),
       'equipment': equipmentModel.toString(exercise.equipment),
+      'asset': exercise.asset,
     };
   }
 }
