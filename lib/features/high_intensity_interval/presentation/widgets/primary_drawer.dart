@@ -11,53 +11,56 @@ class PrimaryDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: Container(
-      // color: Color(0xFF37474F),
-      color: Color(0xff212121),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 250,
+      child: Container(
+        alignment: Alignment.center,
+        height: MediaQuery.of(context).size.height,
+        // color: Color(0xFF37474F),
+        color: Color(0xff212121),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              FormattedButton(
+                onPressed: () {
+                  final Workout workout =
+                      BlocProvider.of<WorkoutBloc>(context).state.getWorkout();
+                  BlocProvider.of<WorkoutBloc>(context).add(
+                    ResetWorkoutEvent(workout),
+                  );
+                  Navigator.pushReplacementNamed(context, '/');
+                },
+                buttonText: "Main Menu",
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              FormattedButton(
+                onPressed: () {
+                  final Workout workout =
+                      BlocProvider.of<WorkoutBloc>(context).state.getWorkout();
+                  BlocProvider.of<WorkoutBloc>(context).add(
+                    ResetWorkoutEvent(workout),
+                  );
+                  Navigator.pushReplacementNamed(
+                      context, EquipmentPage.routeName);
+                },
+                buttonText: "New Workout",
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              FormattedButton(
+                onPressed: () {
+                  BlocProvider.of<UserBloc>(context).add(
+                    SignOutEvent(),
+                  );
+                },
+                buttonText: "Logout",
+              ),
+            ],
           ),
-          FormattedButton(
-            onPressed: () {
-              final Workout workout =
-                  BlocProvider.of<WorkoutBloc>(context).state.getWorkout();
-              BlocProvider.of<WorkoutBloc>(context).add(
-                ResetWorkoutEvent(workout),
-              );
-              Navigator.pushReplacementNamed(context, '/');
-            },
-            buttonText: "Main Menu",
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          FormattedButton(
-            onPressed: () {
-              final Workout workout =
-                  BlocProvider.of<WorkoutBloc>(context).state.getWorkout();
-              BlocProvider.of<WorkoutBloc>(context).add(
-                ResetWorkoutEvent(workout),
-              );
-              Navigator.pushReplacementNamed(context, EquipmentPage.routeName);
-            },
-            buttonText: "New Workout",
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          FormattedButton(
-            onPressed: () {
-              BlocProvider.of<UserBloc>(context).add(
-                SignOutEvent(),
-              );
-            },
-            buttonText: "Logout",
-          ),
-        ],
+        ),
       ),
-    ));
+    );
   }
 }
 

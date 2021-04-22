@@ -32,64 +32,89 @@ class WorkoutSummaryPage extends StatelessWidget {
               body: Container(
                 width: MediaQuery.of(context).size.width,
                 color: Color(0xff424242),
-                child: Column(
+                child: ListView(
                   children: [
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Congratulations! You finished your workout. Save your current workout parameters or go back to the Main Menu.',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Color(0xfffbc02d),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.91,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Congratulations! You finished your workout. Save your current workout parameters or go back to the Main Menu.',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color(0xfffbc02d),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset('assets/images/stoked.gif'),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            height: 2.0,
-                            width: double.infinity,
-                            color: Colors.purple,
                           ),
-                          FormattedButton(
-                            buttonText: 'Main Menu',
-                            onPressed: () {
-                              BlocProvider.of<WorkoutBloc>(context)
-                                  .add(ResetWorkoutEvent(state.workout));
-                            },
+                          Expanded(
+                            flex: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/images/stoked.gif'),
+                              ],
+                            ),
                           ),
-                          FormattedButton(
-                            buttonText: 'Save Workout',
-                            onPressed: () {
-                              var user =
-                                  BlocProvider.of<UserBloc>(context).state;
-                              SaveWorkoutService.saveWorkout(
-                                (user as UserAuthenticatedState).getUserID(),
-                                state.workout,
-                              );
-                            },
+                          Expanded(
+                            flex: 3,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  height: 2.0,
+                                  width: double.infinity,
+                                  color: Colors.purple,
+                                ),
+                                Container(
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                        hintText:
+                                            'To save your workout enter a name.'),
+                                    textAlign: TextAlign.center,
+                                    onSubmitted: (String workoutName) {
+                                      BlocProvider.of<WorkoutBloc>(context).add(
+                                        EditWorkoutNameEvent(
+                                          workout: state.workout,
+                                          workoutName: workoutName,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                FormattedButton(
+                                  buttonText: 'Main Menu',
+                                  onPressed: () {
+                                    BlocProvider.of<WorkoutBloc>(context)
+                                        .add(ResetWorkoutEvent(state.workout));
+                                  },
+                                ),
+                                FormattedButton(
+                                  buttonText: 'Save Workout',
+                                  onPressed: () {
+                                    var user =
+                                        BlocProvider.of<UserBloc>(context)
+                                            .state;
+                                    SaveWorkoutService.saveWorkout(
+                                      (user as UserAuthenticatedState)
+                                          .getUserID(),
+                                      state.workout,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

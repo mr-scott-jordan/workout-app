@@ -61,6 +61,16 @@ class FinishWorkoutEvent extends WorkoutEvent {
   FinishWorkoutEvent(this.workout);
 }
 
+class EditWorkoutNameEvent extends WorkoutEvent {
+  final Workout workout;
+  final String workoutName;
+
+  EditWorkoutNameEvent({
+    @required this.workout,
+    @required this.workoutName,
+  });
+}
+
 class GetWorkoutsEvent extends WorkoutEvent {
   final Workout workout;
   final String userId;
