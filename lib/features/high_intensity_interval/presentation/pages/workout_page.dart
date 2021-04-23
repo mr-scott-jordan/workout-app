@@ -1,6 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay/overlay.dart';
 
 import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../../domain/entities/exercise.dart';
@@ -11,6 +12,7 @@ import '../widgets/page_animation_widget.dart';
 import '../widgets/timer.dart';
 import 'login_page.dart';
 import 'workout_summary_page.dart';
+//import '../'
 
 // ignore: must_be_immutable
 class WorkoutPage extends StatelessWidget {
@@ -200,11 +202,30 @@ Widget _buildPage(
                         Container(
                           height: 25,
                           child: FittedBox(
-                            child: Text(
-                              '${pageParams.exercises.last.title}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                            child: InkWell(
+                              child: Text(
+                                ('${pageParams.exercises.last.title}'),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
+                              onTap: () {
+                                CustomOverlay(
+                                  context: pageParams.context,
+                                  overlayWidget: Container(
+                                    height: MediaQuery.of(pageParams.context)
+                                            .size
+                                            .height *
+                                        0.3,
+                                    child:
+                                        (pageParams.exercises.last.asset != '')
+                                            ? Image.asset(
+                                                pageParams.exercises.last.asset)
+                                            : Image.asset(
+                                                'assets/gifs/no_content.gif'),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),

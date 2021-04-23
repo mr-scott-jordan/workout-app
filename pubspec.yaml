@@ -36,6 +36,7 @@ dependencies:
   # the provider version number might be wrong, might break build..
   provider: ^5.0.0
   flutter_login: ^1.1.0
+  overlay: ^0.0.1
 
 
 
@@ -63,6 +64,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/gifs/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

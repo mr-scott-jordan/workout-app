@@ -41,6 +41,7 @@ class WorkoutRemoteDataSource implements WorkoutRemoteDataSourceType {
             Tag.Push,
           ],
           title: 'Push-up',
+          asset: '',
         ),
       ],
       numOfExercises: 1,

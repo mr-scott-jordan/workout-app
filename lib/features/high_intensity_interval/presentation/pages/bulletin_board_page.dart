@@ -90,10 +90,6 @@ class BulletinBoardPage extends StatelessWidget {
                             state.workout.exercises[index].title;
                         return ListTile(
                           key: ValueKey(exerciseName),
-                          // leading: Text(
-                          //   workout.exercises[index].title,
-                          //   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                          // ),
                           title: Text(
                             state.workout.exercises[index].title,
                             style: TextStyle(
