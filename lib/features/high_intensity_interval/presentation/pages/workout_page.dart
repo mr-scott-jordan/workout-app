@@ -17,6 +17,7 @@ class WorkoutPage extends StatelessWidget {
   static const routeName = '/workout-page';
   final CountDownController controller = CountDownController();
   List<Exercise> exercises;
+  int roundIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +43,19 @@ class WorkoutPage extends StatelessWidget {
       }, builder: (context, state) {
         if (state is WorkoutLoadedState) {
           exercises = state.workout.exercises.reversed.toList();
+          roundIndex = 1;
           BlocProvider.of<WorkoutBloc>(context)
               .add(StartRestWorkoutEvent(state.workout));
+          return Container();
+        } else if (state is NewRoundState) {
+          exercises = state.workout.exercises.reversed.toList();
+          roundIndex++;
+          if (roundIndex <= state.workout.numOfRounds)
+            BlocProvider.of<WorkoutBloc>(context)
+                .add(StartRestWorkoutEvent(state.workout));
+          else
+            BlocProvider.of<WorkoutBloc>(context)
+                .add(FinishWorkoutEvent(state.workout));
           return Container();
         } else if (state is RestInProgressState) {
           print(state);
@@ -55,15 +67,15 @@ class WorkoutPage extends StatelessWidget {
             );
           };
           final pageParams = Params(
-            context: context,
-            workout: state.workout,
-            onComplete: onComplete,
-            exerciseText: 'Next Exercise:',
-            taskText: 'REST',
-            stateDuration: state.workout.restDuration.inSeconds,
-            exercises: exercises,
-            controller: controller,
-          );
+              context: context,
+              workout: state.workout,
+              onComplete: onComplete,
+              exerciseText: 'Next Exercise:',
+              taskText: 'REST',
+              stateDuration: state.workout.restDuration.inSeconds,
+              exercises: exercises,
+              controller: controller,
+              roundIndex: roundIndex);
           return _buildPage(pageParams);
         } else if (state is ExerciseInProgressState) {
           print(state);
@@ -71,7 +83,7 @@ class WorkoutPage extends StatelessWidget {
             exercises.removeLast();
             if (exercises.isEmpty) {
               BlocProvider.of<WorkoutBloc>(context)
-                  .add(FinishWorkoutEvent(state.workout));
+                  .add(NewRoundEvent(state.workout));
             } else {
               BlocProvider.of<WorkoutBloc>(context)
                   .add(StartRestWorkoutEvent(state.workout));
@@ -89,6 +101,7 @@ class WorkoutPage extends StatelessWidget {
             stateDuration: state.workout.exerciseDuration.inSeconds,
             exercises: exercises,
             controller: controller,
+            roundIndex: roundIndex,
           );
           return _buildPage(pageParams);
         } else if (state is SkipExerciseBufferState) {
@@ -109,6 +122,7 @@ class WorkoutPage extends StatelessWidget {
             stateDuration: 10,
             exercises: exercises,
             controller: controller,
+            roundIndex: roundIndex,
           );
           return _buildPage(pageParams);
         } else {
@@ -138,6 +152,7 @@ class Params {
   final int bufferDuration;
   final List<Exercise> exercises;
   final CountDownController controller;
+  final int roundIndex;
 
   Params({
     @required this.context,
@@ -149,6 +164,7 @@ class Params {
     this.bufferDuration = 10,
     @required this.exercises,
     @required this.controller,
+    @required this.roundIndex,
   });
 }
 
@@ -166,22 +182,57 @@ Widget _buildPage(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Table(
+                  columnWidths: {0: FlexColumnWidth(0.5)},
                   children: [
-                    Text(
-                      pageParams.exerciseText,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xfffbc02d),
-                      ),
+                    TableRow(
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            pageParams.exerciseText,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xfffbc02d),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 25,
+                          child: FittedBox(
+                            child: Text(
+                              '${pageParams.exercises.last.title}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      ('${pageParams.exercises.last.title}'),
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    TableRow(
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Round: ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xfffbc02d),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            '${pageParams.roundIndex}',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -241,7 +292,7 @@ Widget _buildPage(
                         pageParams.exercises.removeLast();
                         if (pageParams.exercises.isEmpty) {
                           BlocProvider.of<WorkoutBloc>(pageParams.context)
-                              .add(FinishWorkoutEvent(pageParams.workout));
+                              .add(NewRoundEvent(pageParams.workout));
                         } else {
                           BlocProvider.of<WorkoutBloc>(pageParams.context)
                               .add(SkipWorkoutEvent(pageParams.workout));

@@ -59,6 +59,9 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
     } else if (event is EditWorkoutNameEvent) {
       yield WorkoutLoadingState();
       yield* _editWorkoutName(event.workout, event.workoutName);
+    } else if (event is NewRoundEvent) {
+      yield WorkoutLoadingState();
+      yield* _newRound(event.workout);
     }
   }
 
@@ -92,6 +95,11 @@ class WorkoutBloc extends Bloc<WorkoutEvent, WorkoutState> {
 
   Stream<WorkoutState> _startExercise(Workout workout) async* {
     final result = ExerciseInProgressState(workout);
+    yield result;
+  }
+
+  Stream<WorkoutState> _newRound(Workout workout) async* {
+    final result = NewRoundState(workout);
     yield result;
   }
 
