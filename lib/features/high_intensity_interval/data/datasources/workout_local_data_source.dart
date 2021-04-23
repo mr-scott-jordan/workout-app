@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/services/get_potential_exercises_service.dart';
 
 import '../../../../exercise_data.dart';
 import '../../domain/entities/exercise.dart';
@@ -32,23 +33,14 @@ class WorkoutLocalDataSource implements WorkoutLocalDataSourceType {
     @required int numberOfRounds,
     @required String workoutName,
   }) async {
-    var listOfAllExercises =
-        List.generate(EXERCISES_DATA.length, (index) => EXERCISES_DATA[index]);
-    List<Exercise> potentialExercises = [];
-    listOfAllExercises.forEach((element) {
-      if (element.tags.every((item) => tags.contains(item)) &&
-          equipment.contains(element.equipment)) {
-        potentialExercises.add(element);
-      }
-    });
-    var exercises;
-    // if there are enough exercises in pool
-    if (potentialExercises.length >= numberOfExercises) {
-      potentialExercises.shuffle();
-      exercises = List.generate(
-          numberOfExercises, (index) => potentialExercises.elementAt(index));
-    } else
-      throw UnimplementedError();
+    List<Exercise> potentialExercises =
+        GetPotentialExercisesService.getExercises(
+      tags: tags,
+      equipment: equipment,
+    );
+    var exercises = List.generate(
+        numberOfExercises, (index) => potentialExercises.elementAt(index));
+
     var totalDuration =
         (exerciseDuration + restDuration) * numberOfExercises * numberOfRounds;
 
