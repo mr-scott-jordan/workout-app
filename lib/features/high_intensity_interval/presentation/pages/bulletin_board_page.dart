@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay/overlay.dart';
 
 import '../../../../core/authentication/bloc/user_bloc.dart';
 import '../../data/assets/print_duration_asset.dart';
@@ -90,11 +91,29 @@ class BulletinBoardPage extends StatelessWidget {
                             state.workout.exercises[index].title;
                         return ListTile(
                           key: ValueKey(exerciseName),
-                          title: Text(
-                            state.workout.exercises[index].title,
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.bold),
+                          title: InkWell(
+                            child: Text(
+                              state.workout.exercises[index].title,
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
+                          onTap: () {
+                            CustomOverlay(
+                              context: context,
+                              overlayWidget: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.3,
+                                child: (state.workout.exercises[index].asset !=
+                                        '')
+                                    ? Image.asset(
+                                        state.workout.exercises[index].asset)
+                                    : Image.asset('assets/gifs/no_content.gif'),
+                              ),
+                            );
+                          },
                           trailing: Container(
                             width: MediaQuery.of(context).size.width / 2,
                             child: Row(

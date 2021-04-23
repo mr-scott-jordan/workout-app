@@ -20,6 +20,7 @@ class GetPotentialExercisesService {
         potentialExercises.add(element);
       }
     });
+    potentialExercises.shuffle();
     return potentialExercises;
   }
 }
