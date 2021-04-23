@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/services/get_potential_exercises_service.dart';
 
 import '../../domain/entities/exercise.dart';
 import '../../domain/entities/workout.dart';
@@ -34,6 +35,8 @@ class WorkoutModel extends Workout {
         );
 
   factory WorkoutModel.fromJson(Map<String, dynamic> json) {
+    var tags = tagsModel.fromList(json['tags']);
+    var equipment = equipmentModel.fromList(json['equipment']);
     return WorkoutModel(
       tags: tagsModel.fromList(json['tags']),
       equipment: equipmentModel.fromList(json['equipment']),
@@ -48,7 +51,10 @@ class WorkoutModel extends Workout {
       numOfRounds: json['numOfRounds'],
       numOfExercises: json['numOfExercises'],
       exercises: ExercisesModel.fromList(json['exercises']),
-      potentialExercises: ExercisesModel.fromList(json['exercises']),
+      potentialExercises: GetPotentialExercisesService.getExercises(
+        tags: tags,
+        equipment: equipment,
+      ),
       totalDuration: Duration(
         minutes: json['totalDuration']['minutes'],
         seconds: json['totalDuration']['seconds'],
