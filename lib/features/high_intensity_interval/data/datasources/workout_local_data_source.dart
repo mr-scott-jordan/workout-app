@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/services/get_potential_exercises_service.dart';
 
-import '../../../../exercise_data.dart';
+import '../../../../services/get_potential_exercises_service.dart';
 import '../../domain/entities/exercise.dart';
 import '../../domain/enums/equipment.dart';
 import '../../domain/enums/tag.dart';

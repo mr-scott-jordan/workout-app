@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../features/high_intensity_interval/domain/entities/workout.dart';
 
 import '../features/high_intensity_interval/data/models/workout_model.dart';
 

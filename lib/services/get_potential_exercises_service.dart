@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/entities/exercise.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/enums/equipment.dart';
-import 'package:workout_app/features/high_intensity_interval/domain/enums/tag.dart';
 
 import '../exercise_data.dart';
+import '../features/high_intensity_interval/domain/entities/exercise.dart';
+import '../features/high_intensity_interval/domain/enums/equipment.dart';
+import '../features/high_intensity_interval/domain/enums/tag.dart';
 
 class GetPotentialExercisesService {
   static List<Exercise> getExercises({
